@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="5dp">
+    <ImageView
+        android:id="@+id/item_shop_goodsimage"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/item_shop_goodsname"
+        style="@style/shopItemGoodsText"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
+    <TextView
+        android:id="@+id/item_shop_specification"
+        style="@style/shopItemGoodsText"
+        android:layout_marginBottom="5dp"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textSize="13sp"
+        android:layout_below="@+id/item_shop_goodsname"/>
+    <TextView
+        android:id="@+id/item_shop_mon"
+        style="@style/shopItemGoodsText"
+        android:layout_marginBottom="5dp"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:text="速度的"
+        android:textSize="12sp"
+        android:layout_below="@+id/item_shop_specification"/>
+    <TextView
+        android:id="@+id/item_shop_price"
+        style="@style/shopItemGoodsText"
+        android:textColor="@color/red"
+        android:layout_below="@+id/item_shop_mon"/>
+    <com.juntai.shop.mall.view.CountView
+        android:id="@+id/cart_countview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/item_shop_specification">
+    </com.juntai.shop.mall.view.CountView>
+    <ImageView
+        android:id="@+id/cart_specification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_shop_specification"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/item_shop_specification">
+    </ImageView>
+</RelativeLayout>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@+id/pop_order_more_layout"
+    android:layout_width="100dp"
+    android:layout_height="wrap_content"
+    android:background="@color/gray"
+    android:elevation="10dp"
+    android:padding="5dp"
+    android:gravity="center">
+    <TextView
+        android:id="@+id/pop_order_more_delte"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="5dp"
+        android:textSize="15sp"
+        android:text="删除订单"/>
+</LinearLayout>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.juntai.shop.mall">
+
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <application
+        android:name="App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/MyAppTheme"
+        android:resizeableActivity="true"
+        android:maxAspectRatio="2.4"
+        android:hardwareAccelerated="true"
+        android:networkSecurityConfig="@xml/network_security_config">
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.4" />
+        <!--适配华为（huawei）刘海屏-->
+        <meta-data
+            android:name="android.notch_support"
+            android:value="true"/>
+        <!--适配小米（xiaomi）刘海屏-->
+        <meta-data
+            android:name="notch.config"
+            android:value="portrait|landscape" />
+        <!--Ma = rQAy36GhVBIgyf6vP9pZY0XpNe0Slqon-->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="rQAy36GhVBIgyf6vP9pZY0XpNe0Slqon" />
+        <!-- 融云配置 -->
+        <meta-data
+            android:name="RONG_CLOUD_APP_KEY"
+            android:value="3argexb63qcfe" /> <!-- 融云配置   end ||| -->
+        <!-- 更新 -->
+        <activity
+            android:name="com.tencent.bugly.beta.ui.BetaActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|locale"
+            android:theme="@android:style/Theme.Translucent" /> <!-- 启动页 -->
+
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent"/>
+
+        <activity android:name=".ui.act.StartActivity"
+            android:theme="@style/splashThemeImage">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.act.MainActivity"
+            android:launchMode="singleTask"/>
+        <activity android:name=".ui.act.ImageToViewActivity"/>
+        <activity android:name=".ui.act.SettingActivity" />
+        <activity android:name=".ui.order.OrderConfirmActivity" />
+        <activity android:name=".ui.address.AddressListActivity" />
+        <activity android:name=".ui.address.AddressActivity" />
+        <activity android:name=".ui.act.FragmentContainerActivity" />
+        <activity android:name=".ui.my.MyInfoActivity" />
+        <activity android:name=".ui.act.PassChangeActivity" />
+        <activity android:name=".ui.goods.ShopActivity"
+            android:launchMode="singleTop"/>
+        <activity android:name=".ui.order.RemarksActivity" />
+        <activity android:name=".ui.order.OrderPayActivity" />
+        <activity android:name=".ui.order.PayCompleteActivity" />
+        <activity android:name=".ui.act.ReportActivity" />
+        <activity android:name=".ui.act.CodeActivity" />
+        <activity android:name=".ui.act.LoginActivity"
+            android:launchMode="singleTop"/>
+        <activity android:name=".ui.act.ImageCropActivity" />
+        <activity android:name=".ui.act.ImageZoomActivity" />
+        <activity android:name=".ui.act.SearchActivity" />
+        <activity android:name=".ui.my.ui.MyCollectActivity" />
+        <activity android:name=".ui.my.ui.MyAssessActivity" />
+        <activity android:name=".ui.act.GuideActivity" />
+        <activity android:name=".ui.my.ui.MyOrderActivity" />
+        <activity android:name=".ui.order.OrderDeatilsActivity" />
+        <activity android:name=".ui.order.OrderCommentActivicty" />
+        <activity android:name=".ui.order.LogisticsActivity" />
+        <activity android:name=".ui.act.AboutActivity" />
+        <activity android:name=".ui.act.PhoneChangeActivity" />
+        <activity android:name=".ui.after_sales.AfterSalesActivity" />
+        <activity android:name=".ui.after_sales.GoodsReturnActivity" />
+        <activity android:name=".ui.after_sales.GoodsSelectActivity" />
+        <activity android:name=".ui.after_sales.ReturnSelectActivity" />
+        <activity android:name=".ui.after_sales.ReturnDetailsActivity" />
+        <activity android:name=".ui.act.CameraFullScreenActivity" />
+        <activity android:name=".ui.act.CameraActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"
+            android:theme="@style/edit_AlertDialog_style" />
+        <activity android:name=".ui.act.CitySelectActivity" />
+        <activity android:name=".ui.act.WeatherActivity" />
+        <activity android:name=".ui.act.PhoneBindActivity" />
+        <service android:name="com.juntai.shop.mall.homepage.camera.ijkplayer.KeepAliveService" />
+        <activity android:name=".homepage.camera.ijkplayer.StreamCameraFullScreenActivity" />
+
+        <activity
+            android:name=".homepage.camera.ijkplayer.PlayerLiveActivity"
+            android:theme="@style/edit_AlertDialog_style"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+    </application>
+
+</manifest>

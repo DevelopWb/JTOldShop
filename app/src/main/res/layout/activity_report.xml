@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="80dp"
+                android:layout_weight="1"
+                android:text="选择类型"/>
+            <TextView
+                android:id="@+id/report_select"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="请选择"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:minWidth="80dp"
+                android:text="联系电话"/>
+            <EditText
+                android:id="@+id/report_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:maxLength="11"
+                android:background="@null"
+                android:hint="在此输入手机号"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gray"
+            android:textSize="12sp"
+            android:layout_marginTop="5dp"
+            android:text="手机号作为奖励唯一依据，仅商城工作人员可见"/>
+
+        <EditText
+            android:id="@+id/report_edittext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="top"
+            android:lines="6"
+            android:background="@null"
+            android:hint="请详细描述举报内容，商城将为您的信息保密..."/>
+
+        <com.dxngxhl.imageselection.t2.ImageSelectionView2
+            android:id="@+id/report_imageselect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:numColumns="4">
+        </com.dxngxhl.imageselection.t2.ImageSelectionView2>
+
+        <ImageView
+            android:id="@+id/report_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/pre_report"/>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

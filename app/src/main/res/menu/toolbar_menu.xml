@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--扫描-->
+    <item android:id="@+id/title_collect"
+        android:title="收藏"
+        android:visible="false"
+        android:icon="@mipmap/icon_back1"
+        app:showAsAction="ifRoom"/>
+    <item android:id="@+id/title_collect_ed"
+        android:title="收藏"
+        android:visible="false"
+        android:icon="@mipmap/icon_back1"
+        app:showAsAction="ifRoom"/>
+    <!--添加-->
+    <item android:id="@+id/title_more"
+        android:visible="false"
+        android:title="更多"
+        android:icon="@mipmap/icon_back1"
+        app:showAsAction="ifRoom"/>
+</menu>

@@ -1,0 +1,224 @@
+package com.juntai.shop.mall.ui.act;
+
+import android.Manifest;
+import android.content.Intent;
+import android.view.View;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
+
+import com.baidu.location.BDLocation;
+import com.google.android.material.tabs.TabLayout;
+import com.juntai.mall.base.base.IMLoginOutEvent;
+import com.juntai.mall.base.mvp.BasePresenter;
+import com.juntai.mall.base.utils.NotificationTool;
+import com.juntai.mall.base.utils.SPTools;
+import com.juntai.mall.base.utils.ToastUtils;
+import com.juntai.mall.im.CustomMessage;
+import com.juntai.mall.im.ModuleIm_Init;
+import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.R;
+import com.juntai.shop.mall.baseinfo.BaseAppActivity;
+import com.juntai.shop.mall.ui.adapter.MainAdapter;
+import com.juntai.shop.mall.ui.homepage.HomepageFragment;
+import com.juntai.shop.mall.ui.fmt.PublishFragment;
+import com.juntai.shop.mall.ui.my.MyFragment;
+import com.juntai.shop.mall.utils.AppUtils;
+import com.juntai.shop.mall.utils.UpdateUtils;
+import com.juntai.shop.mall.view.CustomViewPager;
+import com.tbruyelle.rxpermissions2.RxPermissions;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+public class MainActivity extends BaseAppActivity implements ViewPager.OnPageChangeListener {
+    MainAdapter adapter;
+    CustomViewPager mainViewpager;
+    TabLayout mainTablayout;
+    private String[] title = new String[]{"首页", "附近", "我的"};
+    private int[] tabDrawables = new int[]{R.drawable.pre_main_home, R.drawable.pre_main_post, R.drawable.pre_main_my};
+    List<Fragment> mFragments = new ArrayList<>();
+    private HomepageFragment homepageFragment;
+
+    //[]{new HomeFragment(), nearServiceFragment,new GoodsFragment(), new ShopCartFragment(), new MyFragment()};
+    @Override
+    public int getLayoutView() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected BasePresenter createPresenter() {
+        return null;
+    }
+
+    @Override
+    public void initView() {
+        getmBaseRootCol().setBackgroundResource(R.color.transparent);
+        getToolbar().setVisibility(View.GONE);
+        getContentLayout().setBackground(null);
+        getStatusTopNullView().setBackgroundResource(R.mipmap.bg_status_main);
+        mainViewpager = findViewById(R.id.main_viewpager);
+        mainTablayout = findViewById(R.id.main_tablayout);
+        homepageFragment = new HomepageFragment();
+        mFragments.add(homepageFragment);
+        mFragments.add(new PublishFragment());
+        mFragments.add(new MyFragment());
+        //
+        initTab();
+
+
+        //获取指定时间的时间戳，除以1000说明得到的是秒级别的时间戳（10位）
+        long time = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).parse("2019-12-19 16:00:00", new ParsePosition(0)).getTime() / 1000;
+        long time2 = System.currentTimeMillis() / 1000;
+    }
+
+    String[] permissions = new String[]{
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.RECORD_AUDIO,
+            Manifest.permission.CAMERA,
+            Manifest.permission.ACCESS_FINE_LOCATION};
+
+    @Override
+    public void initData() {
+        if (App.app.getUser() != null) {
+            ModuleIm_Init.connectIM(App.app.getUser().getReturnValue().getrOngYunToken());
+        }
+
+        //权限
+        new RxPermissions(this)
+                .request(permissions)
+                .delay(1, TimeUnit.SECONDS)
+                .subscribe(aBoolean -> {
+                    if (aBoolean) {
+                        //所有权限通过
+                    } else {
+                        //有一个权限没通过
+                    }
+                }, throwable -> {
+                });
+        new UpdateUtils().update(mContext, false);
+    }
+
+    public void initTab() {
+        adapter = new MainAdapter(getSupportFragmentManager(), this, title, tabDrawables, mFragments);
+        mainViewpager.setAdapter(adapter);
+        mainViewpager.setOffscreenPageLimit(title.length);
+        /*viewpager切换监听，包含滑动点击两种*/
+        mainViewpager.addOnPageChangeListener(this);
+        //TabLayout
+//        tabLayout.addTab(tabLayout.newTab().setText("index").setIcon(R.mipmap.point_focus));
+        mainTablayout.setupWithViewPager(mainViewpager);
+//        tabLayout.setOnTabSelectedListener();
+        /**
+         * 添加自定义tab布局
+         * */
+        for (int i = 0; i < mainTablayout.getTabCount(); i++) {
+            TabLayout.Tab tab = mainTablayout.getTabAt(i);
+            if (tab != null) {
+//                tab.setIcon(tabDrawables[i]);
+//                tab.setText(title[i]);
+                tab.setCustomView(adapter.getTabView(i));
+            }
+        }
+        /*viewpager切换默认第一个*/
+        mainViewpager.setCurrentItem(0);
+    }
+
+    @Override
+    public void onPageScrolled(int i, float v, int i1) {
+
+    }
+
+    @Override
+    public void onPageSelected(int i) {
+        if (i == 0) {
+            getmBaseRootCol().setBackgroundResource(R.color.transparent);
+            getStatusTopNullView().setBackgroundResource(R.mipmap.bg_status_main);
+        } else {
+            getmBaseRootCol().setBackgroundResource(R.mipmap.bg_2);
+            getStatusTopNullView().setBackgroundResource(R.color.transparent);
+        }
+    }
+
+    /**
+     * 登录被顶-或需要重新登录
+     *
+     * @param login
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLoginOutEvent(IMLoginOutEvent login) {
+        ToastUtils.toast(mContext, login.toast);
+        //重新登录
+        ModuleIm_Init.logout();
+        //登录信息设置为空
+        SPTools.saveString(App.app, AppUtils.SP_KEY_LOGIN, "");
+        App.app.setUserBean(null);
+        App.app.getNowActivity().finish();
+        startActivity(new Intent(mContext, LoginActivity.class));
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void imCustom(CustomMessage customMessage) {
+        //getChannel  1发货推送；2退款推送；3拒绝退款推送
+        if (customMessage.getChannel() == 1) {
+            NotificationTool.sendNotifMessage(
+                    mContext,
+                    1,
+                    "商品已发货",
+                    customMessage.getContent(),
+                    R.drawable.ic_noti_logo,
+                    App.app.activityTool.getOrderDtailsIntent(mContext, customMessage.getId()));
+        } else if (customMessage.getChannel() == 2 || customMessage.getChannel() == 3) {
+            NotificationTool.sendNotifMessage(
+                    mContext,
+                    2,
+                    customMessage.getChannel() == 2 ? "商家同意退款" : "商家拒绝退款",
+                    customMessage.getContent(),
+                    R.drawable.ic_noti_logo,
+                    App.app.activityTool.getReturnDetailsIntent(mContext, customMessage.getId()));
+        }
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int i) {
+
+    }
+
+    @Override
+    public void onLocationReceived(BDLocation bdLocation) {
+        if (homepageFragment != null) {
+            homepageFragment.onLocationReceived(bdLocation);
+        }
+
+    }
+
+    @Override
+    public boolean requestLocation() {
+        return true;
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mFragments.get(2).onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onSuccess(String tag, Object o) {
+
+    }
+
+    @Override
+    public void onError(String tag, Object o) {
+
+    }
+}

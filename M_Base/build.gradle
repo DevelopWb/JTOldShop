@@ -1,0 +1,99 @@
+apply plugin: 'com.android.library'
+
+def configs = rootProject.ext.android
+def librarys = rootProject.ext.dependencies
+android {
+    compileSdkVersion configs.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion configs.minSdkVersion
+        targetSdkVersion configs.targetSdkVersion
+        versionCode configs.versionCode
+        versionName configs.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            consumerProguardFiles 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api librarys["appcompat-v7"]
+    api librarys["design"]
+    testImplementation 'junit:junit:4.12'
+    //noinspection GradleCompatible
+    androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+
+
+    //转换器，请求结果转换成Model
+    //okhttp
+    api librarys["okhttp"]
+    api librarys["logging-interceptor"]
+    //Gson 库
+    api librarys["gson"]
+    //路由
+    //api librarys["arouter-api"]
+    //annotationProcessor librarys["arouter-compiler"]
+    //
+    api librarys["rxjava"]
+    api librarys["rxandroid"]
+    //retrofit2
+    api librarys["retrofit"]
+    api librarys["converter-gson"]
+    api librarys["retrofit-adapters"]
+    api librarys["converter-wire"]
+    api librarys["adapter-rxjava2"]
+    api librarys["converter-scalars"]        //ConverterFactory的String依赖包
+    api librarys["wire-runtime"]
+    //
+    api librarys["BaseRecyclerViewAdapterHelper"]
+    //Glide
+    api librarys["glide"]
+    annotationProcessor librarys["compiler"]
+    //压缩
+    api librarys["Luban"]
+    //下拉刷新
+    api librarys["SmartRefreshLayout"]
+    api librarys["SmartRefreshHeader"]       //没有使用特殊Header，可以不加这行
+    // RxLifecycle
+    api librarys["rxlifecycle"]
+    api librarys["rxlifecycle-android"]
+    api librarys["rxlifecycle-components"]
+
+    api librarys["multidex"]
+    //leakcanary
+    debugImplementation librarys["leakcanary-android"]
+    releaseImplementation librarys["leakcanary-android-no-op"]
+
+    api librarys["logger"]
+    api librarys["rxpermissions"]
+    api librarys["Toasty"]
+    api librarys["immersionbar"]
+    api librarys["flowlayout"]
+//    api librarys["banner"]
+    //热更新
+    api librarys["crashreport_upgrade"]
+    api librarys["tinker_android"]
+    api librarys["nativecrashreport"]
+    //
+    api "com.daimajia.swipelayout:library:1.2.0@aar"
+    //
+    api 'org.greenrobot:eventbus:3.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+}

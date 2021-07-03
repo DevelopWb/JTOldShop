@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@color/white">
+    <ImageView
+        android:id="@+id/item_goods_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <TextView
+        android:id="@+id/item_goods_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:text="【直降150领券再减50】Huawei/华为 畅享 8e 青春版 4G高清全面屏大屏全网通官方正品智能学生老人游戏手机"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:text="￥ 2000"
+        android:textColor="@color/red"/>
+</LinearLayout>

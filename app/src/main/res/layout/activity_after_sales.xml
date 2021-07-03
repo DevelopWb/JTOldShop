@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="10dp">
+
+    <LinearLayout
+        android:id="@+id/after_sales_tui"
+        style="@style/my_item_setting_learnlayout">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_after_sales_tk" />
+        <TextView
+            style="@style/my_item_textview"
+            android:drawableRight="@drawable/pre_my_next"
+            android:text="退款/退货" />
+    </LinearLayout>
+    <View style="@style/my_item_setting_line"/>
+    <LinearLayout
+        android:id="@+id/after_sales_huan"
+        style="@style/my_item_setting_learnlayout">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_after_sales_hh" />
+        <TextView
+            style="@style/my_item_textview"
+            android:drawableRight="@drawable/pre_my_next"
+            android:text="换货" />
+    </LinearLayout>
+    <View style="@style/my_item_setting_line"/>
+    <LinearLayout
+        android:id="@+id/after_sales_shang"
+        style="@style/my_item_setting_learnlayout">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_after_sales_sj" />
+        <TextView
+            style="@style/my_item_textview"
+            android:text="联系商家" />
+    </LinearLayout>
+    <View style="@style/my_item_setting_line"/>
+    <LinearLayout
+        android:id="@+id/after_sales_kefu"
+        style="@style/my_item_setting_learnlayout">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_after_sales_kf" />
+        <TextView
+            style="@style/my_item_textview"
+            android:text="联系客服" />
+    </LinearLayout>
+    <View style="@style/my_item_setting_line"/>
+</LinearLayout>

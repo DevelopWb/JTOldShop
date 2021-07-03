@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="10dp">
+    <ImageView
+        android:id="@+id/item_shopcart_goodsimage"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="10dp"
+        android:src="@mipmap/ic_launcher"/>
+    <TextView
+        android:id="@+id/item_shopcart_goodsname"
+        style="@style/shopcartItemGoodsText"
+        android:textColor="@android:color/black"
+        android:maxLines="1"
+        android:textStyle="bold"
+        android:ellipsize="end"
+        android:textSize="13sp"/>
+    <TextView
+        android:id="@+id/item_shopcart_specification"
+        style="@style/shopcartItemGoodsText"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textSize="12sp"
+        android:textColor="@color/gray"
+        android:layout_below="@+id/item_shopcart_goodsname"/>
+    <TextView
+        android:id="@+id/item_shopcart_goods_price"
+        style="@style/shopcartItemGoodsText"
+        android:textColor="@color/red"
+        android:layout_below="@+id/item_shopcart_specification"/>
+    <com.juntai.shop.mall.view.CountView
+        android:id="@+id/cart_countview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/item_shopcart_specification">
+    </com.juntai.shop.mall.view.CountView>
+</RelativeLayout>

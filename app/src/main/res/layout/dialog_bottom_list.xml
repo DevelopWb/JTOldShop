@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="@drawable/bg_specfication_dialog">
+    <TextView
+        android:id="@+id/bottomDialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="8dp"
+        android:textSize="15sp"/>
+    <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/bottomDialogList"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+        android:layout_weight="1">
+    </androidx.recyclerview.widget.RecyclerView>
+    <TextView
+        android:id="@+id/complete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/complete"
+        android:gravity="center"
+        android:layout_gravity="bottom"
+        android:padding="8dp"
+        android:textSize="15sp"
+        android:background="@drawable/bg_semicircle"
+        android:textColor="@color/white"/>
+</LinearLayout>

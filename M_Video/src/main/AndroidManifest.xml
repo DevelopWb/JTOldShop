@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.juntai.mall.video">
+
+    <application>
+        <activity android:name=".player.DronePlayer"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+        <!-- 短视频录制 -->
+        <activity android:name="com.mabeijianxi.smallvideorecord2.MediaRecorderActivity" />
+        <activity android:name=".record.SendSmallVideoActivity" /> <!-- 萤石 -->
+        <activity
+            android:name="com.videogo.main.EzvizWebViewActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".player.PlayerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name=".img.ImageZoomActivity" />
+        <activity android:name=".player.VideoNetPlayerActivity" />
+    </application>
+
+</manifest>

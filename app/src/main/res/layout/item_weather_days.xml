@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/transparent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/weather_days_item_date"
+            android:layout_marginTop="40dp"
+            android:textColor="@color/white"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:text="4月29日 星期一"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/weather_days_item_skycon"
+            android:src="@drawable/weather_wind"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/weather_days_item_temp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/white"
+            android:layout_centerVertical="true"
+            android:text="23℃/17℃"
+            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <View
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+</LinearLayout>

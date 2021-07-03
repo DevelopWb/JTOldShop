@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:paddingTop="3dp"
+    android:paddingBottom="3dp">
+    <ImageView
+        android:id="@+id/item_return_goods_image"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerVertical="true"
+        android:scaleType="centerCrop"/>
+    <TextView
+        android:id="@+id/item_return_goods_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textSize="15sp"
+        android:maxLines="2"
+        android:layout_toRightOf="@+id/item_return_goods_image"
+        android:layout_toLeftOf="@+id/item_return_goods_price" />
+    <TextView
+        android:id="@+id/item_return_goods_spec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textSize="14sp"
+        android:layout_toRightOf="@+id/item_return_goods_image"
+        android:layout_below="@+id/item_return_goods_name" />
+    <TextView
+        android:id="@+id/item_return_goods_pack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/grey"
+        android:textSize="14sp"
+        android:text="包装费￥0"
+        android:layout_toRightOf="@+id/item_return_goods_image"
+        android:layout_below="@+id/item_return_goods_spec" />
+    <TextView
+        android:id="@+id/item_return_goods_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:textSize="14sp"
+        android:layout_alignParentRight="true"
+        android:text="￥0.0"/>
+    <TextView
+        android:id="@+id/item_return_goods_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:textSize="14sp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/item_return_goods_name"
+        android:text="X1"/>
+    <TextView
+        android:id="@+id/item_return_goods_price_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/item_return_goods_spec"
+        android:text="￥0"/>
+</RelativeLayout>

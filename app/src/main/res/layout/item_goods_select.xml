@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="3dp"
+    android:paddingBottom="3dp">
+    <CheckBox
+        android:id="@+id/item_goods_select_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"/>
+    <ImageView
+        android:id="@+id/item_goods_select_image"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/item_goods_select_check"
+        android:scaleType="centerCrop"/>
+    <TextView
+        android:id="@+id/item_goods_select_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textSize="15sp"
+        android:maxLines="2"
+        android:layout_toRightOf="@+id/item_goods_select_image"
+        android:layout_toLeftOf="@+id/item_goods_select_price" />
+    <TextView
+        android:id="@+id/item_goods_select_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/grey"
+        android:textSize="14sp"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/item_goods_select_name"
+        android:text="￥0.0"/>
+    <TextView
+        android:id="@+id/item_goods_select_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="@color/grey"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/item_goods_select_price"
+        android:text="X1"/>
+</RelativeLayout>

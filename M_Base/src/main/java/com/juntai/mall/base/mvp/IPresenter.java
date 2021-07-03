@@ -1,0 +1,20 @@
+package com.juntai.mall.base.mvp;
+
+/**
+ * @aouther Ma
+ * @date 2019/3/6
+ */
+public interface IPresenter<V extends IView> {
+
+    /**
+     * 绑定 View
+     *
+     * @param mView
+     */
+    void attachView(V mView);
+
+    /**
+     * 解绑 View
+     */
+    void detachView();
+}

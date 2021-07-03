@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/camera_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/mSurfaceview_Rl"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_height="wrap_content">
+        <SurfaceView
+            android:id="@+id/realplay_sv"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+        <ImageView
+            android:id="@+id/player_cover"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="fitXY"/>
+        <ImageButton
+            android:id="@+id/play_button"
+            android:background="#00FFFFFF"
+            android:src="@drawable/camera_play_button"
+            android:layout_width="90dp"
+            android:scaleType="fitCenter"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content" />
+        <ProgressBar
+            android:id="@+id/cameraPlayProgressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
+        <ImageView
+            android:id="@+id/camera_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:visibility="gone"
+            android:background="@drawable/bg_gray_round"
+            android:src="@drawable/ic_back_white"/>
+    </RelativeLayout>
+    <Button
+        android:visibility="gone"
+        android:id="@+id/setAsCover"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="设置为封面"
+        android:layout_alignBottom="@id/mSurfaceview_Rl"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/videoplayer_btn_bg"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+
+        />
+
+    <RelativeLayout
+        android:id="@+id/camera_bottom"
+        android:layout_width="match_parent"
+        android:layout_below="@id/mSurfaceview_Rl"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+        <!--<VideoView-->
+        <!--android:id="@+id/vv"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="185dp" />-->
+        <RelativeLayout
+            android:id="@+id/player_rl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/mSurfaceview_controllor"
+                    android:layout_width="wrap_content"
+                    android:background="#b8ffffff"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginRight="10dp">
+
+                    <ImageButton
+                        android:id="@+id/fullscreen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:layout_centerVertical="true"
+                        android:background="#fff"
+                        android:src="@drawable/max" />
+
+                    <ImageButton
+                        android:layout_marginLeft="4dp"
+                        android:layout_toRightOf="@id/fullscreen"
+                        android:id="@+id/mSurfaceview_play"
+                        android:layout_width="wrap_content"
+                        android:background="#fff"
+                        android:src="@drawable/realplayer_play"
+                        android:layout_centerVertical="true"
+                        android:layout_height="38dp" />
+                    <ImageButton
+                        android:layout_marginLeft="4dp"
+                        android:layout_centerVertical="true"
+                        android:background="#fff"
+                        android:src="@drawable/pause"
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:layout_toRightOf="@id/mSurfaceview_play"
+                        android:id="@+id/mSurfaceView_pause"/>
+
+                    <ImageButton
+                        android:layout_marginLeft="4dp"
+                        android:id="@+id/mSurfaceview_capture"
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:background="#fff"
+                        android:src="@drawable/capture"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/mSurfaceView_pause"
+
+                        />
+
+                    <ImageButton
+                        android:id="@+id/sv_record"
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginLeft="3dp"
+                        android:layout_toEndOf="@+id/mSurfaceview_capture"
+                        android:layout_toRightOf="@+id/mSurfaceview_capture"
+                        android:background="#fff"
+                        android:src="@drawable/record" />
+
+                    <ImageButton
+                        android:layout_marginLeft="4dp"
+                        android:id="@+id/saveTheNetStream"
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:background="#fff"
+                        android:src="@drawable/flow_pre"
+                        android:layout_toRightOf="@id/sv_record"
+                        android:textColor="@android:color/holo_green_dark"
+                        />
+                </RelativeLayout>
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <!--<ProgressBar-->
+        <!--android:id="@+id/progressBar"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="50dp"/>-->
+        <RelativeLayout
+            android:id="@+id/cameraInfoRl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/player_rl"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:background="#ffffff">
+
+            <TextView
+                android:id="@+id/deviceplace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:textColor="@color/black"
+                android:layout_marginTop="5dp"
+                android:text="设备位置:"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/devicestate"
+                android:textColor="@color/black"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/deviceplace"
+                android:layout_marginTop="5dp"
+                android:text="设备状态:"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+    <include layout="@layout/recycleview_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_below="@+id/camera_bottom"
+        android:layout_above="@+id/bottom_view"/>
+</LinearLayout>
