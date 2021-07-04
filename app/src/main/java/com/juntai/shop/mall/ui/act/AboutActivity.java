@@ -3,7 +3,6 @@ package com.juntai.shop.mall.ui.act;
 import android.widget.TextView;
 
 import com.juntai.mall.base.base.BaseActivity;
-import com.juntai.shop.mall.App;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.utils.AppUtils;
 

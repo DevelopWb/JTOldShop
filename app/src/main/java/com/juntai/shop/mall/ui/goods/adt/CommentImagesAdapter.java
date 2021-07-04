@@ -6,7 +6,7 @@ import android.widget.ImageView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.juntai.mall.base.utils.ImageLoadUtil;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.R;
 
 import java.util.List;
@@ -24,8 +24,8 @@ public class CommentImagesAdapter extends BaseQuickAdapter<String, BaseViewHolde
     @Override
     protected void convert(BaseViewHolder helper, String item) {
         ImageView imageView = helper.getView(R.id.item_comment_images);
-        imageView.getLayoutParams().width = App.W / 4;
-        imageView.getLayoutParams().height = App.W / 4;
+        imageView.getLayoutParams().width = MyApp.W / 4;
+        imageView.getLayoutParams().height = MyApp.W / 4;
         ImageLoadUtil.loadImage(mContext,item,imageView);
     }
 }

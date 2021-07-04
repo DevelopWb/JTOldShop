@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.juntai.mall.base.base.BaseActivity;
 import com.juntai.mall.base.base.BaseObserver;
 import com.juntai.mall.base.utils.ToastUtils;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.LogisticsBean;
@@ -58,7 +58,7 @@ public class LogisticsActivity extends BaseActivity {
     @Override
     public void initData() {
         AppNetModule.createrRetrofit()
-                .logistics(App.app.getAccount(), App.app.getUserToken(),id)
+                .logistics(MyApp.app.getAccount(), MyApp.app.getUserToken(),id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<LogisticsBean>() {

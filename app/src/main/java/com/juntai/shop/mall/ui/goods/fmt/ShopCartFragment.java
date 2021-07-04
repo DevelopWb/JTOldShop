@@ -1,6 +1,5 @@
 package com.juntai.shop.mall.ui.goods.fmt;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -11,14 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.juntai.mall.base.base.BaseFragment;
 import com.juntai.mall.im.ModuleIm_Init;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.CartItemLocB;
 import com.juntai.shop.mall.bean.event.EventToSubmit;
 import com.juntai.shop.mall.ui.goods.ShopActivity;
 import com.juntai.shop.mall.ui.goods.adt.ShopCartItemAdapter;
 import com.juntai.shop.mall.utils.Arith;
-import com.juntai.shop.mall.utils.listener.OnUpdateListener;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -83,8 +81,8 @@ public class ShopCartFragment extends BaseFragment implements View.OnClickListen
         sumPrice = 0.0;
         sumPack = 0.0;
         locBArrayList.clear();
-        if (App.app.getCartBeansForShop((ShopActivity.shopId)) != null){
-            for (CartItemLocB b:App.app.getCartBeansForShop(ShopActivity.shopId)) {
+        if (MyApp.app.getCartBeansForShop((ShopActivity.shopId)) != null){
+            for (CartItemLocB b: MyApp.app.getCartBeansForShop(ShopActivity.shopId)) {
                 if (b.getNum() > 0){
                     locBArrayList.add(b);
                     sumPack = Arith.add(sumPack,b.getPackingCharges());
@@ -94,7 +92,7 @@ public class ShopCartFragment extends BaseFragment implements View.OnClickListen
                 ((ShopActivity)getActivity()).refrehsGoods(b);
             }
         }
-        if (App.app.getCartBeansForShop((ShopActivity.shopId)).size() == 0){
+        if (MyApp.app.getCartBeansForShop((ShopActivity.shopId)).size() == 0){
             linearLayout.setVisibility(View.GONE);
         }
         if (cartSize == 0){
@@ -140,7 +138,7 @@ public class ShopCartFragment extends BaseFragment implements View.OnClickListen
                 EventBus.getDefault().post(new EventToSubmit());
                 break;
             case R.id.dialog_shopcart_clear://清空购物车
-                App.app.getCartBeansForShop((ShopActivity.shopId)).clear();
+                MyApp.app.getCartBeansForShop((ShopActivity.shopId)).clear();
                 update();
                 linearLayout.setVisibility(View.GONE);
                 break;

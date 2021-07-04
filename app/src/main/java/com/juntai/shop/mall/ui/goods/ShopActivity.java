@@ -19,13 +19,12 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.juntai.mall.base.base.BaseActivity;
 import com.juntai.mall.base.base.BaseObserver;
-import com.juntai.mall.base.base.BaseResult;
 import com.juntai.mall.base.utils.ImageLoadUtil;
 import com.juntai.mall.base.utils.LogUtil;
 import com.juntai.mall.base.utils.ToastUtils;
 import com.juntai.mall.im.ModuleIm_Init;
 import com.juntai.mall.im.UserIM;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppHttpPath;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
@@ -42,18 +41,15 @@ import com.juntai.shop.mall.ui.goods.fmt.GoodsDetailsFragment;
 import com.juntai.shop.mall.ui.goods.fmt.GoodsFragment;
 import com.juntai.shop.mall.ui.goods.fmt.ShopCartFragment;
 import com.juntai.shop.mall.ui.goods.fmt.ShopInfoFragment;
-import com.juntai.shop.mall.ui.order.OrderConfirmActivity;
 import com.juntai.shop.mall.utils.AppUtils;
 import com.juntai.shop.mall.utils.DpTools;
 import com.juntai.shop.mall.utils.GlideImageLoader;
 import com.juntai.shop.mall.utils.ShareUtils;
 import com.juntai.shop.mall.utils.StringTools;
 import com.juntai.shop.mall.utils.listener.GoodsStatusChangeListener;
-import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONArray;
@@ -108,10 +104,8 @@ public class ShopActivity extends BaseActivity implements ViewPager.OnPageChange
             finish();
         }
         getToolbar().setVisibility(View.GONE);
-        getStatusTopNullView().setVisibility(View.GONE);
-        getContentLayout().setBackground(null);
         viewNull = findViewById(R.id.shop_null_view);
-        viewNull.getLayoutParams().height = App.statusBarH;
+        viewNull.getLayoutParams().height = MyApp.statusBarH;
         titlelayout = findViewById(R.id.shop_title_layout);
         coordinatorLayout = findViewById(R.id.shop_content);
         ivBack = findViewById(R.id.title_shop_back);
@@ -209,7 +203,7 @@ public class ShopActivity extends BaseActivity implements ViewPager.OnPageChange
 
     public void getData(){
         AppNetModule.createrRetrofit()
-                .shop(App.app.getAccount(),App.app.getUserToken(),shopId,App.app.getUid())
+                .shop(MyApp.app.getAccount(), MyApp.app.getUserToken(),shopId, MyApp.app.getUid())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<ShopBean>() {
@@ -248,7 +242,7 @@ public class ShopActivity extends BaseActivity implements ViewPager.OnPageChange
      */
     public void getCarts(){
         AppNetModule.createrRetrofit()
-                .shopCarts(App.app.getAccount(),App.app.getUserToken(),App.app.getUid(), shopId)
+                .shopCarts(MyApp.app.getAccount(), MyApp.app.getUserToken(), MyApp.app.getUid(), shopId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<ShopCartsBean>() {
@@ -256,7 +250,7 @@ public class ShopActivity extends BaseActivity implements ViewPager.OnPageChange
                     public void accept(ShopCartsBean shopCartsBean) throws Exception {
                         StringBuffer stringBuffer;
                         if (shopCartsBean.getReturnValue() != null && shopCartsBean.getReturnValue().size() > 0) {
-                            App.app.getCartBeansForShop(shopId).clear();
+                            MyApp.app.getCartBeansForShop(shopId).clear();
                             for (ShopCartsBean.ReturnValueBean bean : shopCartsBean.getReturnValue()) {
                                 stringBuffer = new StringBuffer();
                                 for (ShopCartsBean.ReturnValueBean.SpecificationBean bean1 : bean.getSpecification()) {
@@ -273,7 +267,7 @@ public class ShopActivity extends BaseActivity implements ViewPager.OnPageChange
                                         bean.getPrice(),
                                         bean.getAttributeId(),
                                         stringBuffer.toString());
-                                App.app.setCartBean(shopId, cartItemLocB);
+                                MyApp.app.setCartBean(shopId, cartItemLocB);
                             }
                         }
                         if (shopCartFragment != null) {
@@ -297,7 +291,7 @@ public class ShopActivity extends BaseActivity implements ViewPager.OnPageChange
         if (shopInfoB == null || isCollect) return;
         isCollect = true;
         AppNetModule.createrRetrofit()
-                .collectOperateOne(App.app.getAccount(),App.app.getUserToken(),App.app.getUid(),
+                .collectOperateOne(MyApp.app.getAccount(), MyApp.app.getUserToken(), MyApp.app.getUid(),
                         0,shopId,0,shopInfoB.getIsCollect(),shopInfoB.getIsCollect())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -407,12 +401,12 @@ public class ShopActivity extends BaseActivity implements ViewPager.OnPageChange
      * 同步购物车
      */
     public void cartSys(){
-        if (App.app.getCartBeansForShop(shopId).size() == 0){
+        if (MyApp.app.getCartBeansForShop(shopId).size() == 0){
             return;
         }
 
         JSONArray jsonArray = new JSONArray();
-        for (CartItemLocB b:App.app.getCartBeansForShop(shopId)) {
+        for (CartItemLocB b: MyApp.app.getCartBeansForShop(shopId)) {
             try {
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("id",b.getCartId());//购物车id,没有为0
@@ -426,12 +420,12 @@ public class ShopActivity extends BaseActivity implements ViewPager.OnPageChange
             }
         }
         AppNetModule.createrRetrofit()
-                .cartSys(App.app.getAccount(),App.app.getUserToken(),App.app.getUid(),shopId,jsonArray.toString())
+                .cartSys(MyApp.app.getAccount(), MyApp.app.getUserToken(), MyApp.app.getUid(),shopId,jsonArray.toString())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(result -> {
                     if (isToSubmit){
-                        App.app.activityTool.toOrderConfirmActivity(mContext,shopId,shopInfoB.getLogoId(),shopInfoB.getShopName());
+                        MyApp.app.activityTool.toOrderConfirmActivity(mContext,shopId,shopInfoB.getLogoId(),shopInfoB.getShopName());
                     }
                     LogUtil.d("购物车同步success-："+ result.success);
                 }, throwable -> {
@@ -456,7 +450,7 @@ public class ShopActivity extends BaseActivity implements ViewPager.OnPageChange
     public void onCartEvent(CartItemLocB itemLocB){
         //
         if (itemLocB.getGoodsId() != 0){
-            App.app.setCartBean(shopId,itemLocB);
+            MyApp.app.setCartBean(shopId,itemLocB);
         }
         shopCartFragment.update();
     }

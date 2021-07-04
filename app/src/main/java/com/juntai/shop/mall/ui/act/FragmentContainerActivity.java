@@ -5,7 +5,7 @@ import android.view.View;
 
 import com.juntai.mall.base.base.BaseActivity;
 import com.juntai.shop.mall.R;
-import com.juntai.shop.mall.ui.my.MyFragment;
+import com.juntai.shop.mall.mine.MineFragment;
 
 /**
  * 加载fragment
@@ -36,7 +36,7 @@ public class FragmentContainerActivity extends BaseActivity {
                 getToolbar().setVisibility(View.GONE);
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .add(R.id.fragment_content,new MyFragment())
+                        .add(R.id.fragment_content,new MineFragment())
                         .commit();
                 break;
         }

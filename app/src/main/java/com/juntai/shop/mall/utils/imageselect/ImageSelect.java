@@ -12,7 +12,7 @@ import com.dxngxhl.imageselection.ImageChoose;
 import com.juntai.mall.base.utils.BaseAppUtils;
 import com.juntai.mall.base.widght.MenuDialog;
 import com.juntai.mall.video.record.VideoPreviewActivity;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.mabeijianxi.smallvideorecord2.MediaRecorderActivity;
 import com.mabeijianxi.smallvideorecord2.model.MediaRecorderConfig;
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -68,9 +68,9 @@ public class ImageSelect implements ImageChoose {
                             //                .smallVideoHeight(480)
                             .recordTimeMax(20000)
                             .recordTimeMin(2000)
-                            .videoBitrate(App.H * App.W)
-                            .smallVideoWidth(App.W)
-                            .smallVideoHeight(App.H)
+                            .videoBitrate(MyApp.H * MyApp.W)
+                            .smallVideoWidth(MyApp.W)
+                            .smallVideoHeight(MyApp.H)
                             .captureThumbnailsTime(1)
                             .build();
                     MediaRecorderActivity.goSmallVideoRecorder(activity == null?fragment.getActivity():activity, VideoPreviewActivity.class.getName(), config);

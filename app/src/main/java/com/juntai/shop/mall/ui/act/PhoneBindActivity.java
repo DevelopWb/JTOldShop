@@ -15,7 +15,7 @@ import com.juntai.mall.base.utils.LogUtil;
 import com.juntai.mall.base.utils.SPTools;
 import com.juntai.mall.base.utils.ToastUtils;
 import com.juntai.mall.im.ModuleIm_Init;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.LoginBean;
@@ -42,10 +42,8 @@ public class PhoneBindActivity extends BaseActivity {
     @Override
     public void initView() {
         setTitleName("绑定手机号");
-        getmBaseRootCol().setBackgroundResource(R.color.content_layout);
+        mBaseRootCol.setBackgroundResource(R.color.content_layout);
         getToolbar().setVisibility(View.GONE);
-        getContentLayout().setBackground(null);
-        getStatusTopNullView().setBackgroundResource(R.mipmap.bg_status_main);
         qqId = getIntent().getStringExtra("qqId");
         qqName = getIntent().getStringExtra("qqName");
         weChatId = getIntent().getStringExtra("weChatId");
@@ -90,11 +88,11 @@ public class PhoneBindActivity extends BaseActivity {
                     userBean = GsonTools.changeGsonToBean(loginStr, LoginBean.class);
                     if (userBean.success) {
                         ToastUtils.success(mContext, "登录成功");
-                        SPTools.saveString(App.app, AppUtils.SP_KEY_LOGIN, loginStr);
-                        App.app.setUserBean(null);
-                        ModuleIm_Init.connectIM(App.app.getUser().getReturnValue().getrOngYunToken());
+                        SPTools.saveString(MyApp.app, AppUtils.SP_KEY_LOGIN, loginStr);
+                        MyApp.app.setUserBean(null);
+                        ModuleIm_Init.connectIM(MyApp.app.getUser().getReturnValue().getrOngYunToken());
                         bind();
-                        LogUtil.d("token=" + App.app.getUserToken());
+                        LogUtil.d("token=" + MyApp.app.getUserToken());
                         LogUtil.d("token=" + userBean.getReturnValue().getAccount());
                     } else {
                         ToastUtils.toast(mContext, userBean.error);
@@ -111,7 +109,7 @@ public class PhoneBindActivity extends BaseActivity {
      */
     public void bind(){
         AppNetModule.createrRetrofit()
-                .bind(App.app.getAccount(),App.app.getUserToken(),weChatId,weChatName,qqId,qqName)
+                .bind(MyApp.app.getAccount(), MyApp.app.getUserToken(),weChatId,weChatName,qqId,qqName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<BaseResult>(null) {

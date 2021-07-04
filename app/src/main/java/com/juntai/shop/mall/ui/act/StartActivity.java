@@ -1,28 +1,18 @@
 package com.juntai.shop.mall.ui.act;
 
 import android.Manifest;
-import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.IBinder;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.baidu.location.BDAbstractLocationListener;
-import com.baidu.location.BDLocation;
-import com.juntai.mall.base.base.BaseActivity;
-import com.juntai.mall.base.utils.LogUtil;
 import com.juntai.mall.base.utils.SPTools;
-import com.juntai.mall.bdmap.utils.BaiDuLocationOneUtils;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MainActivity;
 import com.juntai.shop.mall.R;
-import com.juntai.shop.mall.ui.goods.ShopActivity;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.concurrent.TimeUnit;
-
-import io.reactivex.functions.Consumer;
 
 /**
  * Created by Ma

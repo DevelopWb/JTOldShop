@@ -1,30 +1,23 @@
 package com.juntai.shop.mall.ui.goods.fmt;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
-import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.juntai.mall.base.base.BaseLazyFragment;
 import com.juntai.mall.base.base.BaseObserver;
 import com.juntai.mall.base.utils.ToastUtils;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
-import com.juntai.shop.mall.bean.MyCommentB;
 import com.juntai.shop.mall.bean.ShopCommentsBean;
 import com.juntai.shop.mall.ui.goods.ShopActivity;
 import com.juntai.shop.mall.ui.goods.adt.CommentsAdapter;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
@@ -104,7 +97,7 @@ public class CommentsFragment extends BaseLazyFragment {
     }
     public void getData(){
         AppNetModule.createrRetrofit()
-                .shopComments(App.app.getAccount(), App.app.getUserToken(), ShopActivity.shopId,typeId,page,pagesize).subscribeOn(Schedulers.io())
+                .shopComments(MyApp.app.getAccount(), MyApp.app.getUserToken(), ShopActivity.shopId,typeId,page,pagesize).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<ShopCommentsBean>() {
                     @Override

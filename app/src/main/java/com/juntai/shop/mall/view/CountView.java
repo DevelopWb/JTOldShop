@@ -5,15 +5,13 @@ import android.os.Build;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.juntai.mall.base.utils.ToastUtils;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.R;
 
 /**
@@ -90,9 +88,9 @@ public class CountView extends LinearLayout {
                     onCountChangeListener.countChange(number,1);
                 }
             }else if(maxNumber <= 0){
-                ToastUtils.toast(App.app,"库存不足");
+                ToastUtils.toast(MyApp.app,"库存不足");
             }else {
-                ToastUtils.toast(App.app,"当前库存不足");
+                ToastUtils.toast(MyApp.app,"当前库存不足");
             }
         });
         add.setOnClickListener(v -> {
@@ -106,9 +104,9 @@ public class CountView extends LinearLayout {
                     onCountChangeListener.countChange(number,1);
                 }
             }else if(maxNumber <= 0){
-                ToastUtils.toast(App.app,"库存不足");
+                ToastUtils.toast(MyApp.app,"库存不足");
             }else {
-                ToastUtils.toast(App.app,"当前库存不足");
+                ToastUtils.toast(MyApp.app,"当前库存不足");
             }
         });
     }

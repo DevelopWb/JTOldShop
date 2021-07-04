@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.juntai.mall.base.base.BaseActivity;
 import com.juntai.mall.base.utils.ToastUtils;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.OrderCommodityListBean;
 import com.juntai.shop.mall.ui.after_sales.adt.GoodsSelectAdapter;
@@ -31,30 +31,30 @@ public class GoodsSelectActivity extends BaseActivity {
     @Override
     public void initView() {
         setTitleName("商品选择");
-        for (OrderCommodityListBean bean:App.app.goodsReturnBeans) {
+        for (OrderCommodityListBean bean: MyApp.app.goodsReturnBeans) {
             bean.setChecked(false);
         }
         smartRefreshLayout = findViewById(R.id.smartRefreshLayout);
         smartRefreshLayout.setEnableRefresh(false);
         smartRefreshLayout.setEnableLoadMore(false);
         recyclerView = findViewById(R.id.recyclerView);
-        selectAdapter = new GoodsSelectAdapter(R.layout.item_goods_select,App.app.goodsReturnBeans);
+        selectAdapter = new GoodsSelectAdapter(R.layout.item_goods_select, MyApp.app.goodsReturnBeans);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         recyclerView.setAdapter(selectAdapter);
         findViewById(R.id.goods_select_submit).setOnClickListener(v -> {
-            int size = App.app.goodsReturnBeans.size();
+            int size = MyApp.app.goodsReturnBeans.size();
             List<OrderCommodityListBean> listBeans = new ArrayList<>();
             for (int i = 0; i < size; i++) {
-                if (!App.app.goodsReturnBeans.get(i).isChecked()){
-                    listBeans.add(App.app.goodsReturnBeans.get(i));
+                if (!MyApp.app.goodsReturnBeans.get(i).isChecked()){
+                    listBeans.add(MyApp.app.goodsReturnBeans.get(i));
                 }
             }
-            App.app.goodsReturnBeans.removeAll(listBeans);
-            if (App.app.goodsReturnBeans.size() == 0){
+            MyApp.app.goodsReturnBeans.removeAll(listBeans);
+            if (MyApp.app.goodsReturnBeans.size() == 0){
                 ToastUtils.toast(mContext,"请选择商品");
             }else {
                 //有选中
-                App.app.activityTool.toAfterSalesActivity(mContext,getIntent());
+                MyApp.app.activityTool.toAfterSalesActivity(mContext,getIntent());
                 finish();
             }
         });

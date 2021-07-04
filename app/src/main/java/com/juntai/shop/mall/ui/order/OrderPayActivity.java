@@ -1,12 +1,9 @@
 package com.juntai.shop.mall.ui.order;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -18,35 +15,20 @@ import com.juntai.mall.base.base.BaseActivity;
 import com.juntai.mall.base.base.BaseObserver;
 import com.juntai.mall.base.utils.LogUtil;
 import com.juntai.mall.base.utils.ToastUtils;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
-import com.juntai.shop.mall.bean.OrderCreateBean;
 import com.juntai.shop.mall.bean.OrderPayWxBean;
 import com.juntai.shop.mall.bean.StringBean;
 import com.juntai.shop.mall.bean.event.EventWx;
-import com.juntai.shop.mall.utils.AppUtils;
 import com.juntai.shop.mall.utils.StringTools;
-import com.juntai.shop.mall.wxapi.WXPayEntryActivity;
-import com.mabeijianxi.smallvideorecord2.StringUtils;
-import com.tencent.mm.opensdk.modelbase.BaseReq;
-import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
-import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-import com.tencent.mm.opensdk.utils.ILog;
-import com.videogo.constant.Constant;
-import com.videogo.util.MD5Util;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -188,8 +170,8 @@ public class OrderPayActivity extends BaseActivity implements View.OnClickListen
     String orderInfo_ZFB;
     private void getOrderInfo(){
         AppNetModule.createrRetrofit()
-                .orderInfoZfb(App.app.getAccount(),
-                        App.app.getUserToken(),
+                .orderInfoZfb(MyApp.app.getAccount(),
+                        MyApp.app.getUserToken(),
                         id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -212,8 +194,8 @@ public class OrderPayActivity extends BaseActivity implements View.OnClickListen
      */
     private void getOrderInfoWx(){
         AppNetModule.createrRetrofit()
-                .orderInfoWx(App.app.getAccount(),
-                        App.app.getUserToken(),
+                .orderInfoWx(MyApp.app.getAccount(),
+                        MyApp.app.getUserToken(),
                         id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

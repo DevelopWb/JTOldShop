@@ -8,7 +8,6 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +17,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import com.juntai.mall.base.base.BaseObserver;
 import com.juntai.mall.base.utils.ToastUtils;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.CartItemLocB;
@@ -67,7 +66,7 @@ public class SpecificationsDialog extends DialogFragment {
         window.setBackgroundDrawableResource(com.juntai.mall.base.R.color.transparent);
         WindowManager.LayoutParams wlp = window.getAttributes();
         wlp.gravity = Gravity.CENTER;
-        wlp.width = App.W - App.W / 20;
+        wlp.width = MyApp.W - MyApp.W / 20;
 //        wlp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         wlp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         window.setAttributes(wlp);
@@ -76,8 +75,8 @@ public class SpecificationsDialog extends DialogFragment {
                 onXXListener.onDismiss();
             }
         });
-        if (wlp.height > App.H / 2){
-            wlp.height = App.H / 2;
+        if (wlp.height > MyApp.H / 2){
+            wlp.height = MyApp.H / 2;
         }
     }
     public void initView(){
@@ -143,7 +142,7 @@ public class SpecificationsDialog extends DialogFragment {
         countview.setNumber(0);
         countview.setNumEdit(true);
         countview.setMaxNumber(nowSku.getInventoryNum());
-        for (CartItemLocB b:App.app.getCartBeansForShop(ShopActivity.shopId)) {
+        for (CartItemLocB b: MyApp.app.getCartBeansForShop(ShopActivity.shopId)) {
             if (Integer.parseInt(sku.getId()) == b.getSpcId()){
                 //购物车有
                 countview.setNumber(b.getNum());
@@ -204,7 +203,7 @@ public class SpecificationsDialog extends DialogFragment {
 
     public void getData(){
         AppNetModule.createrRetrofit()
-                .GoodsDetalis(goodsId,App.app.getUid())
+                .GoodsDetalis(goodsId, MyApp.app.getUid())
                 .subscribeOn(Schedulers.io())
 //                .observeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

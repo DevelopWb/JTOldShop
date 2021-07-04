@@ -1,21 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/base_layout"
     android:layout_width="match_parent"
+    android:id="@+id/base_col"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/bg_1">
-    <TextView
-        android:id="@+id/status_top_null_view"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="5dp"/>
-    <include layout="@layout/base_toolbar"/>
+        app:elevation="0dp"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/base_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            >
+            <TextView
+                android:id="@+id/back_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:gravity="center"
+                android:textColor="@color/text_title"/>
+            <TextView
+                android:id="@+id/title_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:layout_gravity="center_horizontal"
+                android:textSize="18dp"
+                android:textColor="@color/white"/>
+            <TextView
+                android:id="@+id/title_rightTv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="10dp"
+                android:paddingRight="5dp"
+                android:gravity="center"
+                android:singleLine="true"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="right"
+                android:textColor="@color/colorAccent"
+                android:text="@string/app_name"
+                android:visibility="gone"/>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
     <FrameLayout
         android:id="@+id/base_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_round_top"></FrameLayout>
-</LinearLayout>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"></FrameLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

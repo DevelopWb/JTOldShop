@@ -14,7 +14,7 @@ import com.github.promeg.pinyinhelper.Pinyin;
 import com.juntai.mall.base.base.BaseObserver;
 import com.juntai.mall.base.utils.ToastUtils;
 import com.juntai.mall.base.widght.BottomDialogFragment;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.PlaceBean;
@@ -336,7 +336,7 @@ public class AddressSelectorDialog extends BottomDialogFragment implements View.
 
                     @Override
                     public void onError(String msg) {
-                        ToastUtils.toast(App.app,msg);
+                        ToastUtils.toast(MyApp.app,msg);
                     }
                 });
     }

@@ -2,13 +2,9 @@ package com.juntai.shop.mall.ui.act;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -29,7 +25,7 @@ import com.juntai.mall.base.base.BaseObserver;
 import com.juntai.mall.base.utils.DialogUtil;
 import com.juntai.mall.base.utils.SPTools;
 import com.juntai.mall.base.utils.ToastUtils;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.SearchGoodsBean;
@@ -37,8 +33,6 @@ import com.juntai.shop.mall.bean.SearchShopBean;
 import com.juntai.shop.mall.ui.adapter.SearchGoodsAdapter;
 import com.juntai.shop.mall.ui.adapter.SearchShopsAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
@@ -91,7 +85,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         ImmersionBar.with(this).statusBarDarkFont(true).init();
         setContentView(R.layout.activity_search);
         findViewById(R.id.search_back).setOnClickListener(v -> finish());
-        findViewById(R.id.search_top_null_view).getLayoutParams().height = App.statusBarH;
+        findViewById(R.id.search_top_null_view).getLayoutParams().height = MyApp.statusBarH;
         initView();
         initData();
     }
@@ -120,10 +114,10 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         goodsAdapter = new SearchGoodsAdapter(R.layout.item_mycollect,new ArrayList());
         recyclerView.setAdapter(goodsAdapter);
         shopsAdapter.setOnItemClickListener((adapter, view, position) -> {
-            App.app.activityTool.toShopActivity(SearchActivity.this,shopsAdapter.getData().get(position).getShopId());
+            MyApp.app.activityTool.toShopActivity(SearchActivity.this,shopsAdapter.getData().get(position).getShopId());
         });
         goodsAdapter.setOnItemClickListener((adapter, view, position) -> {
-            App.app.activityTool.toGoodsActivity(SearchActivity.this,
+            MyApp.app.activityTool.toGoodsActivity(SearchActivity.this,
                     goodsAdapter.getData().get(position).getShopId(),
                     goodsAdapter.getData().get(position).getCommodityId());
         });
@@ -192,7 +186,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     public void getData(){
         if (checkBox.isChecked()){//店铺
             AppNetModule.createrRetrofit()
-                    .searchShop(strSearch,String.valueOf(App.app.getBdLocation().getLatitude()),String.valueOf(App.app.getBdLocation().getLongitude()),0,page,pagesize)
+                    .searchShop(strSearch,String.valueOf(MyApp.app.getBdLocation().getLatitude()),String.valueOf(MyApp.app.getBdLocation().getLongitude()),0,page,pagesize)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new BaseObserver<SearchShopBean>(null) {
@@ -214,7 +208,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                     });
         }else {//商品
             AppNetModule.createrRetrofit()
-                    .searchGoods(strSearch,String.valueOf(App.app.getBdLocation().getLatitude()),String.valueOf(App.app.getBdLocation().getLongitude()),1,page,pagesize)
+                    .searchGoods(strSearch,String.valueOf(MyApp.app.getBdLocation().getLatitude()),String.valueOf(MyApp.app.getBdLocation().getLongitude()),1,page,pagesize)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new BaseObserver<SearchGoodsBean>(null) {

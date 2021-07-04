@@ -15,7 +15,7 @@ import com.juntai.mall.base.utils.FileCacheUtils;
 import com.juntai.mall.base.utils.GsonTools;
 import com.juntai.mall.base.utils.LogUtil;
 import com.juntai.mall.base.utils.ToastUtils;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppHttpPath;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.UpgradeBean;
@@ -76,7 +76,7 @@ public class UpdateUtils {
                 .setForceUpdateListener(() -> {
                     //强制更新
                     if (isForceUpdate){
-                        App.app.clearActivitys();
+                        MyApp.app.clearActivitys();
                     }
                     cancle();
                 })

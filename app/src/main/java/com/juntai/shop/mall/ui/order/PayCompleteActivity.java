@@ -1,24 +1,13 @@
 package com.juntai.shop.mall.ui.order;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.alipay.sdk.app.PayTask;
 import com.juntai.mall.base.base.BaseActivity;
-import com.juntai.mall.base.utils.ToastUtils;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.R;
-import com.juntai.shop.mall.ui.act.MainActivity;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.Map;
+import com.juntai.shop.mall.MainActivity;
 
 /**
  * 订单支付后的界面--成功-失败
@@ -58,7 +47,7 @@ public class PayCompleteActivity extends BaseActivity implements View.OnClickLis
                 startActivity(new Intent(mContext, MainActivity.class));
                 break;
             case R.id.pay_end_order:
-                App.app.activityTool.toOrderDtailsActivity(mContext,getIntent().getIntExtra("id",0));
+                MyApp.app.activityTool.toOrderDtailsActivity(mContext,getIntent().getIntExtra("id",0));
                 break;
             case R.id.pay_end_retry:
                 break;

@@ -1,7 +1,6 @@
 package com.juntai.shop.mall.ui.goods.adt;
 
 import android.content.Intent;
-import android.view.View;
 import android.widget.RatingBar;
 
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -12,12 +11,10 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.juntai.mall.base.utils.ImageLoadUtil;
 import com.juntai.mall.video.img.ImageZoomActivity;
 import com.juntai.mall.video.player.VideoNetPlayerActivity;
-import com.juntai.shop.mall.App;
 import com.juntai.shop.mall.AppHttpPath;
 import com.juntai.shop.mall.R;
-import com.juntai.shop.mall.bean.MyCommentB;
 import com.juntai.shop.mall.bean.ShopCommentsBean;
-import com.juntai.shop.mall.ui.my.adt.ItemImagesAdapter;
+import com.juntai.shop.mall.mine.adt.ItemImagesAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.R;
 
 /**
@@ -51,7 +51,7 @@ public class PromptDialog extends DialogFragment implements View.OnClickListener
         //window.setWindowAnimations(R.style.dialogWindowAnim);
         window.setBackgroundDrawableResource(R.color.transparent);
         WindowManager.LayoutParams wlp = window.getAttributes();
-        wlp.width = App.W / 3 * 2;
+        wlp.width = MyApp.W / 3 * 2;
         window.setAttributes(wlp);
 //        getDialog().setCanceledOnTouchOutside(false);
 //        getDialog().setCancelable(false);

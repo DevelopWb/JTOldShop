@@ -12,13 +12,13 @@ import com.juntai.mall.base.base.BaseObserver;
 import com.juntai.mall.base.utils.ToastUtils;
 import com.juntai.mall.im.ModuleIm_Init;
 import com.juntai.mall.im.UserIM;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.OrderCommodityListBean;
 import com.juntai.shop.mall.bean.OrderInfoBean;
 import com.juntai.shop.mall.ui.dialog.PromptDialog;
-import com.juntai.shop.mall.ui.my.adt.MyOrderGoodsAdapter;
+import com.juntai.shop.mall.mine.adt.MyOrderGoodsAdapter;
 import com.juntai.shop.mall.utils.AppUtils;
 import com.juntai.shop.mall.utils.StringTools;
 
@@ -50,7 +50,6 @@ public class OrderDeatilsActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void initView() {
         setTitleName("订单详情");
-        getContentLayout().setBackground(null);
         orderid = getIntent().getIntExtra("orderId",-1);
         if (orderid == -1)
             finish();
@@ -73,7 +72,7 @@ public class OrderDeatilsActivity extends BaseActivity implements View.OnClickLi
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         recyclerView.setAdapter(myOrderGoodsAdapter);
         myOrderGoodsAdapter.setOnItemClickListener((adapter, view, position) -> {
-            App.app.activityTool.toGoodsActivity(mContext,orderInfoBean.getShopId(),myOrderGoodsAdapter.getData().get(position).getCommodityId());
+            MyApp.app.activityTool.toGoodsActivity(mContext,orderInfoBean.getShopId(),myOrderGoodsAdapter.getData().get(position).getCommodityId());
         });
 
         //(0：待付款）（1：待发货）（2：待收货）（3：待评价）（4：退款中）（5：完成）（6:订单取消）（7：退款完成）（8：全部订单）
@@ -103,7 +102,7 @@ public class OrderDeatilsActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void initData() {
         AppNetModule.createrRetrofit()
-                .orderInfo(App.app.getAccount(), App.app.getUserToken(),orderid)
+                .orderInfo(MyApp.app.getAccount(), MyApp.app.getUserToken(),orderid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<OrderInfoBean>() {

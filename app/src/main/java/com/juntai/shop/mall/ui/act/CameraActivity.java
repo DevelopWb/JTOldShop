@@ -30,12 +30,11 @@ import com.juntai.mall.base.utils.FileCacheUtils;
 import com.juntai.mall.base.utils.ImageLoadUtil;
 import com.juntai.mall.base.utils.LogUtil;
 import com.juntai.mall.base.utils.ToastUtils;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppHttpPath;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.CameraDetailsBean;
-import com.juntai.shop.mall.utils.StringTools;
 import com.videogo.errorlayer.ErrorInfo;
 import com.videogo.openapi.EZConstants;
 import com.videogo.openapi.EZOpenSDK;
@@ -96,7 +95,7 @@ public class CameraActivity extends AppCompatActivity implements SurfaceHolder.C
                     @Override
                     public void onSuccess(CameraDetailsBean o) {
                         bean = o;
-                        App.app.setYsAccount(o.getReturnValue().getAppKey(), o.getReturnValue().getAccessToken());
+                        MyApp.app.setYsAccount(o.getReturnValue().getAppKey(), o.getReturnValue().getAccessToken());
                         TextView tvplace = findViewById(R.id.deviceplace);
 //                        TextView tvstate = findViewById(R.id.devicestate);
                         mSVControllor = findViewById(R.id.mSurfaceview_controllor);
@@ -120,16 +119,16 @@ public class CameraActivity extends AppCompatActivity implements SurfaceHolder.C
 //            window.setBackgroundDrawableResource(R.color.transparent);
             WindowManager.LayoutParams wlp = window.getAttributes();
             //wlp.gravity = Gravity.BOTTOM;
-            wlp.width = (App.W / 10) * 9;
-            wlp.height = (App.H / 5) * 4;
+            wlp.width = (MyApp.W / 10) * 9;
+            wlp.height = (MyApp.H / 5) * 4;
             window.setAttributes(wlp);
             //
             linearLayout.setBackgroundResource(R.drawable.videoplayer_btn_bg);
         }else {
             WindowManager.LayoutParams wlp = window.getAttributes();
             //wlp.gravity = Gravity.BOTTOM;
-            wlp.width = App.W;
-            wlp.height = App.H - App.statusBarH;
+            wlp.width = MyApp.W;
+            wlp.height = MyApp.H - MyApp.statusBarH;
             window.setAttributes(wlp);
             //
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mSurfaceViewRl.getLayoutParams();

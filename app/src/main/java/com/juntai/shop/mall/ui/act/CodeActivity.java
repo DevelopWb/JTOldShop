@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.juntai.mall.base.base.BaseActivity;
 import com.juntai.mall.base.utils.LogUtil;
 import com.juntai.mall.base.utils.ToastUtils;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.R;
 
 import cn.smssdk.EventHandler;
@@ -34,10 +34,8 @@ public class CodeActivity extends BaseActivity {
     }
     @Override
     public void initView() {
-        getmBaseRootCol().setBackgroundResource(R.color.content_layout);
+        mBaseRootCol.setBackgroundResource(R.color.content_layout);
         getToolbar().setVisibility(View.GONE);
-        getContentLayout().setBackground(null);
-        getStatusTopNullView().setBackgroundResource(R.mipmap.bg_status_main);
         editText1 = findViewById(R.id.code_edit_1);
         editText2 = findViewById(R.id.code_edit_2);
         editText3 = findViewById(R.id.code_edit_3);
@@ -172,7 +170,7 @@ public class CodeActivity extends BaseActivity {
                     runOnUiThread(() -> {
                         ToastUtils.toast(CodeActivity.this,"验证码已发送");
                     });
-                    App.app.codeOverTime = System.currentTimeMillis();
+                    MyApp.app.codeOverTime = System.currentTimeMillis();
                     new Thread(() -> {
                         for (int i = 0; i < 59; i++) {
                             try {

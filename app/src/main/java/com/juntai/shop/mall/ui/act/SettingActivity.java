@@ -6,22 +6,14 @@ import android.view.View;
 import com.juntai.mall.base.base.BaseActivity;
 import com.juntai.mall.base.utils.ToastUtils;
 import com.juntai.mall.base.widght.MenuDialog;
-import com.juntai.shop.mall.App;
-import com.juntai.shop.mall.AppNetModule;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.R;
-import com.juntai.shop.mall.bean.WeatherBean;
 import com.juntai.shop.mall.ui.address.AddressListActivity;
 import com.juntai.shop.mall.utils.CleanDataUtils;
 import com.juntai.shop.mall.utils.UpdateUtils;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.Arrays;
 import java.util.Objects;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * @aouther Ma
@@ -69,7 +61,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.setting_pass://修改密码
-                App.app.activityTool.toPassChange(mContext,null,2);
+                MyApp.app.activityTool.toPassChange(mContext,null,2);
                 break;
             case R.id.setting_place://收货地址
                 startActivity(new Intent(mContext, AddressListActivity.class));

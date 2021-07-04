@@ -1,6 +1,5 @@
 package com.juntai.shop.mall.ui.goods;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -9,22 +8,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.juntai.mall.base.base.BaseObserver;
-import com.juntai.mall.base.utils.ImageLoadUtil;
 import com.juntai.mall.base.utils.ToastUtils;
 import com.juntai.mall.base.widght.BottomDialogFragment;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.ReportTypeBesan;
-import com.juntai.shop.mall.bean.ShopBean;
 import com.juntai.shop.mall.ui.goods.adt.ReportAdapter;
-import com.juntai.shop.mall.utils.GlideImageLoader;
-import com.juntai.shop.mall.utils.StringTools;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -90,7 +83,7 @@ public class ReportDialog extends BottomDialogFragment {
 
     @Override
     public int dialogHeight() {
-        return App.H / 3;
+        return MyApp.H / 3;
     }
 
     /**
@@ -108,7 +101,7 @@ public class ReportDialog extends BottomDialogFragment {
     private void getData(){
         //selectReportMerchantType
         AppNetModule.createrRetrofit()
-                .reportType(App.app.getAccount(),App.app.getUserToken())
+                .reportType(MyApp.app.getAccount(), MyApp.app.getUserToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<ReportTypeBesan>(null) {

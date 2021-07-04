@@ -12,10 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.juntai.mall.base.base.BaseActivity;
 import com.juntai.mall.base.base.BaseObserver;
-import com.juntai.mall.base.base.BaseResult;
 import com.juntai.mall.base.utils.ImageLoadUtil;
 import com.juntai.mall.base.utils.ToastUtils;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.AddressListBean;
@@ -23,7 +22,6 @@ import com.juntai.shop.mall.bean.OrderCreateBean;
 import com.juntai.shop.mall.bean.SettlementBean;
 import com.juntai.shop.mall.ui.adapter.OrderConfirmGoodsAdapter;
 import com.juntai.shop.mall.ui.address.AddressSelectDialog;
-import com.juntai.shop.mall.ui.goods.ShopActivity;
 import com.juntai.shop.mall.utils.AppCode;
 import com.juntai.shop.mall.utils.StringTools;
 
@@ -56,7 +54,6 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void initView() {
         setTitleName("提交订单");
-        getContentLayout().setBackground(null);
         selectDialog = new AddressSelectDialog();
 
         relativeLayoutAdd = findViewById(R.id.order_address_toadd_layout);
@@ -101,7 +98,7 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void initData() {
         AppNetModule.createrRetrofit()
-                .settlement(App.app.getAccount(),App.app.getUserToken(),App.app.getUid(),shopid)
+                .settlement(MyApp.app.getAccount(), MyApp.app.getUserToken(), MyApp.app.getUid(),shopid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<SettlementBean>() {
@@ -142,7 +139,7 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
                 }
                 break;
             case R.id.order_address_toadd_layout://
-                App.app.activityTool.toAddAddress(OrderConfirmActivity.this,-1);
+                MyApp.app.activityTool.toAddAddress(OrderConfirmActivity.this,-1);
                 break;
             case R.id.order_address_layout://
                 selectDialog.show(getSupportFragmentManager(),"ss");
@@ -152,7 +149,7 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
 
     public void getAddress(){
         AppNetModule.createrRetrofit()
-                .addressList(App.app.getAccount(),App.app.getUserToken(),App.app.getUid())
+                .addressList(MyApp.app.getAccount(), MyApp.app.getUserToken(), MyApp.app.getUid())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<AddressListBean>(null) {
@@ -201,9 +198,9 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
      */
     private void orderCreate(){
         AppNetModule.createrRetrofit()
-                .orderCreate(App.app.getAccount(),
-                        App.app.getUserToken(),
-                        App.app.getUid(),
+                .orderCreate(MyApp.app.getAccount(),
+                        MyApp.app.getUserToken(),
+                        MyApp.app.getUid(),
                         shopid,
                         addressBean.getId(),
                         price1,
@@ -214,12 +211,12 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
                 .subscribe(new BaseObserver<OrderCreateBean>() {
                     @Override
                     public void onSuccess(OrderCreateBean o) {
-                        App.app.activityTool.toOrderPayActivity(OrderConfirmActivity.this,
+                        MyApp.app.activityTool.toOrderPayActivity(OrderConfirmActivity.this,
                                 o.getReturnValue().getId(),
                                 o.getReturnValue().getFooting(),
                                 o.getReturnValue().getShopName(),
                                 StringTools.getDataForString(o.getReturnValue().getEstablishTime()).getTime()/1000);
-                        App.app.getCartBeansForShop(shopid).clear();
+                        MyApp.app.getCartBeansForShop(shopid).clear();
                         finish();
                     }
 

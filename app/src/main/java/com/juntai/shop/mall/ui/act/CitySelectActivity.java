@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.juntai.mall.base.base.BaseActivity;
 import com.juntai.mall.base.base.BaseObserver;
-import com.juntai.shop.mall.App;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.PlaceBean;

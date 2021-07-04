@@ -9,8 +9,7 @@ import com.juntai.mall.base.base.BaseObserver;
 import com.juntai.mall.base.base.BaseResult;
 import com.juntai.mall.base.utils.LogUtil;
 import com.juntai.mall.base.utils.ToastUtils;
-import com.juntai.shop.mall.App;
-import com.juntai.shop.mall.AppHttpPath;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
 
@@ -82,7 +81,7 @@ public class PhoneChangeActivity extends BaseActivity {
     }
     private void phoneChange(){
         AppNetModule.createrRetrofit()
-                .editPhone(App.app.getAccount(),App.app.getUserToken(),editTextPhone.getText().toString())
+                .editPhone(MyApp.app.getAccount(), MyApp.app.getUserToken(),editTextPhone.getText().toString())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<BaseResult>(null) {

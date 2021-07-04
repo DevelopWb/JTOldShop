@@ -7,104 +7,33 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 
 import com.baidu.mapapi.model.LatLng;
-import com.juntai.mall.base.app.BaseApplication;
-import com.juntai.mall.base.utils.BaseAppUtils;
-import com.juntai.mall.base.utils.LogUtil;
+import com.juntai.mall.base.utils.ToastUtils;
+import com.juntai.mall.bdmap.R;
 
 import java.util.List;
 
 /**
- * 导航工具类
- * Created by Ma
- * on 2019/4/11
+ * @aouther tobato
+ * @description 描述   导航工具类
+ * @date 2020/7/25 15:28
  */
 public class NagivationUtils {
     //1.百度地图包名
-    public static final String BAIDUMAP_PACKAGENAME = "com.baidu.BaiduMap";
+    public  final String BAIDUMAP_PACKAGENAME = "com.baidu.BaiduMap";
     //2.高德地图包名
-    public static final String AUTONAVI_PACKAGENAME = "com.autonavi.minimap";
+    public  final String AUTONAVI_PACKAGENAME = "com.autonavi.minimap";
     //3.腾讯地图包名
-    public static final String QQMAP_PACKAGENAME = "com.tencent.map";
+    public  final String QQMAP_PACKAGENAME = "com.tencent.map";
+    private static NagivationUtils nagivationUtils;
 
-    /**
-     * 检测程序是否安装
-     *
-     * @param packageName
-     * @return
-     */
-    public static boolean isInstalled(String packageName) {
-        PackageManager manager = BaseApplication.app.getPackageManager();
-        //获取所有已安装程序的包信息
-        List<PackageInfo> installedPackages = manager.getInstalledPackages(0);
-        if (installedPackages != null) {
-            for (PackageInfo info : installedPackages) {
-                if (info.packageName.equals(packageName))
-                    return true;
-            }
+    public static NagivationUtils getInstant() {
+        if (nagivationUtils == null) {
+            nagivationUtils = new NagivationUtils();
         }
-        return false;
+        return nagivationUtils;
     }
 
-    /**
-     * 跳转百度地图导航
-     * @param bd
-     * @param address
-     */
-    public static void toBaiduMap(Context context,LatLng bd,String address){
-        try {
-            Uri uri = Uri.parse("baidumap://map/geocoder?" +
-                    "location=" + bd.latitude + "," + bd.longitude +
-                    "&name=" + address + //终点的显示名称
-                    "&coord_type=db0911");//坐标 （百度同样支持他自己的db0911的坐标，但是高德和腾讯不支持）
-            Intent intent = new Intent();
-            intent.setPackage(BAIDUMAP_PACKAGENAME);
-            intent.setData(uri);
-            context.startActivity(intent);
-        } catch (Exception e) {
-            LogUtil.e("跳转第三方Map导航" + e.getMessage());
-        }
-    }
 
-    /**
-     * 高德地图
-     * @param bd
-     * @param address
-     */
-    public static void toGaoDe(Context context,LatLng bd, String address){
-        //转换坐标
-        LatLng latLng = BD2GCJ(bd);
-        try {
-            Uri uri = Uri.parse("androidamap://route?sourceApplication={"+ BaseAppUtils.getAppName() +"}" +
-                    "&dlat=" + latLng.latitude//终点的纬度
-                    + "&dlon=" + latLng.longitude//终点的经度
-                    + "&dname=" + address////终点的显示名称
-                    + "&dev=0&m=0&t=0");
-            Intent intent = new Intent("android.intent.action.VIEW", uri);
-            intent.addCategory("android.intent.category.DEFAULT");
-            context.startActivity(intent);
-        } catch (Exception e) {
-            LogUtil.e("跳转第三方Map导航" + e.getMessage());
-        }
-    }
-    /**
-     * 腾讯地图
-     * @param bd
-     * @param address
-     */
-    public static void toTengXun(Context context,LatLng bd,String address){
-        LatLng latLng = BD2GCJ(bd);
-        try {
-            Uri uri = Uri.parse("qqmap://map/routeplan?type=drive" +
-                    "&to=" + address//终点的显示名称 必要参数
-                    + "&tocoord=" + latLng.latitude + "," + latLng.longitude//终点的经纬度
-                    + "&referer={你的应用名称}");
-            Intent intent = new Intent();
-            intent.setData(uri);
-            context.startActivity(intent);
-        } catch (Exception e) {
-            LogUtil.e("跳转第三方Map导航" + e.getMessage());
-        }
-    }
 
     /**
      * BD-09 坐标转换成 GCJ-02 坐标
@@ -129,5 +58,96 @@ public class NagivationUtils {
         double tempLon = z * Math.cos(theta) + 0.0065;
         double tempLat = z * Math.sin(theta) + 0.006;
         return new LatLng(tempLat, tempLon);
+    }
+    /**
+     * 打开高德地图（公交出行，起点位置使用地图当前位置）
+     * <p>
+     * t = 0（驾车）= 1（公交）= 2（步行）= 3（骑行）= 4（火车）= 5（长途客车）
+     *
+     * @param dlat  终点纬度
+     * @param dlon  终点经度
+     * @param dname 终点名称
+     */
+    public void openGaoDeMap(Context context,double dlat, double dlon, String dname) {
+        LatLng gcj02End = BD2GCJ(new LatLng(dlat,dlon));
+        if (checkMapAppsIsExist(context, AUTONAVI_PACKAGENAME)) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setPackage("com.autonavi.minimap");
+            intent.addCategory("android.intent.category.DEFAULT");
+            intent.setData(Uri.parse("androidamap://route?sourceApplication=" + R.string.app_name
+                    + "&sname=我的位置&dlat=" + gcj02End.latitude
+                    + "&dlon=" + gcj02End.longitude
+                    + "&dname=" + dname
+                    + "&dev=0&m=0&t=0"));
+            context.startActivity(intent);
+        } else {
+            ToastUtils.toast(context, "高德地图未安装");
+        }
+    }
+
+    /* * 打开百度地图（公交出行，起点位置使用地图当前位置）
+     *
+     * mode = transit（公交）、driving（驾车）、walking（步行）和riding（骑行）. 默认:driving
+     * 当 mode=transit 时 ： sy = 0：推荐路线 、 2：少换乘 、 3：少步行 、 4：不坐地铁 、 5：时间短 、 6：地铁优先
+     *
+     * @param dlat  终点纬度
+     * @param dlon  终点经度
+     * @param dname 终点名称
+     */
+    public void openBaiduMap(Context context,double dlat, double dlon, String dname) {
+        if (checkMapAppsIsExist(context, BAIDUMAP_PACKAGENAME)) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("baidumap://map/direction?origin=我的位置&destination=name:"
+                    + dname
+                    + "|latlng:" + dlat + "," + dlon
+                    + "&mode=driving&sy=0&index=0&target=1"));
+            context.startActivity(intent);
+        } else {
+            ToastUtils.toast(context, "百度地图未安装");
+        }
+    }
+    /**
+     * 打开腾讯地图（公交出行，起点位置使用地图当前位置）
+     *
+     * 公交：type=bus，policy有以下取值
+     * 0：较快捷 、 1：少换乘 、 2：少步行 、 3：不坐地铁
+     * 驾车：type=drive，policy有以下取值
+     * 0：较快捷 、 1：无高速 、 2：距离短
+     * policy的取值缺省为0
+     *
+     * @param dlat  终点纬度
+     * @param dlon  终点经度
+     * @param dname 终点名称
+     */
+    public void openTencent(Context context,double dlat, double dlon, String dname) {
+        LatLng gcj02End = BD2GCJ(new LatLng(dlat,dlon));
+        if (checkMapAppsIsExist(context, QQMAP_PACKAGENAME)) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("qqmap://map/routeplan?type=drive&from=我的位置&fromcoord=0,0"
+                    + "&to=" + dname
+                    + "&tocoord=" + gcj02End.latitude + "," + gcj02End.longitude
+                    + "&policy=0&referer=myapp"));
+            context.startActivity(intent);
+        } else {
+            ToastUtils.toast(context, "腾讯地图未安装");
+        }
+    }
+
+    /**
+     * 检测地图应用是否安装
+     *
+     * @param context
+     * @param packagename
+     * @return
+     */
+    public static boolean checkMapAppsIsExist(Context context, String packagename) {
+        PackageInfo packageInfo;
+        try {
+            packageInfo = context.getPackageManager().getPackageInfo(packagename, 0);
+        } catch (Exception e) {
+            packageInfo = null;
+            e.printStackTrace();
+        }
+        return packageInfo != null;
     }
 }

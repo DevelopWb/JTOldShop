@@ -2,9 +2,9 @@
 <resources>
     <color name="colorPrimary">@color/colorTheme</color>
     <color name="colorPrimaryDark">@color/colorTheme</color>
-    <color name="colorAccent">#F4CA4B</color>
+    <color name="colorAccent">#F0250F</color>
 
-    <color name="colorTheme">#F4CA4B</color>
+    <color name="colorTheme">#F0250F</color>
     <color name="colorThemeStart">#F4CA4B</color>
     <color name="colorThemeDark">#F4CA4B</color>
     <color name="background">#55cccccc</color>
@@ -23,6 +23,7 @@
     <color name="orange">#ff8800</color>
     <color name="blue">#007BFF</color>
     <color name="weather_bg">#41CCCCCC</color>
+    <color name="text_title">#555555</color>
 
 
     <color name="gray_lighter">#55cccccc</color>

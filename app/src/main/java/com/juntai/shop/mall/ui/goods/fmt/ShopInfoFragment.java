@@ -5,27 +5,21 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.juntai.mall.base.base.BaseLazyFragment;
 import com.juntai.mall.base.base.BaseObserver;
 import com.juntai.mall.base.utils.ImageLoadUtil;
 import com.juntai.mall.base.utils.ToastUtils;
 import com.juntai.mall.video.img.ImageZoomActivity;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
-import com.juntai.shop.mall.bean.ShopBean;
 import com.juntai.shop.mall.bean.ShopInfoBean;
 import com.juntai.shop.mall.ui.goods.ShopActivity;
-import com.juntai.shop.mall.ui.goods.adt.CommentsAdapter;
 import com.juntai.shop.mall.utils.AppUtils;
 import com.juntai.shop.mall.utils.StringTools;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -66,7 +60,7 @@ public class ShopInfoFragment extends BaseLazyFragment implements View.OnClickLi
     @Override
     protected void lazyLoad() {
         AppNetModule.createrRetrofit()
-                .shopInfo(App.app.getAccount(), App.app.getUserToken(), ShopActivity.shopId).subscribeOn(Schedulers.io())
+                .shopInfo(MyApp.app.getAccount(), MyApp.app.getUserToken(), ShopActivity.shopId).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<ShopInfoBean>(null) {
                     @Override

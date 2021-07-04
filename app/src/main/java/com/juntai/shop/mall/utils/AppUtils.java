@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 
 /**
  * @aouther Ma
@@ -19,7 +19,7 @@ public class AppUtils {
      * @return
      */
     public static String getFileprovider(){
-        return AppUtils.getPackageName(App.app) + ".fileProvider";
+        return AppUtils.getPackageName(MyApp.app) + ".fileProvider";
     }
 
     /**
@@ -28,11 +28,11 @@ public class AppUtils {
      */
     public static synchronized String getAppName() {
         try {
-            PackageManager packageManager = App.app.getPackageManager();
+            PackageManager packageManager = MyApp.app.getPackageManager();
             PackageInfo packageInfo = packageManager.getPackageInfo(
-                    App.app.getPackageName(), 0);
+                    MyApp.app.getPackageName(), 0);
             int labelRes = packageInfo.applicationInfo.labelRes;
-            return App.app.getResources().getString(labelRes);
+            return MyApp.app.getResources().getString(labelRes);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -45,7 +45,7 @@ public class AppUtils {
      */
     public static synchronized int getAppLogo() {
         try {
-            int ic = App.app.getResources().getIdentifier("ic_launcher", "mipmap", App.app.getPackageName());
+            int ic = MyApp.app.getResources().getIdentifier("ic_launcher", "mipmap", MyApp.app.getPackageName());
             return ic;
         } catch (Exception e) {
             e.printStackTrace();

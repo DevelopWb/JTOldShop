@@ -1,22 +1,17 @@
 package com.juntai.shop.mall.ui.act;
 
-import android.content.Intent;
 import android.text.InputType;
 import android.util.Base64;
-import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.juntai.mall.base.base.BaseActivity;
 import com.juntai.mall.base.base.BaseObserver;
 import com.juntai.mall.base.base.BaseResult;
-import com.juntai.mall.base.utils.SPTools;
 import com.juntai.mall.base.utils.ToastUtils;
-import com.juntai.mall.im.ModuleIm_Init;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
-import com.juntai.shop.mall.utils.AppUtils;
 import com.juntai.shop.mall.utils.RSAUtils;
 
 import io.reactivex.Observable;
@@ -102,7 +97,7 @@ public class PassChangeActivity extends BaseActivity {
         if (type == 1){
             observable = AppNetModule.createrRetrofit().findPass(phone,pass);
         }else {
-            observable = AppNetModule.createrRetrofit().editPass(App.app.getAccount(),App.app.getUserToken(),pass);
+            observable = AppNetModule.createrRetrofit().editPass(MyApp.app.getAccount(), MyApp.app.getUserToken(),pass);
         }
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

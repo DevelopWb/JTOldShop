@@ -2,7 +2,6 @@ package com.juntai.shop.mall.ui.act;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -15,6 +14,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.gyf.barlibrary.ImmersionBar;
 import com.juntai.mall.base.utils.SPTools;
+import com.juntai.shop.mall.MainActivity;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.ui.adapter.GuideAdapter;
 

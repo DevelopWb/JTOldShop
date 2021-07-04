@@ -2,7 +2,6 @@ package com.juntai.shop.mall.ui.act;
 
 import android.content.Intent;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,19 +18,17 @@ import com.juntai.mall.base.utils.LogUtil;
 import com.juntai.mall.base.utils.ToastUtils;
 import com.juntai.mall.base.widght.ProgressDialog;
 import com.juntai.mall.video.record.VideoEvent;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppHttpPath;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.ReportTypeBesan;
 import com.juntai.shop.mall.ui.goods.ReportDialog;
-import com.juntai.shop.mall.bean.event.EventDetailsMessage;
 import com.juntai.shop.mall.ui.goods.ShopActivity;
 import com.juntai.shop.mall.utils.imageselect.ImageSelect;
 import com.juntai.shop.mall.utils.imageselect.ImageSelectLoad;
 import com.zhihu.matisse.Matisse;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -145,9 +142,9 @@ public class ReportActivity extends BaseActivity implements View.OnClickListener
         requestBody = null;
         MultipartBody.Builder builder = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("token", App.app.getUserToken())
-                .addFormDataPart("account", App.app.getAccount())
-                .addFormDataPart("purchaserId", String.valueOf(App.app.getUid()))
+                .addFormDataPart("token", MyApp.app.getUserToken())
+                .addFormDataPart("account", MyApp.app.getAccount())
+                .addFormDataPart("purchaserId", String.valueOf(MyApp.app.getUid()))
                 .addFormDataPart("merchantId", String.valueOf(ShopActivity.shopId))
                 .addFormDataPart("reportTypeId", String.valueOf(valueBean.getId()))//
                 .addFormDataPart("phone", editTextPhone.getText().toString())//

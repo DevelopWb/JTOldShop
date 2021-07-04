@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.juntai.mall.base.base.BaseActivity;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.ui.after_sales.adt.ReturnGoodsAdapter;
 
@@ -30,15 +30,15 @@ public class ReturnSelectActivity extends BaseActivity {
         textView = findViewById(R.id.goods_return_shopname);
         textView.setText(getIntent().getStringExtra("name"));
         recyclerView = findViewById(R.id.goods_return_list);
-        goodsAdapter = new ReturnGoodsAdapter(R.layout.item_return_goods, App.app.goodsReturnBeans);
+        goodsAdapter = new ReturnGoodsAdapter(R.layout.item_return_goods, MyApp.app.goodsReturnBeans);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         recyclerView.setAdapter(goodsAdapter);
         //换货-1，退货-2，退款-3
         findViewById(R.id.return_select_tk_layout).setOnClickListener(v -> {
-            App.app.activityTool.toReturnGoodsActivity(mContext,3,getIntent());
+            MyApp.app.activityTool.toReturnGoodsActivity(mContext,3,getIntent());
         });
         findViewById(R.id.return_select_th_layout).setOnClickListener(v -> {
-            App.app.activityTool.toReturnGoodsActivity(mContext,2,getIntent());
+            MyApp.app.activityTool.toReturnGoodsActivity(mContext,2,getIntent());
         });
     }
 

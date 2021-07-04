@@ -21,7 +21,6 @@ public class LocationLookActivity extends BaseActivity{
     private String address;
     private BaiduMap map = null;
     private BitmapDescriptor locationMarker = null;
-    private NavigationDialog navigationDialog;
     @Override
     public int getLayoutView() {
         return R.layout.activity_location_look;
@@ -41,7 +40,6 @@ public class LocationLookActivity extends BaseActivity{
 //        });
         //
 
-        navigationDialog = new NavigationDialog();
         //
         mapView = findViewById(R.id.mMapView);
         map = mapView.getMap();

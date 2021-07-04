@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
@@ -15,7 +13,6 @@ import android.widget.TextView;
 
 import com.dxngxhl.imageselection.t2.Bean;
 import com.dxngxhl.imageselection.t2.ImageSelectionView2;
-import com.dxngxhl.imageselection.t2.RemoveListener;
 import com.juntai.mall.base.base.BaseActivity;
 import com.juntai.mall.base.base.BaseObserver;
 import com.juntai.mall.base.base.BaseResult;
@@ -24,16 +21,14 @@ import com.juntai.mall.base.utils.LogUtil;
 import com.juntai.mall.base.utils.ToastUtils;
 import com.juntai.mall.base.widght.ProgressDialog;
 import com.juntai.mall.video.record.VideoEvent;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppHttpPath;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
-import com.juntai.shop.mall.ui.goods.ShopActivity;
 import com.juntai.shop.mall.utils.imageselect.ImageSelect;
 import com.juntai.shop.mall.utils.imageselect.ImageSelectLoad;
 import com.zhihu.matisse.Matisse;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -148,9 +143,9 @@ public class OrderCommentActivicty extends BaseActivity {
         requestBody = null;
         MultipartBody.Builder builder = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("token", App.app.getUserToken())
-                .addFormDataPart("account", App.app.getAccount())
-                .addFormDataPart("purchaserId", String.valueOf(App.app.getUid()))
+                .addFormDataPart("token", MyApp.app.getUserToken())
+                .addFormDataPart("account", MyApp.app.getAccount())
+                .addFormDataPart("purchaserId", String.valueOf(MyApp.app.getUid()))
                 .addFormDataPart("merchantId", String.valueOf(shopid))//	商家id
                 .addFormDataPart("orderId", String.valueOf(ordid))//	订单id
                 .addFormDataPart("degreeOfSatisfaction",String.valueOf(degreeOfSatisfaction))//	满意度

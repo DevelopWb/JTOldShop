@@ -1,5 +1,7 @@
 package com.juntai.shop.mall.utils;
 
+import android.text.TextUtils;
+
 import com.juntai.mall.bdmap.utils.MD5;
 import com.juntai.shop.mall.AppHttpPath;
 import com.mob.tools.utils.Data;
@@ -17,7 +19,19 @@ import java.util.List;
  */
 public class StringTools {
 
-
+    /**
+     * 判断str是否为空或者是空字符串
+     *
+     * @param str
+     * @return
+     */
+    public static boolean isStringValueOk(String str) {
+        if (str != null && !TextUtils.isEmpty(str)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     public static String getStringPrice(double data) {
         return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(data);
     }

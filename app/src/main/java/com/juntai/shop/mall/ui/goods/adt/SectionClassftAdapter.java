@@ -1,22 +1,18 @@
 package com.juntai.shop.mall.ui.goods.adt;
 
-import android.util.Log;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseSectionQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.juntai.mall.base.utils.ImageLoadUtil;
-import com.juntai.shop.mall.App;
 import com.juntai.shop.mall.AppHttpPath;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.CartItemLocB;
 import com.juntai.shop.mall.bean.MySection;
-import com.juntai.shop.mall.ui.goods.ShopActivity;
 import com.juntai.shop.mall.view.CountView;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 

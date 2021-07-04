@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.juntai.mall.base.widght.BottomDialogFragment;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.AddressListBean;
 
@@ -40,7 +40,7 @@ public class AddressSelectDialog extends BottomDialogFragment {
             listAdapter.selectorPosition(position);
         });
         listAdapter.selectorPosition(select);
-        view.findViewById(R.id.dialog_address_add).setOnClickListener(v -> App.app.activityTool.toAddAddress(getActivity(),-1));
+        view.findViewById(R.id.dialog_address_add).setOnClickListener(v -> MyApp.app.activityTool.toAddAddress(getActivity(),-1));
         view.findViewById(R.id.dialog_address_close).setOnClickListener(v -> dismiss());
         view.findViewById(R.id.dialog_address_complete).setOnClickListener(v -> {
             if (onSelectorListener != null){
@@ -53,7 +53,7 @@ public class AddressSelectDialog extends BottomDialogFragment {
     }
     @Override
     public int dialogHeight() {
-        return App.H / 2;
+        return MyApp.H / 2;
     }
     public void updateList(List<AddressListBean.ReturnValueBean> list){
         beanList.clear();

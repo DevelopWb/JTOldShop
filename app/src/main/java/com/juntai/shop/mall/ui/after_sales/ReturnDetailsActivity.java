@@ -12,7 +12,7 @@ import com.juntai.mall.base.base.BaseObserver;
 import com.juntai.mall.base.utils.ToastUtils;
 import com.juntai.mall.im.ModuleIm_Init;
 import com.juntai.mall.im.UserIM;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.OrderCommodityListBean;
@@ -47,7 +47,6 @@ public class ReturnDetailsActivity extends BaseActivity implements View.OnClickL
     @Override
     public void initView() {
         setTitleName("退款详情");
-        getContentLayout().setBackground(null);
         returnid = getIntent().getIntExtra("returnId",-1);
         if (returnid == -1)
             finish();
@@ -77,7 +76,7 @@ public class ReturnDetailsActivity extends BaseActivity implements View.OnClickL
     @Override
     public void initData() {
         AppNetModule.createrRetrofit()
-                .returnInfo(App.app.getAccount(), App.app.getUserToken(),returnid)
+                .returnInfo(MyApp.app.getAccount(), MyApp.app.getUserToken(),returnid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<ReturnDetailsBean>() {

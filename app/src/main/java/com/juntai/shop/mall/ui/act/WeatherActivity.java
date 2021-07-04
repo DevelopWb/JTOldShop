@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import com.juntai.mall.base.base.BaseActivity;
 import com.juntai.mall.base.utils.LogUtil;
 import com.juntai.mall.bdmap.utils.DateUtil;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.WeatherBean;
@@ -137,7 +137,7 @@ public class WeatherActivity extends BaseActivity implements View.OnClickListene
      */
     public void getWeather(String lat,String lon){
         AppNetModule.createrRetrofit()
-                .weather(App.app.getAccount(),App.app.getUserToken(),lat,lon)
+                .weather(MyApp.app.getAccount(), MyApp.app.getUserToken(),lat,lon)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<WeatherBean>() {
@@ -300,11 +300,11 @@ public class WeatherActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void initData() {
 //        Intent intent = getIntent();
-        province = App.app.getBdLocation().getProvince();
-        city = App.app.getBdLocation().getCity();
-        area = App.app.getBdLocation().getDistrict();
-        getWeather(String.valueOf(App.app.getBdLocation().getLatitude()),
-                String.valueOf(App.app.getBdLocation().getLongitude()));
+        province = MyApp.app.getBdLocation().getProvince();
+        city = MyApp.app.getBdLocation().getCity();
+        area = MyApp.app.getBdLocation().getDistrict();
+        getWeather(String.valueOf(MyApp.app.getBdLocation().getLatitude()),
+                String.valueOf(MyApp.app.getBdLocation().getLongitude()));
         address.setText(province + " " + city);
     }
 

@@ -41,6 +41,13 @@ public abstract class BaseFragment extends RxFragment {
         return mRootView;
     }
     /**
+     * 获取activity
+     * @return
+     */
+    public BaseActivity getBaseActivity() {
+        return (BaseActivity)getActivity();
+    }
+    /**
      * 查找viewid
      * @param viewId
      * @param <V>

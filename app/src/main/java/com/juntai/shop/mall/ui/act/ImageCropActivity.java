@@ -3,14 +3,13 @@ package com.juntai.shop.mall.ui.act;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 
 import com.juntai.mall.base.base.BaseActivity;
 import com.juntai.mall.base.utils.FileCacheUtils;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.utils.cropbitmap.LikeQQCropView;
 
@@ -63,7 +62,7 @@ public class ImageCropActivity extends BaseActivity implements View.OnClickListe
         btClip.setOnClickListener(this);
 
 
-        likeView.setBitmapForWidth(path, App.W);
+        likeView.setBitmapForWidth(path, MyApp.W);
         sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.juntai.mall.base.base.BaseActivity;
 import com.juntai.mall.base.base.BaseObserver;
 import com.juntai.mall.base.utils.ToastUtils;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.AddressListBean;
@@ -41,7 +41,7 @@ public class AddressListActivity extends BaseActivity {
         setTitleName("地址管理");
         getTitleRightTv().setText("新增收货地址");
         getTitleRightTv().setTextColor(Color.BLACK);
-        getTitleRightTv().setOnClickListener(v -> App.app.activityTool.toAddAddress(AddressListActivity.this,-1));
+        getTitleRightTv().setOnClickListener(v -> MyApp.app.activityTool.toAddAddress(AddressListActivity.this,-1));
         refreshLayout = findViewById(R.id.smartRefreshLayout);
         recyclerView = findViewById(R.id.recyclerView);
         refreshLayout.setEnableRefresh(false);
@@ -51,7 +51,7 @@ public class AddressListActivity extends BaseActivity {
         listAdapter = new AddressListAdapter(R.layout.item_address,new ArrayList());
         recyclerView.setAdapter(listAdapter);
         listAdapter.setOnItemChildClickListener((adapter, view, position) -> {
-            App.app.activityTool.toAddAddress(AddressListActivity.this,listAdapter.getData().get(position).getId());
+            MyApp.app.activityTool.toAddAddress(AddressListActivity.this,listAdapter.getData().get(position).getId());
         });
     }
 
@@ -71,7 +71,7 @@ public class AddressListActivity extends BaseActivity {
      */
     public void getAddress(boolean isR){
         AppNetModule.createrRetrofit()
-                .addressList(App.app.getAccount(),App.app.getUserToken(),App.app.getUid())
+                .addressList(MyApp.app.getAccount(), MyApp.app.getUserToken(), MyApp.app.getUid())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<AddressListBean>(null) {

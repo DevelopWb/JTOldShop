@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
     <application
-        android:name="App"
+        android:name=".MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -54,7 +54,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.act.MainActivity"
+        <activity android:name=".MainActivity"
             android:launchMode="singleTask"/>
         <activity android:name=".ui.act.ImageToViewActivity"/>
         <activity android:name=".ui.act.SettingActivity" />
@@ -62,7 +62,7 @@
         <activity android:name=".ui.address.AddressListActivity" />
         <activity android:name=".ui.address.AddressActivity" />
         <activity android:name=".ui.act.FragmentContainerActivity" />
-        <activity android:name=".ui.my.MyInfoActivity" />
+        <activity android:name=".mine.MyInfoActivity" />
         <activity android:name=".ui.act.PassChangeActivity" />
         <activity android:name=".ui.goods.ShopActivity"
             android:launchMode="singleTop"/>
@@ -76,10 +76,10 @@
         <activity android:name=".ui.act.ImageCropActivity" />
         <activity android:name=".ui.act.ImageZoomActivity" />
         <activity android:name=".ui.act.SearchActivity" />
-        <activity android:name=".ui.my.ui.MyCollectActivity" />
-        <activity android:name=".ui.my.ui.MyAssessActivity" />
+        <activity android:name=".mine.ui.MyCollectActivity" />
+        <activity android:name=".mine.ui.MyAssessActivity" />
         <activity android:name=".ui.act.GuideActivity" />
-        <activity android:name=".ui.my.ui.MyOrderActivity" />
+        <activity android:name=".mine.ui.MyOrderActivity" />
         <activity android:name=".ui.order.OrderDeatilsActivity" />
         <activity android:name=".ui.order.OrderCommentActivicty" />
         <activity android:name=".ui.order.LogisticsActivity" />

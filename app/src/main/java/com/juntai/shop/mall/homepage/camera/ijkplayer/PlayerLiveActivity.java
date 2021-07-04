@@ -28,6 +28,7 @@ import com.juntai.mall.base.utils.ImageLoadUtil;
 import com.juntai.mall.base.utils.ScreenUtils;
 import com.juntai.mall.base.utils.ToastUtils;
 import com.juntai.shop.mall.R;
+import com.juntai.shop.mall.baseinfo.BaseAppActivity;
 import com.juntai.shop.mall.bean.stream.StreamCameraDetailBean;
 import com.juntai.shop.mall.homepage.camera.PlayContract;
 import com.juntai.shop.mall.homepage.camera.PlayPresent;
@@ -43,7 +44,7 @@ import okhttp3.RequestBody;
  * @description 描述   播放视频流
  * @date 2020/7/25 16:44
  */
-public class PlayerLiveActivity extends BaseDownLoadActivity<PlayPresent> implements PlayContract.IPlayView,
+public class PlayerLiveActivity extends BaseAppActivity<PlayPresent> implements PlayContract.IPlayView,
         View.OnClickListener, BaseDownLoadActivity.OnFileDownloaded {
 
     private PlayerView player;
@@ -78,7 +79,6 @@ public class PlayerLiveActivity extends BaseDownLoadActivity<PlayPresent> implem
     public void initView() {
         setFileDownLoadCallBack(this);
         getToolbar().setVisibility(View.GONE);
-        getStatusTopNullView().setVisibility(View.GONE);
         mBaseRootCol.setFitsSystemWindows(false);
         Window window = getWindow();
         WindowManager.LayoutParams wlp = window.getAttributes();
@@ -323,19 +323,19 @@ public class PlayerLiveActivity extends BaseDownLoadActivity<PlayPresent> implem
             String fileName = filePath.substring(filePath.lastIndexOf(
                     "/") + 1, filePath.lastIndexOf("."));
             //压缩图片作为缩略图
-            compressImage(filePath, FileCacheUtils.STREAM_THUMBNAIL,fileName, new OnImageCompressedPath() {
-                @Override
-                public void compressedImagePath(File file) {
-                    if (mPresenter == null) {
-                        return;
-                    }
-                    MultipartBody.Builder builder =   mPresenter.getPublishMultipartBody()
-                            .addFormDataPart("id",String.valueOf(mCameraId))
-                            .addFormDataPart("number",String.valueOf(mCameraNum))
-                            .addFormDataPart("file",fileName, RequestBody.create(MediaType.parse("file"),file));
-                    mPresenter.uploadStreamCameraThumbPic(builder.build(),PlayContract.UPLOAD_CAMERA_CAPTURE);
-                }
-            });
+//            compressImage(filePath, FileCacheUtils.STREAM_THUMBNAIL,fileName, new OnImageCompressedPath() {
+//                @Override
+//                public void compressedImagePath(File file) {
+//                    if (mPresenter == null) {
+//                        return;
+//                    }
+//                    MultipartBody.Builder builder =   mPresenter.getPublishMultipartBody()
+//                            .addFormDataPart("id",String.valueOf(mCameraId))
+//                            .addFormDataPart("number",String.valueOf(mCameraNum))
+//                            .addFormDataPart("file",fileName, RequestBody.create(MediaType.parse("file"),file));
+//                    mPresenter.uploadStreamCameraThumbPic(builder.build(),PlayContract.UPLOAD_CAMERA_CAPTURE);
+//                }
+//            });
         }
 
     }

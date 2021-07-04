@@ -20,7 +20,7 @@ import com.juntai.mall.base.utils.SPTools;
 import com.juntai.mall.base.utils.ToastUtils;
 import com.juntai.mall.base.widght.ProgressDialog;
 import com.juntai.mall.im.ModuleIm_Init;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.LoginBean;
@@ -61,10 +61,8 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        getmBaseRootCol().setBackgroundResource(R.color.content_layout);
+        mBaseRootCol.setBackgroundResource(R.color.content_layout);
         getToolbar().setVisibility(View.GONE);
-        getContentLayout().setBackground(null);
-        getStatusTopNullView().setBackgroundResource(R.mipmap.bg_status_main);
         findViewById(R.id.login_code).setOnClickListener(v -> {
 //            sendCode(mContext);
         });
@@ -152,7 +150,7 @@ public class LoginActivity extends BaseActivity {
 
     public void getCode(int code){
         //验证码登陆
-        int time = (int) ((System.currentTimeMillis() - App.app.codeOverTime) / 1000);
+        int time = (int) ((System.currentTimeMillis() - MyApp.app.codeOverTime) / 1000);
         if (60 - time > 0){
             //验证码不可获取直接返回
             ToastUtils.toast(mContext,String.format("请在%s秒后重新获取",(60 - time)));
@@ -185,12 +183,12 @@ public class LoginActivity extends BaseActivity {
                     if (userBean.success) {
                         ToastUtils.success(mContext, "登录成功");
                         Hawk.put(HawkProperty.USER_INFO,userBean.getReturnValue());
-                        SPTools.saveString(App.app, AppUtils.SP_KEY_LOGIN, loginStr);
-                        App.app.setUserBean(null);
-                        ModuleIm_Init.connectIM(App.app.getUser().getReturnValue().getrOngYunToken());
+                        SPTools.saveString(MyApp.app, AppUtils.SP_KEY_LOGIN, loginStr);
+                        MyApp.app.setUserBean(null);
+                        ModuleIm_Init.connectIM(MyApp.app.getUser().getReturnValue().getrOngYunToken());
                         setResult(RESULT_OK);
                         finish();
-                        LogUtil.d("token=" + App.app.getUserToken());
+                        LogUtil.d("token=" + MyApp.app.getUserToken());
                         LogUtil.d("token=" + userBean.getReturnValue().getAccount());
                     } else {
                         if (userBean.code == 302){
@@ -294,7 +292,7 @@ public class LoginActivity extends BaseActivity {
         if (requestCode == AppCode.SSM_CODE_LOGIN && resultCode == RESULT_OK) {
             login();
         }else if (requestCode == AppCode.SSM_CODE_FORGET && resultCode == RESULT_OK) {
-            App.app.activityTool.toPassChange(mContext,phone,1);
+            MyApp.app.activityTool.toPassChange(mContext,phone,1);
         }else if (requestCode == AppCode.BIND_PHONE && resultCode == RESULT_OK) {
             setResult(RESULT_OK);
             finish();

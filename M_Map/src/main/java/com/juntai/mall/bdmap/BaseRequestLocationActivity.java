@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
+import com.juntai.mall.base.base.BaseDownLoadActivity;
 import com.juntai.mall.base.base.BaseMvpActivity;
 import com.juntai.mall.base.mvp.BasePresenter;
 import com.juntai.mall.bdmap.utils.BaiDuLocationUtils;
@@ -17,7 +18,7 @@ import com.juntai.mall.bdmap.utils.BaiDuLocationUtils;
  * @description 描述
  * @date 2020/4/27 8:48  app的基类
  */
-public abstract class BaseRequestLocationActivity<P extends BasePresenter> extends BaseMvpActivity<P> {
+public abstract class BaseRequestLocationActivity<P extends BasePresenter> extends BaseDownLoadActivity<P> {
     public Double lat = 0.0;
     public Double lng = 0.0;
     public String  address = null;

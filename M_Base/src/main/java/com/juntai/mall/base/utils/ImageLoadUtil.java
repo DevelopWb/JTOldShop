@@ -41,7 +41,9 @@ public class ImageLoadUtil {
                 .load(bitmap)
                 .into(view);
     }
-
+    public static void loadCentercropImage(Context context, int url, ImageView view) {
+        Glide.with(context).load(url).apply(new RequestOptions().optionalCenterCrop().diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true)).into(view);
+    }
     /**
      * @param context
      * @param url

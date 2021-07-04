@@ -2,7 +2,6 @@ package com.juntai.shop.mall.ui.after_sales;
 
 import android.content.Intent;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.dxngxhl.imageselection.ImageSelectionView;
 import com.dxngxhl.imageselection.t2.Bean;
 import com.dxngxhl.imageselection.t2.ImageSelectionView2;
 import com.juntai.mall.base.base.BaseActivity;
@@ -22,22 +20,16 @@ import com.juntai.mall.base.utils.FileCacheUtils;
 import com.juntai.mall.base.utils.LogUtil;
 import com.juntai.mall.base.utils.ToastUtils;
 import com.juntai.mall.base.widght.ProgressDialog;
-import com.juntai.mall.video.record.VideoEvent;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppHttpPath;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.OrderCommodityListBean;
 import com.juntai.shop.mall.bean.ReturnReasonBean;
-import com.juntai.shop.mall.ui.after_sales.adt.GoodsSelectAdapter;
 import com.juntai.shop.mall.ui.after_sales.adt.ReturnGoodsAdapter;
 import com.juntai.shop.mall.utils.imageselect.ImageSelect;
 import com.juntai.shop.mall.utils.imageselect.ImageSelectLoad;
 import com.zhihu.matisse.Matisse;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -48,7 +40,6 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import top.zibin.luban.CompressionPredicate;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
@@ -122,7 +113,7 @@ public class GoodsReturnActivity extends BaseActivity implements View.OnClickLis
         tvStatus = findViewById(R.id.goods_return_status);
         imageSelectionView = findViewById(R.id.goods_return_imageselect);
         recyclerView = findViewById(R.id.goods_return_list);
-        goodsAdapter = new ReturnGoodsAdapter(R.layout.item_return_goods, App.app.goodsReturnBeans);
+        goodsAdapter = new ReturnGoodsAdapter(R.layout.item_return_goods, MyApp.app.goodsReturnBeans);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         recyclerView.setAdapter(goodsAdapter);
         tvStatus.setOnClickListener(this);
@@ -147,7 +138,7 @@ public class GoodsReturnActivity extends BaseActivity implements View.OnClickLis
         //
 
         listIds.clear();
-        for (OrderCommodityListBean s:App.app.goodsReturnBeans) {
+        for (OrderCommodityListBean s: MyApp.app.goodsReturnBeans) {
             listIds.add(s.getId());
             price += s.getPrice() * s.getCommodityNumber();
         }
@@ -159,8 +150,8 @@ public class GoodsReturnActivity extends BaseActivity implements View.OnClickLis
         requestBody = null;
         MultipartBody.Builder builder = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("token", App.app.getUserToken())
-                .addFormDataPart("account", App.app.getAccount())
+                .addFormDataPart("token", MyApp.app.getUserToken())
+                .addFormDataPart("account", MyApp.app.getAccount())
                 .addFormDataPart("orderId", String.valueOf(orderId))//订单id
                 .addFormDataPart("causeId", String.valueOf(valueBean.getId()));//	原因id
         if (!editText.getText().toString().isEmpty()){

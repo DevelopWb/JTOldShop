@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -19,12 +18,11 @@ import com.juntai.mall.base.base.BaseActivity;
 import com.juntai.mall.base.base.BaseObserver;
 import com.juntai.mall.base.base.BaseResult;
 import com.juntai.mall.base.utils.ToastUtils;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppHttpPath;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.AddressInfoBean;
-import com.juntai.shop.mall.bean.AddressListBean;
 import com.juntai.shop.mall.bean.PlaceBean;
 import com.juntai.shop.mall.ui.address.selector.AddressSelectorDialog;
 import com.juntai.shop.mall.ui.dialog.PromptDialog;
@@ -211,7 +209,7 @@ public class AddressActivity  extends BaseActivity implements View.OnClickListen
      */
     private void getAddress(){
         AppNetModule.createrRetrofit()
-                .addressInfo(App.app.getAccount(),App.app.getUserToken(),id)
+                .addressInfo(MyApp.app.getAccount(), MyApp.app.getUserToken(),id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<AddressInfoBean>(null) {
@@ -251,7 +249,7 @@ public class AddressActivity  extends BaseActivity implements View.OnClickListen
      */
     private void toDel(){
         AppNetModule.createrRetrofit()
-                .addressDel(App.app.getAccount(),App.app.getUserToken(),id)
+                .addressDel(MyApp.app.getAccount(), MyApp.app.getUserToken(),id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<BaseResult>() {
@@ -272,9 +270,9 @@ public class AddressActivity  extends BaseActivity implements View.OnClickListen
         requestBody = null;
         MultipartBody.Builder builder = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("token", App.app.getUserToken())
-                .addFormDataPart("account", App.app.getAccount())
-                .addFormDataPart("purchaserId", String.valueOf(App.app.getUid()))
+                .addFormDataPart("token", MyApp.app.getUserToken())
+                .addFormDataPart("account", MyApp.app.getAccount())
+                .addFormDataPart("purchaserId", String.valueOf(MyApp.app.getUid()))
                 .addFormDataPart("name", editTextName.getText().toString())//
                 .addFormDataPart("phone", editTextPhone.getText().toString())//
                 .addFormDataPart("sex", String.valueOf(sex))//
@@ -289,7 +287,7 @@ public class AddressActivity  extends BaseActivity implements View.OnClickListen
         if (id != -1){
             //地址id
             builder.addFormDataPart("id",String.valueOf(id));
-            builder.addFormDataPart("purchaserId",String.valueOf(App.app.getUid()));
+            builder.addFormDataPart("purchaserId",String.valueOf(MyApp.app.getUid()));
         }
         if (beanTown != null){
             //街道代码

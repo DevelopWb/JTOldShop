@@ -1,6 +1,5 @@
 package com.juntai.shop.mall.ui.goods.fmt;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,33 +13,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.juntai.mall.base.base.BaseFragment;
 import com.juntai.mall.base.base.BaseObserver;
-import com.juntai.mall.base.base.BaseResult;
 import com.juntai.mall.base.utils.ToastUtils;
-import com.juntai.shop.mall.App;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppHttpPath;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.CartItemLocB;
 import com.juntai.shop.mall.bean.GoodsB;
 import com.juntai.shop.mall.bean.IntBean;
-import com.juntai.shop.mall.bean.event.EventDetailsMessage;
-import com.juntai.shop.mall.ui.goods.ShopActivity;
 import com.juntai.shop.mall.ui.goods.SpecificationsDialog;
 import com.juntai.shop.mall.ui.goods.adt.AttributesAdapter;
 import com.juntai.shop.mall.utils.AppUtils;
 import com.juntai.shop.mall.utils.DpTools;
 import com.juntai.shop.mall.utils.GlideImageLoader;
 import com.juntai.shop.mall.utils.ShareUtils;
-import com.juntai.shop.mall.utils.StringTools;
 import com.juntai.shop.mall.view.CountView;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
-import com.youth.banner.listener.OnBannerListener;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -185,7 +178,7 @@ public class GoodsDetailsFragment extends BaseFragment implements View.OnClickLi
     }
     public void getData(){
         AppNetModule.createrRetrofit()
-                .GoodsDetalis(goodsId, App.app.getUid())
+                .GoodsDetalis(goodsId, MyApp.app.getUid())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<GoodsB>() {
@@ -234,7 +227,7 @@ public class GoodsDetailsFragment extends BaseFragment implements View.OnClickLi
         if (goodsB == null || isCollect) return;
         isCollect = true;
         AppNetModule.createrRetrofit()
-                .collectOperateOne(App.app.getAccount(),App.app.getUserToken(),App.app.getUid(),
+                .collectOperateOne(MyApp.app.getAccount(), MyApp.app.getUserToken(), MyApp.app.getUid(),
                         1,goodsB.getShopId(),goodsB.getId(),goodsB.getIsCollect(),goodsB.getIsCollect())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -289,7 +282,7 @@ public class GoodsDetailsFragment extends BaseFragment implements View.OnClickLi
     public void btnStatus(){
         //
         cartCount = 0;
-        for (CartItemLocB b:App.app.getCartBeansForShop(goodsB.getShopId())) {
+        for (CartItemLocB b: MyApp.app.getCartBeansForShop(goodsB.getShopId())) {
             if (b.getGoodsId() == goodsId){
                 cartCount += b.getNum();
             }

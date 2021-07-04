@@ -31,6 +31,31 @@
         <item name="android:windowContentOverlay">@null</item>
 
     </style>
+
+    <!--    选中图片、视频占位-->
+    <style name="picture_choose_style">
+        <item name="android:layout_width">90dp</item>
+        <item name="android:layout_height">90dp</item>
+        <item name="android:scaleType">centerCrop</item>
+    </style>
+    <style name="item_title_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:textColor">@color/text_title</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+    <style name="bt_bg_style">
+        <item name="android:background">@drawable/app_bt_bg</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:letterSpacing" tools:ignore="NewApi">0.2</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">18dp</item>
+    </style>
     <!--我的-->
     <style name="my_item_learnlayout">
         <item name="android:layout_width">match_parent</item>
