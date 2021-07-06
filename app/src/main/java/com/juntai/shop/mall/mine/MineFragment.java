@@ -45,7 +45,8 @@ import io.reactivex.schedulers.Schedulers;
  * 我的
  */
 public class MineFragment extends BaseLazyFragment implements View.OnClickListener {
-    ImageView headImageView,loginOut;
+    ImageView headImageView;
+    TextView mCommitTv;
     TextView tvNick,tvOrder,tvCom,tvColl,tvShare,tvWx,tvQQ;
     UserB userB;
     @Override
@@ -78,8 +79,8 @@ public class MineFragment extends BaseLazyFragment implements View.OnClickListen
             headImageView.setOnClickListener(toUserInfoListener);
             tvNick.setText(MyApp.app.getUser().getReturnValue().getNickName());
         }
-        loginOut = getView(R.id.my_loginout);
-        loginOut.setOnClickListener(v -> {
+        mCommitTv = getView(R.id.commit_form_tv);
+        mCommitTv.setOnClickListener(v -> {
             loginout();
         });
     }
@@ -165,7 +166,7 @@ public class MineFragment extends BaseLazyFragment implements View.OnClickListen
                     @Override
                     public void accept(UserB result) throws Exception {
                         if (result.success && result.getReturnValue() != null){
-                            loginOut.setVisibility(View.VISIBLE);
+                            mCommitTv.setVisibility(View.VISIBLE);
                             userB = result;
                             MyApp.app.customerServicePhone = userB.getReturnValue().getCustomerServicePhone();
                             tvNick.setText(result.getReturnValue().getNickName());
@@ -252,7 +253,7 @@ public class MineFragment extends BaseLazyFragment implements View.OnClickListen
                         tvShare.setText("");
                         tvWx.setText("");
                         tvQQ.setText("");
-                        loginOut.setVisibility(View.GONE);
+                        mCommitTv.setVisibility(View.GONE);
                         //
 
                         SPTools.saveString(MyApp.app, AppUtils.SP_KEY_LOGIN, "");

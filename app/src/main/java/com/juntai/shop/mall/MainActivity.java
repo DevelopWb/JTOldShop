@@ -59,7 +59,9 @@ public class MainActivity extends BaseAppActivity implements ViewPager.OnPageCha
 
     @Override
     public void initView() {
-        mBaseRootCol.setBackgroundResource(R.color.transparent);
+        mImmersionBar.reset().transparentStatusBar().statusBarDarkFont(true).init();
+        getToolbar().setVisibility(View.GONE);
+        mBaseRootCol.setFitsSystemWindows(false);
         getToolbar().setVisibility(View.GONE);
         mainViewpager = findViewById(R.id.main_viewpager);
         mainTablayout = findViewById(R.id.main_tablayout);
@@ -136,10 +138,13 @@ public class MainActivity extends BaseAppActivity implements ViewPager.OnPageCha
 
     @Override
     public void onPageSelected(int i) {
-        if (i == 0) {
-            mBaseRootCol.setBackgroundResource(R.color.transparent);
-        } else {
-            mBaseRootCol.setBackgroundResource(R.mipmap.bg_2);
+        switch (i) {
+            case 2:
+                mImmersionBar.reset().transparentStatusBar().statusBarDarkFont(false).init();
+                break;
+            default:
+                mImmersionBar.reset().transparentStatusBar().statusBarDarkFont(true).init();
+                break;
         }
     }
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_pressed="true" android:drawable="@mipmap/ic_my_next_pre"/>
+    <item android:state_pressed="true" android:drawable="@mipmap/ic_my_next"/>
     <item android:drawable="@mipmap/ic_my_next"/>
 </selector>
