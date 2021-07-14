@@ -60,7 +60,7 @@ public abstract class BaseApplication extends MultiDexApplication {
             //
             Logger.addLogAdapter(new AndroidLogAdapter(PrettyFormatStrategy.newBuilder().
                     tag(getString(R.string.app_name)).build()));
-            LogUtil.logInit(false);
+            LogUtil.logInit(true);
         }
 //        initLeakCanary();
         registerActivityLifecycleCallbacks(mCallbacks);

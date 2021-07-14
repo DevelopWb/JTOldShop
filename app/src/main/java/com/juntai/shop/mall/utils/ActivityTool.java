@@ -6,8 +6,8 @@ import android.content.Intent;
 
 import androidx.fragment.app.Fragment;
 
-import com.juntai.shop.mall.ui.act.PassChangeActivity;
-import com.juntai.shop.mall.ui.address.AddressActivity;
+import com.juntai.shop.mall.mine.set.ModifyPwd;
+import com.juntai.shop.mall.mine.set.address.AddressActivity;
 import com.juntai.shop.mall.ui.after_sales.AfterSalesActivity;
 import com.juntai.shop.mall.ui.after_sales.GoodsReturnActivity;
 import com.juntai.shop.mall.ui.after_sales.GoodsSelectActivity;
@@ -30,7 +30,7 @@ public class ActivityTool {
      * @param type:1`-忘记密码，2修改密码
      */
     public void toPassChange(Context context,String phone,int type){
-        context.startActivity(new Intent(context, PassChangeActivity.class)
+        context.startActivity(new Intent(context, ModifyPwd.class)
                 .putExtra("type",type)
                 .putExtra("phone",phone));
     }

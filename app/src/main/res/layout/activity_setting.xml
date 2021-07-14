@@ -1,85 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="10dp">
+    android:background="@color/white"
+    android:orientation="vertical"
+   >
+
     <LinearLayout
         android:id="@+id/setting_pass"
-        style="@style/my_item_setting_learnlayout">
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_setig_pass" />
+        style="@style/my_item_setting_learnlayout"
+        android:background="@drawable/bg_white_only_bottom_gray_shape_1px">
+
         <TextView
             style="@style/my_item_textview"
             android:drawableRight="@drawable/pre_my_next"
             android:text="修改密码" />
     </LinearLayout>
-    <View style="@style/my_item_setting_line"/>
+
     <LinearLayout
         android:id="@+id/setting_place"
-        style="@style/my_item_setting_learnlayout">
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_setig_address" />
+
+        style="@style/my_item_setting_learnlayout"
+        android:background="@drawable/bg_white_only_bottom_gray_shape_1px">
+
         <TextView
             style="@style/my_item_textview"
             android:drawableRight="@drawable/pre_my_next"
             android:text="收货地址" />
     </LinearLayout>
-    <View style="@style/my_item_setting_line"/>
+
     <LinearLayout
         android:id="@+id/setting_phone"
-        style="@style/my_item_setting_learnlayout">
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_setig_phone" />
+
+        style="@style/my_item_setting_learnlayout"
+        android:background="@drawable/bg_white_only_bottom_gray_shape_1px">
+
         <TextView
             style="@style/my_item_textview"
             android:drawableRight="@drawable/pre_my_next"
             android:text="修改手机号" />
     </LinearLayout>
-    <View style="@style/my_item_setting_line"/>
+
     <LinearLayout
         android:id="@+id/setting_clear"
-        style="@style/my_item_setting_learnlayout">
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_setig_clear" />
+
+        style="@style/my_item_setting_learnlayout"
+        android:background="@drawable/bg_white_only_bottom_gray_shape_1px">
+
         <TextView
             style="@style/my_item_textview"
             android:drawableRight="@drawable/pre_my_next"
             android:text="清理缓存" />
     </LinearLayout>
-    <View style="@style/my_item_setting_line"/>
+
     <LinearLayout
         android:id="@+id/setting_update"
-        style="@style/my_item_setting_learnlayout">
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_setig_update" />
+
+        style="@style/my_item_setting_learnlayout"
+        android:background="@drawable/bg_white_only_bottom_gray_shape_1px">
+
         <TextView
             style="@style/my_item_textview"
             android:drawableRight="@drawable/pre_my_next"
             android:text="检查更新" />
     </LinearLayout>
-    <View style="@style/my_item_setting_line"/>
+
     <LinearLayout
         android:id="@+id/setting_about"
-        style="@style/my_item_setting_learnlayout">
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_setig_about" />
+
+        style="@style/my_item_setting_learnlayout"
+        android:background="@drawable/bg_white_only_bottom_gray_shape_1px">
+
         <TextView
             style="@style/my_item_textview"
             android:drawableRight="@drawable/pre_my_next"
             android:text="关于我们" />
     </LinearLayout>
-    <View style="@style/my_item_setting_line"/>
 </LinearLayout>

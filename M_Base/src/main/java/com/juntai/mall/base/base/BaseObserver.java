@@ -46,6 +46,7 @@ public abstract class BaseObserver<T> extends DisposableObserver<T> {
     public BaseObserver(IView view) {
         this.view = view;
     }
+
     public BaseObserver() {
     }
 
@@ -60,23 +61,27 @@ public abstract class BaseObserver<T> extends DisposableObserver<T> {
     public void onNext(T bean) {
         try {
             BaseResult model = (BaseResult) bean;
-            if (model instanceof OpenLiveBean ||model instanceof SearchResultBean ||model instanceof CareChildListNewestBean ||model instanceof CareChildOldBean) {
+            if (model instanceof OpenLiveBean || model instanceof SearchResultBean || model instanceof CareChildListNewestBean || model instanceof CareChildOldBean) {
                 model.success = true;
 //                model.status = 200;
             }
             if (model.success) {
-                onSuccess(bean);
-            } else if (model.code == 100 || model.code == 101){
-                //未登录和别的设备登录
-                onError(model.error);
-                EventBus.getDefault().post(new IMLoginOutEvent(model.error));
+                if (200==model.code) {
+                    onSuccess(bean);
+                }else {
+                    onError(model.msg);
+                }
+
             } else {
-//                if (view != null) {
-//                    view.showErrorMsg(model.error);
-//                }
-                onError(model.error);
+                if (model.code == 100 || model.code == 101) {
+                    //未登录和别的设备登录
+                    onError(model.error);
+                    EventBus.getDefault().post(new IMLoginOutEvent(model.error));
+                } else {
+                    onError(model.error);
+                }
             }
-        } catch (ClassCastException ee){
+        } catch (ClassCastException ee) {
             LogUtil.e("数据解析失败" + ee.toString());
             onException(PARSE_ERROR);
         } catch (Exception e) {
@@ -119,6 +124,7 @@ public abstract class BaseObserver<T> extends DisposableObserver<T> {
 
     /**
      * 异常
+     *
      * @param unknownError
      */
     private void onException(int unknownError) {

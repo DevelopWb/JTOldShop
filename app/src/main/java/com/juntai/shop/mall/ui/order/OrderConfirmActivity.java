@@ -21,7 +21,7 @@ import com.juntai.shop.mall.bean.AddressListBean;
 import com.juntai.shop.mall.bean.OrderCreateBean;
 import com.juntai.shop.mall.bean.SettlementBean;
 import com.juntai.shop.mall.ui.adapter.OrderConfirmGoodsAdapter;
-import com.juntai.shop.mall.ui.address.AddressSelectDialog;
+import com.juntai.shop.mall.mine.set.address.AddressSelectDialog;
 import com.juntai.shop.mall.utils.AppCode;
 import com.juntai.shop.mall.utils.StringTools;
 

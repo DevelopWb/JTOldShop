@@ -1,6 +1,5 @@
-package com.juntai.shop.mall.ui.address;
+package com.juntai.shop.mall.mine.set.address;
 
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;

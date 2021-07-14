@@ -1,4 +1,4 @@
-package com.juntai.shop.mall.ui.address.selector;
+package com.juntai.shop.mall.mine.set.address.selector;
 
 import android.graphics.Color;
 import android.view.View;

@@ -9,7 +9,8 @@ public class AppHttpPath {
 
 
 
-    public static final String BASE = "http://61.156.157.132:31080/shoppingMall/u/appConnector/";
+//    public static final String BASE = "http://61.156.157.132:31080/shoppingMall/u/appConnector/";
+    public static final String BASE = "http://192.168.124.118:8080/shoppingMall/u/appConnector/";
 //
     public static final String B = "http://61.156.157.132:31080/shoppingMall/u/";
 //    public static final String B = "http://192.168.124.118:8080/shoppingMall/u/";
@@ -248,11 +249,11 @@ public class AppHttpPath {
     /**BaseSearchFragment
      * 硬盘录像机和OpenLiveBean独立摄像头列表
      */
-    public static final String STREAM_CAMERAS = BASE + "/u/camera/selectDvrAndCameraListAPP.shtml";
+    public static final String STREAM_CAMERAS = BASE + "u/camera/selectDvrAndCameraListAPP.shtml";
     /**
      * 硬盘录像机下面的摄像头列表
      */
-    public static final String STREAM_CAMERAS_FROM_VCR = BASE + "/u/camera/selectCameraByDvrIdAPP.shtml?";
+    public static final String STREAM_CAMERAS_FROM_VCR = BASE + "u/camera/selectCameraByDvrIdAPP.shtml?";
     /**
      * 摄像头详情
      */
@@ -261,7 +262,14 @@ public class AppHttpPath {
     /**
      * 上传封面图
      */
-    public static final String UPLOAD_STREAM_CAMERAS_THUMB = BASE + "/u/camera/uploadCameraImgAPP.shtml";
+    public static final String UPLOAD_STREAM_CAMERAS_THUMB = BASE + "u/camera/uploadCameraImgAPP.shtml";
+
+
+
+    /**
+     * 获取短信验证码
+     */
+    public static final String GET_SMS_CODE = BASE + "getSMSCode.shtml";
 
 
 

@@ -33,7 +33,6 @@ public class SearchShopsAdapter extends BaseQuickAdapter<SearchShopBean.ReturnVa
         ratingBar.setRating(item.getDegreeOfSatisfaction());
 
         //商铺
-        helper.getView(R.id.item_collect_price_l).setVisibility(View.GONE);
         tvName.setText(item.getShopName());
         tvName.setTextSize(18);
         tvName.setMaxLines(1);

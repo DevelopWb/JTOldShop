@@ -52,7 +52,6 @@ public class MyCollectAdapter extends BaseQuickAdapter<MyCollcetB.ReturnValueBea
         ratingBar.setRating(item.getDegreeOfSatisfaction());
         if (type == 0){
             //商铺
-            helper.getView(R.id.item_collect_price_l).setVisibility(View.GONE);
             tvName.setText(item.getShopName());
             tvName.setTextSize(18);
             tvName.setLines(1);
@@ -65,12 +64,11 @@ public class MyCollectAdapter extends BaseQuickAdapter<MyCollcetB.ReturnValueBea
         }else{
             //商品
             ratingBar.setVisibility(View.GONE);
-            helper.getView(R.id.item_collect_price_l).setVisibility(View.VISIBLE);
             tvName.setText(item.getCommodityName());
             tvName.setTextSize(16);
             tvName.setLines(2);
-            helper.setText(R.id.item_collect_yuexiao,"月销" + item.getMonthlySales());
-            helper.setText(R.id.item_collect_price,String.valueOf(item.getPrice()));
+            helper.setText(R.id.item_collect_distance,"月销" + item.getMonthlySales());
+            helper.setText(R.id.item_collect_address,"￥"+String.valueOf(item.getPrice()));
             ImageLoadUtil.loadImageNoCrash(mContext, AppHttpPath.IMAGE + item.getCommodityImg(),R.mipmap.ic_launcher,helper.getView(R.id.item_collect_image));
         }
     }

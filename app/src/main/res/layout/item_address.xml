@@ -1,61 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="10dp"
+   >
 
-    <TextView
-        android:id="@+id/item_address_one"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginRight="10dp"
-        android:gravity="center"
-        android:maxLength="1"
-        android:layout_centerVertical="true"
-        android:textColor="@color/grey"
-        android:background="@drawable/bg_address_select_left"
-        android:textSize="20sp"/>
-    <TextView
-        android:id="@+id/item_address_name"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/grey"
-        android:layout_toRightOf="@+id/item_address_one"
-        android:textSize="18sp"/>
-    <TextView
-        android:id="@+id/item_address_phone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/grey"
-        android:textSize="14sp"
-        android:layout_toRightOf="@+id/item_address_name"
-        android:layout_marginLeft="20dp"/>
-    <TextView
-        android:id="@+id/item_address_adress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/grey"
-        android:textSize="14sp"
-        android:layout_below="@+id/item_address_name"
-        android:layout_toLeftOf="@+id/item_address_line"
-        android:layout_toRightOf="@+id/item_address_one"/>
-    <ImageView
-        android:id="@+id/item_address_line"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_centerVertical="true"
-        android:src="@mipmap/ic_address_line"
-        android:layout_toLeftOf="@+id/item_address_edit"/>
-    <TextView
-        android:id="@+id/item_address_edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textColor="@color/grey"
-        android:padding="7dp"
-        android:text="编辑"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"/>
-</RelativeLayout>
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/item_address_one"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_address_select_left"
+            android:gravity="center"
+            android:maxLength="1"
+            android:padding="5dp"
+            android:text="王彬"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/item_address_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="测试数据111111"
+            android:textColor="@color/grey"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toTopOf="@+id/item_address_adress"
+            app:layout_constraintLeft_toRightOf="@+id/item_address_one"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread" />
+
+        <TextView
+            android:id="@+id/item_address_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="测试数据"
+            android:textColor="@color/grey"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="@+id/item_address_name"
+            app:layout_constraintLeft_toRightOf="@+id/item_address_name"
+            app:layout_constraintTop_toTopOf="@+id/item_address_name" />
+
+        <TextView
+            android:id="@+id/item_address_adress"
+            android:layout_width="0dp"
+            android:paddingTop="5dp"
+            android:paddingRight="5dp"
+            app:layout_constraintRight_toLeftOf="@+id/item_address_edit"
+            android:layout_height="wrap_content"
+            android:text="测试数据"
+            android:textColor="@color/grey"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@+id/item_address_name"
+            app:layout_constraintTop_toBottomOf="@+id/item_address_name" />
+
+
+        <ImageView
+            android:id="@+id/item_address_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:src="@mipmap/edit_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

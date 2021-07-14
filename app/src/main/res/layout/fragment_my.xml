@@ -48,7 +48,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="5dp"
                         android:background="@drawable/bg_round_white"
                         android:orientation="vertical">
 
@@ -214,14 +214,19 @@
                             android:text="个人设置" />
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/commit_form_tv"
-                        style="@style/bt_style"
-                        android:visibility="invisible"
-                        android:layout_marginTop="40dp"
-                        android:layout_marginBottom="40dp"
-                        android:text="退出登录"
-                        ></TextView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp">
+
+                        <TextView
+                            android:id="@+id/commit_form_tv"
+                            style="@style/bt_style"
+                            android:layout_marginTop="30dp"
+                            android:text="退出登录"
+                            android:visibility="invisible"></TextView>
+
+
+                    </LinearLayout>
 
                 </LinearLayout>
             </LinearLayout>

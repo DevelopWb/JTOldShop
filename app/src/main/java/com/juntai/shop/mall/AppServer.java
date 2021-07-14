@@ -148,7 +148,7 @@ public interface AppServer {
     @POST(AppHttpPath.USER_PHONE)
     Observable<BaseResult> editPhone(@Query("account")String account,
                                      @Query("token")String token,
-                                     @Query("phone")String phone);
+                                     @Query("phone")String phone,@Query("code")String code);
 
     /**
      * 实时天气
@@ -631,6 +631,13 @@ public interface AppServer {
      */
     @POST(AppHttpPath.UPLOAD_STREAM_CAMERAS_THUMB)
     Observable<BaseResult> uploadStreamCameraThumbPic(@Body RequestBody requestBody);
+    /**
+     *
+     *account  手机号
+     * @return
+     */
+    @POST(AppHttpPath.GET_SMS_CODE)
+    Observable<BaseResult> getSMSCode(@Query("account")String account);
 
     /**
      * 打开视频流

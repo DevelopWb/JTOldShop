@@ -3,25 +3,21 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="40dp"
+    android:paddingTop="15dp"
     android:paddingLeft="10dp"
     android:paddingRight="10dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:background="@drawable/bg_white_only_bottom_gray_shape_1px"
         android:gravity="center_vertical"
         android:padding="10dp">
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/ic_pass"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:textSize="18sp"
-            android:textStyle="bold"
             android:text="新密码"/>
         <EditText
             android:id="@+id/pass_change_pass1"
@@ -42,26 +38,18 @@
             android:layout_height="30dp"
             android:button="@drawable/check_pass_show"/>
     </LinearLayout>
-    <View
-        style="@style/my_item_setting_line"
-        android:layout_marginRight="10dp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:background="@drawable/bg_white_only_bottom_gray_shape_1px"
         android:gravity="center_vertical"
-        android:layout_marginTop="20dp"
         android:padding="10dp">
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/ic_pass"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:textSize="18sp"
-            android:textStyle="bold"
             android:text="确认新密码"/>
         <EditText
             android:id="@+id/pass_change_pass2"
@@ -82,9 +70,6 @@
             android:layout_height="30dp"
             android:button="@drawable/check_pass_show"/>
     </LinearLayout>
-    <View
-        style="@style/my_item_setting_line"
-        android:layout_marginRight="10dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -97,13 +82,9 @@
 
     <TextView
         android:id="@+id/pass_change_submit"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="20dp"
-        android:background="@drawable/bg_btn_theme"
-        android:gravity="center"
-        android:padding="8dp"
+        android:layout_marginTop="50dp"
+        android:letterSpacing="0.2"
+        style="@style/bt_style"
         android:text="确认"
-        android:textSize="18sp" />
+        />
 </LinearLayout>

@@ -76,7 +76,6 @@ public class NonHierarchicalDistanceBasedAlgorithm<T extends ClusterItem> implem
 
     @Override
     public void removeItem(T item) {
-        // TODO: delegate QuadItem#hashCode and QuadItem#equals to its item.
         throw new UnsupportedOperationException("NonHierarchicalDistanceBasedAlgorithm.remove not implemented");
     }
 
@@ -157,7 +156,7 @@ public class NonHierarchicalDistanceBasedAlgorithm<T extends ClusterItem> implem
     }
 
     private Bounds createBoundsFromSpan(Point p, double span) {
-        // TODO: Use a span that takes into account the visual size of the marker, not just its
+        // Use a span that takes into account the visual size of the marker, not just its
         // LatLng.
         double halfSpan = span / 2;
         return new Bounds(

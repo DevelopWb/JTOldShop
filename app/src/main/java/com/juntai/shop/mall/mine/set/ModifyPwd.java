@@ -1,4 +1,4 @@
-package com.juntai.shop.mall.ui.act;
+package com.juntai.shop.mall.mine.set;
 
 import android.text.InputType;
 import android.util.Base64;
@@ -23,7 +23,7 @@ import io.reactivex.schedulers.Schedulers;
  * Created by Ma
  * on 2019/8/24
  */
-public class PassChangeActivity extends BaseActivity {
+public class ModifyPwd extends BaseActivity {
     EditText editText1,editText2;
     CheckBox checkBox1,checkBox2;
     int type = 0;

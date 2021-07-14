@@ -10,12 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.juntai.mall.base.base.BaseObserver;
 import com.juntai.mall.base.utils.ToastUtils;
 import com.juntai.mall.base.widght.BottomDialogFragment;
-import com.juntai.shop.mall.AppHttpPath;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
-import com.juntai.shop.mall.bean.AddressListBean;
 import com.juntai.shop.mall.bean.ReturnReasonBean;
-import com.juntai.shop.mall.ui.address.AddressSelectAdapter;
 import com.juntai.shop.mall.ui.after_sales.adt.AfterSalesAdapter;
 
 import java.util.ArrayList;

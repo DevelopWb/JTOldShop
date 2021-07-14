@@ -29,12 +29,11 @@ public class SearchGoodsAdapter extends BaseQuickAdapter<SearchGoodsBean.ReturnV
         helper.getView(R.id.item_collect_check).setVisibility(View.GONE);
         helper.getView(R.id.item_collect_ratingBar).setVisibility(View.GONE);
         TextView tvName = helper.getView(R.id.item_collect_name);
-        helper.getView(R.id.item_collect_price_l).setVisibility(View.VISIBLE);
         tvName.setText(item.getCommodityName());
         tvName.setTextSize(16);
         tvName.setMaxLines(2);
         helper.setText(R.id.item_collect_yuexiao,"月销" + item.getMonthlySales());
-        helper.setText(R.id.item_collect_price,String.valueOf(item.getPrice()));
+        helper.setText(R.id.item_collect_address,"￥"+String.valueOf(item.getPrice()));
         ImageLoadUtil.loadImageNoCrash(mContext, AppHttpPath.IMAGE + item.getCommodityImg(),R.mipmap.ic_launcher,helper.getView(R.id.item_collect_image));
     }
 }

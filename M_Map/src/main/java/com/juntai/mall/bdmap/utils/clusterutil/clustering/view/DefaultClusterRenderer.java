@@ -339,7 +339,7 @@ public class DefaultClusterRenderer<T extends ClusterItem> implements
 
             final Set<MarkerWithPosition> markersToRemove = mMarkers;
             final LatLngBounds visibleBounds = mMap.getMapStatus().bound;
-            // TODO: Add some padding, so that markers can animate in from off-screen.
+            // : Add some padding, so that markers can animate in from off-screen.
 
             // Find all of the existing clusters that are on-screen. These are candidates for
             // markers to animate from.
@@ -397,7 +397,7 @@ public class DefaultClusterRenderer<T extends ClusterItem> implements
             for (final MarkerWithPosition marker : markersToRemove) {
                 boolean onScreen = visibleBounds.contains(marker.position);
                 // Don't animate when zooming out more than 3 zoom levels.
-                // TODO: drop animation based on speed of device & number of markers to animate.
+                // : drop animation based on speed of device & number of markers to animate.
                 if (!zoomingIn && zoomDelta > -3 && onScreen && SHOULD_ANIMATE) {
                     final Point point = mSphericalMercatorProjection.toPoint(marker.position);
                     final Point closest = findClosestCluster(newClustersOnScreen, point);
@@ -458,7 +458,7 @@ public class DefaultClusterRenderer<T extends ClusterItem> implements
             return null;
         }
 
-        // TODO: make this configurable.
+        // : make this configurable.
         double minDistSquared = MAX_DISTANCE_AT_ZOOM * MAX_DISTANCE_AT_ZOOM;
         Point closest = null;
         for (Point candidate : markers) {
@@ -586,7 +586,7 @@ public class DefaultClusterRenderer<T extends ClusterItem> implements
                 } else {
                     // Sometimes the idle queue may not be called - schedule up some work regardless
                     // of whether the UI thread is busy or not.
-                    // TODO: try to remove this.
+                    // : try to remove this.
                     sendEmptyMessageDelayed(BLANK, 10);
                 }
             } finally {
@@ -640,7 +640,7 @@ public class DefaultClusterRenderer<T extends ClusterItem> implements
             while (isBusy()) {
                 // Sometimes the idle queue may not be called - schedule up some work regardless
                 // of whether the UI thread is busy or not.
-                // TODO: try to remove this.
+                // : try to remove this.
                 sendEmptyMessage(BLANK);
                 lock.lock();
                 try {
@@ -708,7 +708,7 @@ public class DefaultClusterRenderer<T extends ClusterItem> implements
             descriptor = BitmapDescriptorFactory.fromBitmap(mIconGenerator.makeIcon(getClusterText(bucket)));
             mIcons.put(bucket, descriptor);
         }
-        // TODO: consider adding anchor(.5, .5) (Individual markers will overlap more often)
+        // : consider adding anchor(.5, .5) (Individual markers will overlap more often)
         markerOptions.icon(descriptor);
     }
 
@@ -868,7 +868,7 @@ public class DefaultClusterRenderer<T extends ClusterItem> implements
     private static final TimeInterpolator ANIMATION_INTERP = new DecelerateInterpolator();
 
     /**
-     * Animates a markerWithPosition from one position to another. TODO: improve performance for
+     * Animates a markerWithPosition from one position to another. : improve performance for
      * slow devices (e.g. Nexus S).
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)

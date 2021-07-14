@@ -31,7 +31,7 @@ public class CleanDataUtils {
         deleteDir(context.getCacheDir());
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             deleteDir(context.getExternalCacheDir());
-            //TODO 有网页清理时注意排错，是否存在/data/data/应用package目录下找不到database文件夹的问题
+            // 有网页清理时注意排错，是否存在/data/data/应用package目录下找不到database文件夹的问题
             context.deleteDatabase("webview.db");
             context.deleteDatabase("webviewCache.db");
         }

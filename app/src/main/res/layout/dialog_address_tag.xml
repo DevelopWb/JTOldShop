@@ -132,10 +132,9 @@
             android:visibility="gone"
             android:src="@mipmap/ic_region_checked"/>
     </LinearLayout>
-    <ImageView
+    <TextView
         android:id="@+id/item_address_add_tag_submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/pre_dialog_qd"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginBottom="20dp"
+        android:text="确定"
+        style="@style/bt_style"/>
 </LinearLayout>

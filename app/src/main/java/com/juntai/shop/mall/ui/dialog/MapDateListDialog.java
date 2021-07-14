@@ -43,7 +43,7 @@ public class MapDateListDialog extends BottomDialogFragment {
 //                        adapter.getData().get(position).getAddress(),
 //                        MyApp.app.getBdLocation());
 //                navigationDialog.show(getFragmentManager(),"nav");
-                // TODO: 2021/7/4   导航的逻辑 
+                // : 2021/7/4   导航的逻辑 
             }
         });
     }

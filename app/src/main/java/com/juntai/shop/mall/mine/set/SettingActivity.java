@@ -1,4 +1,4 @@
-package com.juntai.shop.mall.ui.act;
+package com.juntai.shop.mall.mine.set;
 
 import android.content.Intent;
 import android.view.View;
@@ -8,7 +8,8 @@ import com.juntai.mall.base.utils.ToastUtils;
 import com.juntai.mall.base.widght.MenuDialog;
 import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.R;
-import com.juntai.shop.mall.ui.address.AddressListActivity;
+import com.juntai.shop.mall.mine.set.address.AddressListActivity;
+import com.juntai.shop.mall.ui.act.AboutActivity;
 import com.juntai.shop.mall.utils.CleanDataUtils;
 import com.juntai.shop.mall.utils.UpdateUtils;
 
@@ -67,7 +68,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 startActivity(new Intent(mContext, AddressListActivity.class));
                 break;
             case R.id.setting_phone://修改手机号
-                startActivity(new Intent(mContext,PhoneChangeActivity.class));
+                startActivity(new Intent(mContext, PhoneChangeActivity.class));
                 break;
             case R.id.setting_clear://清理
                 menuDialog.showMenu(getSupportFragmentManager(), Arrays.asList(menu));
@@ -76,7 +77,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 new UpdateUtils().update(mContext,true);
                 break;
             case R.id.setting_about://关于
-                startActivity(new Intent(mContext,AboutActivity.class));
+                startActivity(new Intent(mContext, AboutActivity.class));
                 break;
         }
     }

@@ -1,4 +1,4 @@
-package com.juntai.shop.mall.ui.address;
+package com.juntai.shop.mall.mine.set.address;
 
 import com.juntai.mall.base.base.BaseResult;
 import com.juntai.mall.base.mvp.IModel;

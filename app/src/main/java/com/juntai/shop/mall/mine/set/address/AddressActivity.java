@@ -1,4 +1,4 @@
-package com.juntai.shop.mall.ui.address;
+package com.juntai.shop.mall.mine.set.address;
 
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -13,6 +13,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.SwitchCompat;
+
 import com.google.android.material.textfield.TextInputEditText;
 import com.juntai.mall.base.base.BaseActivity;
 import com.juntai.mall.base.base.BaseObserver;
@@ -24,7 +26,7 @@ import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.AddressInfoBean;
 import com.juntai.shop.mall.bean.PlaceBean;
-import com.juntai.shop.mall.ui.address.selector.AddressSelectorDialog;
+import com.juntai.shop.mall.mine.set.address.selector.AddressSelectorDialog;
 import com.juntai.shop.mall.ui.dialog.PromptDialog;
 
 import java.util.regex.Matcher;
@@ -42,11 +44,11 @@ import okhttp3.RequestBody;
 public class AddressActivity  extends BaseActivity implements View.OnClickListener {
     ImageView imageView;
     TextInputEditText editTextName,editTextPhone,editeTextPlace;
-    TextView addressTv,tvTag,tvDelete;
+    TextView addressTv,tvTag;
     AddressSelectorDialog selectorDialog = new AddressSelectorDialog();
     AddressTagDialog addressTagDialog = new AddressTagDialog();
     //家，公司，学校，默认地址
-    CheckBox checkBox1,checkBox2,checkBox3,checkBoxDef;
+    CheckBox checkBox1,checkBox2,checkBox3;
     RadioGroup radioGroup;
     RadioButton radioButton1,radioButton2;
     int sex = 0;//性别（0男，1女）
@@ -57,6 +59,9 @@ public class AddressActivity  extends BaseActivity implements View.OnClickListen
     private AddressInfoBean.ReturnValueBean valueBean;
     PromptDialog promptDialog = new PromptDialog();
     boolean isDel = false;//是否删除
+    private TextView tvDelete;
+    private SwitchCompat mDefaultAddrSc;
+
     @Override
     public int getLayoutView() {
         return R.layout.activity_address;
@@ -76,11 +81,20 @@ public class AddressActivity  extends BaseActivity implements View.OnClickListen
         radioButton1 = findViewById(R.id.address_add_radio1);
         radioButton2 = findViewById(R.id.address_add_radio2);
         tvTag = findViewById(R.id.address_add_tag);
-        tvDelete = findViewById(R.id.address_add_delete);
         checkBox1 = findViewById(R.id.address_add_tag1);
         checkBox2 = findViewById(R.id.address_add_tag2);
         checkBox3 = findViewById(R.id.address_add_tag3);
-        checkBoxDef = findViewById(R.id.address_add_def);
+        mDefaultAddrSc = findViewById(R.id.default_addr_sc);
+        tvDelete = getTitleRightTv();
+        tvDelete.setText("删除");
+        tvDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                promptDialog.setMessage("是否删除地址","取消","删除");
+                isDel = true;
+                promptDialog.show(getSupportFragmentManager(),"delete");
+            }
+        });
         imageView.setOnClickListener(this);
         addressTv.setOnClickListener(this);
         findViewById(R.id.address_add_taglayout).setOnClickListener(this);
@@ -92,7 +106,7 @@ public class AddressActivity  extends BaseActivity implements View.OnClickListen
                 sex = 1;
             }
         });
-        checkBoxDef.setOnCheckedChangeListener((buttonView, isChecked) -> def = isChecked ? 1 : 0);
+        mDefaultAddrSc.setOnCheckedChangeListener((buttonView, isChecked) -> def = isChecked ? 1 : 0);
         selectorDialog.setOnSelectorListener((province, city, area, street) -> {
             beanProvince = province;
             beanCity = city;
@@ -100,12 +114,12 @@ public class AddressActivity  extends BaseActivity implements View.OnClickListen
             beanTown = street;
             stringBuffer = new StringBuffer();
             stringBuffer.append(province.getName())
-                    .append("\n")
+                    .append(" ")
                     .append(city.getName())
-                    .append("\n")
+                    .append(" ")
                     .append(area.getName());
             if (beanTown != null){
-                stringBuffer.append("\n")
+                stringBuffer.append(" ")
                         .append(street.getName());
             }
             addressTv.setText(stringBuffer.toString());
@@ -139,25 +153,32 @@ public class AddressActivity  extends BaseActivity implements View.OnClickListen
             setTitleName("编辑收货地址");
             getAddress();
             tvDelete.setVisibility(View.VISIBLE);
-            tvDelete.setOnClickListener(this);
         }
         addressTagDialog.setOnSelectListener(tag -> {
             tvTag.setText(tag);
-            checkBox1.setChecked(false);
-            checkBox2.setChecked(false);
-            checkBox3.setChecked(false);
-            switch (tag){
-                case "家":
-                    checkBox1.setChecked(true);
-                    break;
-                case "公司":
-                    checkBox2.setChecked(true);
-                    break;
-                case "学校":
-                    checkBox3.setChecked(true);
-                    break;
-            }
+            initAddrCheckBoxTag(tag);
+
         });
+    }
+
+    /**
+     * 地址标签 控件状态
+     */
+    private void initAddrCheckBoxTag(String tag) {
+        checkBox1.setChecked(false);
+        checkBox2.setChecked(false);
+        checkBox3.setChecked(false);
+        switch (tag){
+            case "家":
+                checkBox1.setChecked(true);
+                break;
+            case "公司":
+                checkBox2.setChecked(true);
+                break;
+            case "学校":
+                checkBox3.setChecked(true);
+                break;
+        }
     }
 
     @Override
@@ -165,7 +186,10 @@ public class AddressActivity  extends BaseActivity implements View.OnClickListen
 
     }
     private void toSave(){
-        if (id != -1 && !isEdited()) return;
+        if (id != -1 && !isEdited()){
+            ToastUtils.toast(mContext,"您还没有编辑内容");
+            return;
+        }
         if (editTextName.getText().toString().isEmpty()){
             ToastUtils.toast(mContext,"请输入收货人姓名");
         }else if (editTextPhone.getText().toString().isEmpty()){
@@ -219,12 +243,13 @@ public class AddressActivity  extends BaseActivity implements View.OnClickListen
                         editTextName.setText(valueBean.getName());
                         editTextPhone.setText(valueBean.getPhone());
                         editeTextPlace.setText(valueBean.getDetailedAddress());
-                        addressTv.setText(String.format("%s\n%s\n%s\n%s",
+                        addressTv.setText(String.format("%s %s %s %s",
                                 valueBean.getProvinceName(),
                                 valueBean.getCityName(),
                                 valueBean.getAreaName(),
                                 valueBean.getStreetName()));
                         tvTag.setText(valueBean.getLabel());
+                       initAddrCheckBoxTag(valueBean.getLabel());
                         //性别（0男，1女）
                         sex = valueBean.getSex();
                         if (sex == 0) {
@@ -234,7 +259,7 @@ public class AddressActivity  extends BaseActivity implements View.OnClickListen
                         }
                         //默认地址（0：不是）（1：是）
                         def = valueBean.getDefaultAddress();
-                        checkBoxDef.setChecked(def == 1);
+                        mDefaultAddrSc.setChecked(def == 1);
                     }
 
                     @Override
@@ -314,11 +339,6 @@ public class AddressActivity  extends BaseActivity implements View.OnClickListen
                 break;
             case R.id.address_add_save://添加收货地址
                 toSave();
-                break;
-            case R.id.address_add_delete://删除收货地址
-                promptDialog.setMessage("是否删除地址","取消","删除");
-                isDel = true;
-                promptDialog.show(getSupportFragmentManager(),"delete");
                 break;
         }
     }

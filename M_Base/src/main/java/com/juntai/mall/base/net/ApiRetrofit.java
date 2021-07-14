@@ -3,6 +3,7 @@ package com.juntai.mall.base.net;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.juntai.mall.base.BuildConfig;
 import com.juntai.mall.base.utils.CustomeHttpLogger;
 import com.juntai.mall.base.utils.LogUtil;
 
@@ -64,6 +65,11 @@ public class ApiRetrofit {
         /**
          * log拦截器默认不打印，要设置打印的等级(NONE,BASIC,HEADERS,BODY)，有4个，body是最大的级别，把她放入okhttp对象中，再把okhttp放入retrofit ，那么就可以打印对应的body，所有的代码
          */
+        if (BuildConfig.DEBUG) {
+            logging.setLevel(HttpLoggingInterceptor.Level.BODY);// 重要
+        } else {
+            logging.setLevel(HttpLoggingInterceptor.Level.NONE);// 重要
+        }
         return logging;
     }
 

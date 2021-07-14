@@ -192,13 +192,13 @@ public class ReportActivity extends BaseActivity implements View.OnClickListener
                 .setCompressListener(new OnCompressListener() {
                     @Override
                     public void onStart() {
-                        // TODO 压缩开始前调用，可以在方法内启动 loading UI
+                        //  压缩开始前调用，可以在方法内启动 loading UI
                         progressDialog.show();
                     }
 
                     @Override
                     public void onSuccess(File file) {
-                        // TODO 压缩成功后调用，返回压缩后的图片文件
+                        //  压缩成功后调用，返回压缩后的图片文件
                         imageSelectionView.addImagePath(new Bean(file.getPath(),false));
                         LogUtil.e("push-图片压缩"+file.getPath());
                         progressDialog.dismiss();
@@ -206,7 +206,7 @@ public class ReportActivity extends BaseActivity implements View.OnClickListener
 
                     @Override
                     public void onError(Throwable e) {
-                        // TODO 当压缩过程出现问题时调用
+                        //  当压缩过程出现问题时调用
                         LogUtil.e("push-图片压缩失败");
                         progressDialog.dismiss();
                     }
