@@ -26,7 +26,7 @@
     <color name="text_title">#555555</color>
 
 
-    <color name="gray_lighter">#55cccccc</color>
+    <color name="gray_lighter">#33cccccc</color>
     <color name="gray_light">#ddcccccc</color>
     <color name="text_default_color">#AA333333</color>
 </resources>

@@ -13,11 +13,13 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
@@ -36,6 +38,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.google.android.material.appbar.AppBarLayout;
 import com.gyf.barlibrary.ImmersionBar;
 import com.juntai.mall.base.R;
 import com.juntai.mall.base.utils.ActivityManagerTool;
@@ -110,13 +113,28 @@ public abstract class BaseActivity extends RxAppCompatActivity implements Toolba
         titleName = findViewById(R.id.title_name);
         titleRightTv = findViewById(R.id.title_rightTv);
         initToolbarAndStatusBar(true);
-        initLeftBackTv(true);
+        initLeftBackTv(true,R.drawable.app_back);
         initView();
         initData();
         adapterScreen();
         ActivityManagerTool.getInstance().addActivity(this);
     }
 
+    /**
+     * 设置toolbar背景
+     * @param resId
+     */
+    public void setToolbarBg(int resId){
+        titleName.setTextColor(getResources().getColor(R.color.white));
+        toolbar.setBackgroundResource(resId);
+        AppBarLayout.LayoutParams params = new AppBarLayout.LayoutParams(toolbar.getLayoutParams());
+        params.width = AppBarLayout.LayoutParams.MATCH_PARENT;
+        params.height = DisplayUtil.dp2px(mContext,60);
+        params.gravity = Gravity.CENTER_VERTICAL;
+        toolbar.setLayoutParams(params);
+        toolbar.setPadding(0,DisplayUtil.dp2px(mContext,20),DisplayUtil.dp2px(mContext,20),0);
+        initLeftBackTv(true,R.drawable.app_back_white);
+    }
     /**
      * 警小宝 东关派出所版本 初始化toolbar和状态栏
      */
@@ -155,10 +173,10 @@ public abstract class BaseActivity extends RxAppCompatActivity implements Toolba
      *
      * @param isShow 是否显示
      */
-    protected void initLeftBackTv(boolean isShow) {
+    protected void initLeftBackTv(boolean isShow,int resId) {
         if (isShow) {
             mBackTv.setVisibility(View.VISIBLE);
-            Drawable drawable = mContext.getResources().getDrawable(R.drawable.app_back);
+            Drawable drawable = mContext.getResources().getDrawable(resId);
             // 这一步必须要做,否则不会显示.
             drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
             mBackTv.setCompoundDrawables(drawable, null, null, null);
@@ -588,14 +606,13 @@ public abstract class BaseActivity extends RxAppCompatActivity implements Toolba
     /**
      * 配置view的margin属性
      */
-    public void setMargin(View view, int left, int top, int right, int bottom) {
+    public void setMargin(ViewGroup.MarginLayoutParams params,View view, int left, int top, int right, int bottom) {
         left = DisplayUtil.dp2px(this, left);
         top = DisplayUtil.dp2px(this, top);
         right = DisplayUtil.dp2px(this, right);
         bottom = DisplayUtil.dp2px(this, bottom);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(view.getLayoutParams());
-        layoutParams.setMargins(left, top, right, bottom);
-        view.setLayoutParams(layoutParams);
+        params.setMargins(left, top, right, bottom);
+        view.setLayoutParams(params);
     }
     /**
      * 隐藏软键盘  view 可以是当前点击的view 没必要全是edittext

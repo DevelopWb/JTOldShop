@@ -25,7 +25,7 @@ public class GoodsSelectAdapter extends BaseQuickAdapter<OrderCommodityListBean,
         Log.e("ffffffff",item.isChecked() + "");
         helper.setChecked(R.id.item_goods_select_check,item.isChecked());
         helper.setText(R.id.item_goods_select_name,item.getCommodityName());
-        helper.setText(R.id.item_goods_select_price,"￥" + item.getPrice());
+        helper.setText(R.id.item_goods_select_price_tag_tv,"￥" + item.getPrice());
         helper.setText(R.id.item_goods_select_num,"X" + item.getCommodityNumber());
         ImageLoadUtil.loadImageNoCrash(mContext, AppHttpPath.IMAGE + item.getCommodityImg(),R.mipmap.ic_launcher,helper.getView(R.id.item_goods_select_image));
         helper.setOnCheckedChangeListener(R.id.item_goods_select_check,(buttonView, isChecked) -> {

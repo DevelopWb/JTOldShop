@@ -1,5 +1,10 @@
 package com.juntai.shop.mall.mine.ui;
 
+import android.graphics.Color;
+import android.view.View;
+import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -49,6 +54,8 @@ public class MyOrderActivity extends BaseActivity implements ViewPager.OnPageCha
         /*viewpager切换监听，包含滑动点击两种*/
         mainViewpager.addOnPageChangeListener(this);
         mainTablayout.setupWithViewPager(mainViewpager);
+        //设置tab文本的没有选中（第一个参数）和选中（第二个参数）的颜色
+        mainTablayout.setTabTextColors(Color.BLACK, Color.RED);
         /**
          * 添加自定义tab布局
          * */
@@ -80,6 +87,14 @@ public class MyOrderActivity extends BaseActivity implements ViewPager.OnPageCha
 
     @Override
     public void onPageSelected(int position) {
+        TabLayout.Tab tab = mainTablayout.getTabAt(position);
+        View view = tab.getCustomView();
+        if (null != view && view instanceof TextView) {
+            // 改变 tab 未选择状态下的字体大小
+//            ((TextView) view).setTextSize(18);
+            // 改变 tab 未选择状态下的字体颜色
+            ((TextView) view).setTextColor(ContextCompat.getColor(mContext, R.color.red));
+        }
 
     }
 

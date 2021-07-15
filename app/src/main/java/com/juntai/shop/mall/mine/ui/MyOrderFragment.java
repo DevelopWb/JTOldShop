@@ -93,6 +93,13 @@ public class MyOrderFragment extends BaseLazyFragment {
         recyclerView = getView(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         adapter = new MyOrderAdapter(R.layout.item_myorder,new ArrayList());
+        adapter.setJumpToOrderDetailCallBack(new MyOrderAdapter.OnJumpToOrderDetailCallBack() {
+            @Override
+            public void jumpToOrderDetail(int orderId) {
+                //订单详情
+                startActivity(new Intent(mContext, OrderDeatilsActivity.class).putExtra("orderId",orderId));
+            }
+        });
         recyclerView.setAdapter(adapter);
         //刷新
         smartRefreshLayout.setOnRefreshListener(refreshLayout -> {
@@ -153,7 +160,6 @@ public class MyOrderFragment extends BaseLazyFragment {
                 case R.id.item_myorder_deails://查看详情
                     //退款详情
                     startActivityForResult(MyApp.app.activityTool.getReturnDetailsIntent(mContext,nowOrderId), AppCode.RETURN);
-                    //startActivity(new Intent(mContext, OrderDeatilsActivity.class).putExtra("id",nowOrderId));
                     break;
                 case R.id.item_myorder_after_sales://售后
                     MyApp.app.goodsReturnBeans.clear();

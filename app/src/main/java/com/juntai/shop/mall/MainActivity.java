@@ -62,7 +62,6 @@ public class MainActivity extends BaseAppActivity implements ViewPager.OnPageCha
         mImmersionBar.reset().transparentStatusBar().statusBarDarkFont(true).init();
         getToolbar().setVisibility(View.GONE);
         mBaseRootCol.setFitsSystemWindows(false);
-        getToolbar().setVisibility(View.GONE);
         mainViewpager = findViewById(R.id.main_viewpager);
         mainTablayout = findViewById(R.id.main_tablayout);
         homepageFragment = new HomepageFragment();

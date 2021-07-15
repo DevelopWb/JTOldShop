@@ -9,8 +9,8 @@ public class AppHttpPath {
 
 
 
-//    public static final String BASE = "http://61.156.157.132:31080/shoppingMall/u/appConnector/";
-    public static final String BASE = "http://192.168.124.118:8080/shoppingMall/u/appConnector/";
+    public static final String BASE = "http://61.156.157.132:31080/shoppingMall/u/appConnector/";
+//    public static final String BASE = "http://192.168.124.118:8080/shoppingMall/u/appConnector/";
 //
     public static final String B = "http://61.156.157.132:31080/shoppingMall/u/";
 //    public static final String B = "http://192.168.124.118:8080/shoppingMall/u/";

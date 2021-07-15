@@ -21,6 +21,9 @@ import java.util.List;
  *
  */
 public class MyOrderAdapter extends BaseQuickAdapter<OrderListBean.ReturnValueBean.DatasBean, BaseViewHolder> {
+
+
+    private OnJumpToOrderDetailCallBack jumpToOrderDetailCallBack;
     int[] idsAll = new int[]{R.id.item_myorder_maijia,
                              R.id.item_myorder_cancle,
                              R.id.item_myorder_fukuan,
@@ -71,8 +74,15 @@ public class MyOrderAdapter extends BaseQuickAdapter<OrderListBean.ReturnValueBe
         mapStr.put(6,"订单已取消");
     }
 
+
+
+    public void setJumpToOrderDetailCallBack(OnJumpToOrderDetailCallBack jumpToOrderDetailCallBack) {
+        this.jumpToOrderDetailCallBack = jumpToOrderDetailCallBack;
+    }
+
     @Override
     protected void convert(BaseViewHolder helper, OrderListBean.ReturnValueBean.DatasBean item) {
+        int orderId = item.getOrderId();
         helper.addOnClickListener(R.id.item_myorder_shoplayout);
         //(0：待付款）（1：待发货）（2：待收货）（3：待评价）（4：退款中）（5：完成）（6:订单取消）（7：退款完成）（8：全部订单）
         for (int i = 0; i < idsAll.length; i++) {
@@ -92,16 +102,27 @@ public class MyOrderAdapter extends BaseQuickAdapter<OrderListBean.ReturnValueBe
         helper.setText(R.id.item_myorder_shopname,item.getShopName());
         helper.setText(R.id.item_myorder_right,mapStr.get(item.getStatus()));
         ImageLoadUtil.loadCircularImage(mContext, StringTools.getImageForCrmInt(item.getLogoId() ),R.mipmap.ic_launcher,R.mipmap.ic_launcher,helper.getView(R.id.item_myorder_logo));
-        helper.setText(R.id.item_myorder_price_all,"共"+ item.getCommodityList().size() +"件商品   合计： ￥"+item.getFooting());
+        helper.setText(R.id.item_myorder_price_all,"共"+ item.getCommodityList().size() +"件商品   合计:");
+       helper.setText(R.id.item_myorder_price_tv,"￥"+item.getFooting());
         //
         RecyclerView recyclerView = helper.getView(R.id.item_myorder_list);
         MyOrderGoodsAdapter myOrderGoodsAdapter = new MyOrderGoodsAdapter(R.layout.item_myorder_goods,item.getCommodityList());
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         recyclerView.setAdapter(myOrderGoodsAdapter);
         helper.addOnClickListener(R.id.item_myorder_list);
-        //商品详情
-//        myOrderGoodsAdapter.setOnItemClickListener((adapter, view, position) -> {
-//            App.app.activityTool.toGoodsActivity(mContext,item.getShopId(),myOrderGoodsAdapter.getData().get(position).getCommodityId());
-//        });
+        myOrderGoodsAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                //跳转到订单详情
+                if (jumpToOrderDetailCallBack != null) {
+                    jumpToOrderDetailCallBack.jumpToOrderDetail(orderId);
+                }
+            }
+        });
+    }
+
+
+    public interface OnJumpToOrderDetailCallBack {
+        void  jumpToOrderDetail(int orderId);
     }
 }

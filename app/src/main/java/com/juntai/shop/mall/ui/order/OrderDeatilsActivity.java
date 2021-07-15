@@ -49,7 +49,10 @@ public class OrderDeatilsActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void initView() {
+        mImmersionBar.reset().transparentStatusBar().statusBarDarkFont(false).init();
+        mBaseRootCol.setFitsSystemWindows(false);
         setTitleName("订单详情");
+        setToolbarBg(R.mipmap.my_center_red_bg);
         orderid = getIntent().getIntExtra("orderId",-1);
         if (orderid == -1)
             finish();

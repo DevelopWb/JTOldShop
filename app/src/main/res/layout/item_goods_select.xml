@@ -1,49 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    android:paddingTop="3dp"
-    android:paddingBottom="3dp">
+    android:layout_marginTop="10dp"
+    android:background="@drawable/bg_round_white"
+    android:padding="15dp">
+
     <CheckBox
         android:id="@+id/item_goods_select_check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"/>
-    <ImageView
-        android:id="@+id/item_goods_select_image"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/item_goods_select_check"
-        android:scaleType="centerCrop"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/item_goods_select_image_cv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/item_goods_select_image"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="centerCrop" />
+    </androidx.cardview.widget.CardView>
+
+
     <TextView
+
         android:id="@+id/item_goods_select_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        app:layout_constraintRight_toRightOf="parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:textSize="15sp"
+        android:layout_marginLeft="10dp"
         android:maxLines="2"
-        android:layout_toRightOf="@+id/item_goods_select_image"
-        android:layout_toLeftOf="@+id/item_goods_select_price" />
-    <TextView
-        android:id="@+id/item_goods_select_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/grey"
-        android:textSize="14sp"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/item_goods_select_name"
-        android:text="￥0.0"/>
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/item_goods_select_num"
+        app:layout_constraintLeft_toRightOf="@+id/item_goods_select_image_cv"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread" />
+
     <TextView
         android:id="@+id/item_goods_select_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:text="X1"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
         android:textColor="@color/grey"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/item_goods_select_price"
-        android:text="X1"/>
-</RelativeLayout>
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/item_goods_select_price_tag_tv"
+        app:layout_constraintLeft_toLeftOf="@+id/item_goods_select_name"
+        app:layout_constraintTop_toBottomOf="@+id/item_goods_select_name" />
+
+    <TextView
+        android:id="@+id/item_goods_select_price_tag_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="￥0.0"
+        android:textColor="@color/red"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/item_goods_select_num"
+        app:layout_constraintTop_toBottomOf="@+id/item_goods_select_num" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
