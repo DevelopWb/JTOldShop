@@ -5,6 +5,8 @@ import android.widget.CheckBox;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.juntai.mall.base.utils.ImageLoadUtil;
@@ -55,19 +57,23 @@ public class MyCollectAdapter extends BaseQuickAdapter<MyCollcetB.ReturnValueBea
             tvName.setText(item.getShopName());
             tvName.setTextSize(18);
             tvName.setLines(1);
+            helper.setTextColor(R.id.item_collect_address, ContextCompat.getColor(mContext,R.color.gray));
             helper.setText(R.id.item_collect_address,item.getAddress());
-            ratingBar.setVisibility(View.VISIBLE);
+            helper.setGone(R.id.item_collect_score,true);
+            helper.setGone(R.id.item_collect_ratingBar,true);
             DecimalFormat format = new DecimalFormat("##0.0");
             helper.setText(R.id.item_collect_score,"(" + format.format(item.getDegreeOfSatisfaction()) + ")");
             helper.setText(R.id.item_collect_distance,format.format(item.getDistance()) + "km");
             ImageLoadUtil.loadImageNoCrash(mContext, StringTools.getImageForCrmInt(item.getLogoId()),R.mipmap.ic_launcher,helper.getView(R.id.item_collect_image));
         }else{
             //商品
-            ratingBar.setVisibility(View.GONE);
+            helper.setGone(R.id.item_collect_ratingBar,false);
+            helper.setGone(R.id.item_collect_score,false);
             tvName.setText(item.getCommodityName());
             tvName.setTextSize(16);
             tvName.setLines(2);
             helper.setText(R.id.item_collect_distance,"月销" + item.getMonthlySales());
+            helper.setTextColor(R.id.item_collect_address, ContextCompat.getColor(mContext,R.color.red));
             helper.setText(R.id.item_collect_address,"￥"+String.valueOf(item.getPrice()));
             ImageLoadUtil.loadImageNoCrash(mContext, AppHttpPath.IMAGE + item.getCommodityImg(),R.mipmap.ic_launcher,helper.getView(R.id.item_collect_image));
         }

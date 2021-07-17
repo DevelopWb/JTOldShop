@@ -134,6 +134,7 @@ public class MyOrderFragment extends BaseLazyFragment {
                     break;
                 case R.id.item_myorder_maijia://联系卖家
                     //im
+                    // TODO: 2021/7/15 联系卖家 跳转到聊天的界面
                     ModuleIm_Init.chat(mContext,adapter.getData().get(position).getShopAccount(),adapter.getData().get(position).getShopName());
                     break;
                 case R.id.item_myorder_cancle://取消订单
@@ -263,7 +264,7 @@ public class MyOrderFragment extends BaseLazyFragment {
         loca = new int[2];
         viewP.getLocationOnScreen(loca);
         //显示（自定义位置）
-        popupWindow.showAtLocation(viewP,Gravity.NO_GRAVITY,loca[0] - DpTools.dip2px(mContext,50),loca[1] - DpTools.dip2px(mContext,50));
+        popupWindow.showAtLocation(viewP,Gravity.NO_GRAVITY,loca[0] - DpTools.dip2px(mContext,50),loca[1] - DpTools.dip2px(mContext,28));
 //        popupWindow.showAsDropDown(viewP,- DpTools.dip2px(mContext,50),10);
     }
 

@@ -82,7 +82,7 @@
         <item name="android:layout_marginTop">20dp</item>
         <item name="android:layout_marginLeft">20dp</item>
         <item name="android:layout_marginRight">20dp</item>
-        <item name="android:background">@drawable/sp_accent_circle_button</item>
+        <item name="android:background">@drawable/bt_accent_color_selecter</item>
         <item name="android:textColor">#ffffff</item>
         <item name="android:textSize">18dp</item>
     </style>
@@ -262,7 +262,7 @@
     </style>
     <style name="goods_return_line">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@mipmap/ic_line</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">@color/gray</item>
     </style>
 </resources>

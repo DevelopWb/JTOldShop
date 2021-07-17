@@ -52,6 +52,8 @@ import io.reactivex.schedulers.Schedulers;
  * Created by Ma
  * on 2019/11/23
  */
+
+// TODO: 2021/7/16 搜索界面需要优化
 public class SearchActivity extends AppCompatActivity implements View.OnClickListener{
     TagFlowLayout flowLayout;
     RelativeLayout relativeLayout;

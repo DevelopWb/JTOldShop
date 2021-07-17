@@ -1,4 +1,4 @@
-package com.juntai.shop.mall.ui.goods;
+package com.juntai.shop.mall.ui.goods.shop;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,7 +17,6 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
-import com.juntai.mall.base.base.BaseActivity;
 import com.juntai.mall.base.base.BaseObserver;
 import com.juntai.mall.base.utils.ImageLoadUtil;
 import com.juntai.mall.base.utils.LogUtil;
@@ -28,6 +27,7 @@ import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppHttpPath;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
+import com.juntai.shop.mall.baseinfo.BaseAppActivity;
 import com.juntai.shop.mall.bean.CartItemLocB;
 import com.juntai.shop.mall.bean.IntBean;
 import com.juntai.shop.mall.bean.ShopBean;
@@ -64,27 +64,26 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * 店铺
+ * 店铺详情
  * Created by Ma
  * on 2019/8/28
+ * update  2021-7-16 tobato
  */
-public class ShopActivity extends BaseActivity implements ViewPager.OnPageChangeListener, View.OnClickListener {
+public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPager.OnPageChangeListener, View.OnClickListener,ShopContract.IShopContractView {
     public static int shopId;
     public static String shopRyid,shopName;
     private Banner banner;
     GlideImageLoader glideImageLoader = new GlideImageLoader();
     TopTabAdapter adapter;
-    ImageView headView;
     ViewPager viewpager;
     TabLayout tablayout;
     ShopBean.ReturnValueBean shopInfoB;
-    private String[] title = new String[]{"商铺","评价", "商家"};
+    private String[] title = new String[]{"商品","评价", "商家"};
     List<Fragment> mFragments = new ArrayList<>();
     GoodsFragment goodsFragment = new GoodsFragment();
     //title
     ImageView ivBack,ivCollect,ivMore;
     TextView tvTItle;
-    View viewNull;
     LinearLayout titlelayout;
     CoordinatorLayout coordinatorLayout;
     boolean isToSubmit = false,isCollect = false;
@@ -104,8 +103,8 @@ public class ShopActivity extends BaseActivity implements ViewPager.OnPageChange
             finish();
         }
         getToolbar().setVisibility(View.GONE);
-        viewNull = findViewById(R.id.shop_null_view);
-        viewNull.getLayoutParams().height = MyApp.statusBarH;
+        mImmersionBar.reset().transparentStatusBar().statusBarDarkFont(false).init();
+        mBaseRootCol.setFitsSystemWindows(false);
         titlelayout = findViewById(R.id.shop_title_layout);
         coordinatorLayout = findViewById(R.id.shop_content);
         ivBack = findViewById(R.id.title_shop_back);
@@ -116,9 +115,6 @@ public class ShopActivity extends BaseActivity implements ViewPager.OnPageChange
         findViewById(R.id.title_goods_back).setOnClickListener(this);
         ivCollect.setOnClickListener(this);
         ivMore.setOnClickListener(this);
-        //
-        headView = findViewById(R.id.shop_logo_view);
-        //
         banner = findViewById(R.id.banner);
         banner.isAutoPlay(false);
         banner.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -215,7 +211,6 @@ public class ShopActivity extends BaseActivity implements ViewPager.OnPageChange
                         //0：未收藏 1：已收藏
                         ivCollect.setImageResource(shopInfoB.getIsCollect() == 0?R.mipmap.ic_collect:R.mipmap.ic_collect_check);
                         tvTItle.setText(result.getReturnValue().getShopName());
-                        ImageLoadUtil.loadImageNoCrash(mContext,StringTools.getImageForCrmInt(result.getReturnValue().getLogoId()),headView);
                         List<String> sssss = new ArrayList<>();
                         if (shopInfoB.getVideoUrl() != null && !shopInfoB.getVideoUrl().isEmpty()){
                             sssss.add(AppHttpPath.VIDEO_FOR_CRM + shopInfoB.getShopId());
@@ -486,6 +481,11 @@ public class ShopActivity extends BaseActivity implements ViewPager.OnPageChange
     }
 
     @Override
+    protected ShopPresent createPresenter() {
+        return new ShopPresent();
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
@@ -513,5 +513,10 @@ public class ShopActivity extends BaseActivity implements ViewPager.OnPageChange
         }else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public void onSuccess(String tag, Object o) {
+
     }
 }

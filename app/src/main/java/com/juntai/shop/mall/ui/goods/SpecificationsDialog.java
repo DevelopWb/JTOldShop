@@ -22,6 +22,7 @@ import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.CartItemLocB;
 import com.juntai.shop.mall.bean.GoodsB;
+import com.juntai.shop.mall.ui.goods.shop.ShopActivity;
 import com.juntai.shop.mall.view.CountView;
 import com.wuhenzhizao.sku.bean.Sku;
 import com.wuhenzhizao.sku.bean.SkuAttribute;

@@ -64,7 +64,7 @@
         <activity android:name=".ui.act.FragmentContainerActivity" />
         <activity android:name=".mine.MyInfoActivity" />
         <activity android:name=".mine.set.ModifyPwd" />
-        <activity android:name=".ui.goods.ShopActivity"
+        <activity android:name=".ui.goods.shop.ShopActivity"
             android:launchMode="singleTop"/>
         <activity android:name=".ui.order.RemarksActivity" />
         <activity android:name=".ui.order.OrderPayActivity" />

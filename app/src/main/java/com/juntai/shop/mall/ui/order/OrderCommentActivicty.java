@@ -47,8 +47,11 @@ import top.zibin.luban.OnCompressListener;
 /**
  * 订单评价
  * Created by Ma
+ * 
  * on 2019/12/9
  */
+
+// TODO: 2021/7/15   发表订单评价  这个效果图还没有出 
 public class OrderCommentActivicty extends BaseActivity {
     RadioGroup radioGroup;//1-5
     RatingBar ratingBar;//1-5
@@ -66,6 +69,7 @@ public class OrderCommentActivicty extends BaseActivity {
 
     @Override
     public void initView() {
+        
         setTitleName("发表评论");
         shopid = getIntent().getIntExtra("shopid",-1);
         ordid = getIntent().getIntExtra("ordid",-1);

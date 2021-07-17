@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">@color/colorTheme</color>
-    <color name="colorPrimaryDark">@color/colorTheme</color>
+    <color name="colorPrimaryDark">#AA250F</color>
     <color name="colorAccent">#F0250F</color>
 
     <color name="colorTheme">#F0250F</color>
@@ -27,6 +27,6 @@
 
 
     <color name="gray_lighter">#33cccccc</color>
-    <color name="gray_light">#ddcccccc</color>
+    <color name="gray_light">#ffcccccc</color>
     <color name="text_default_color">#AA333333</color>
 </resources>

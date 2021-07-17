@@ -5,4 +5,5 @@
     <!--<color name="colorAccent">#409EFF</color>-->
     <!--<color name="colorTheme">#61B9D2</color>-->
     <!--<color name="colorThemeDark">#6BCFD7</color>-->
+    <color name="gray">#cccccc</color>
 </resources>

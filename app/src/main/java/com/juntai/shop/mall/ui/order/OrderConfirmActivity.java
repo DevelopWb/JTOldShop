@@ -2,17 +2,16 @@ package com.juntai.shop.mall.ui.order;
 
 import android.content.Intent;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.juntai.mall.base.base.BaseActivity;
 import com.juntai.mall.base.base.BaseObserver;
-import com.juntai.mall.base.utils.ImageLoadUtil;
 import com.juntai.mall.base.utils.ToastUtils;
 import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppNetModule;
@@ -20,7 +19,7 @@ import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.AddressListBean;
 import com.juntai.shop.mall.bean.OrderCreateBean;
 import com.juntai.shop.mall.bean.SettlementBean;
-import com.juntai.shop.mall.ui.adapter.OrderConfirmGoodsAdapter;
+import com.juntai.shop.mall.mine.adt.MyOrderGoodsAdapter;
 import com.juntai.shop.mall.mine.set.address.AddressSelectDialog;
 import com.juntai.shop.mall.utils.AppCode;
 import com.juntai.shop.mall.utils.StringTools;
@@ -35,17 +34,20 @@ import io.reactivex.schedulers.Schedulers;
  * @aouther Ma
  * @date 2019/3/6
  */
+
+// TODO: 2021/7/15 提交订单的界面 需要优化
 public class OrderConfirmActivity extends BaseActivity implements View.OnClickListener {
     AddressSelectDialog selectDialog;
-    RelativeLayout relativeLayoutAdd,relativeLayoutAddress;
+    RelativeLayout relativeLayoutAdd;
     RecyclerView recyclerView;
-    TextView tvShopName,tvPrice1,tvPrice2,tvRemark,tvName,tvPhone,tvTag,tvAddress,tvY,tvB;
-    ImageView imageView;
+    TextView tvShopName,tvPrice1,tvPrice2,tvRemark,tvName,tvPhone,tvAddress,tvY,tvB;
     int shopid,logoId;
-    private OrderConfirmGoodsAdapter adapter;
+    private MyOrderGoodsAdapter adapter;
     double price1,price2;
     //默认选择的地址
     AddressListBean.ReturnValueBean addressBean;
+    private ConstraintLayout addrCl;
+
     @Override
     public int getLayoutView() {
         return R.layout.activity_order_confirm;
@@ -57,10 +59,9 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
         selectDialog = new AddressSelectDialog();
 
         relativeLayoutAdd = findViewById(R.id.order_address_toadd_layout);
-        relativeLayoutAddress = findViewById(R.id.order_address_layout);
+        addrCl = findViewById(R.id.order_address_layout);
         tvShopName = findViewById(R.id.order_confirm_shop_name);
         tvName = findViewById(R.id.order_confirm_address_name);
-        tvTag = findViewById(R.id.address_tag);
         tvAddress = findViewById(R.id.order_confirm_address);
         tvPhone = findViewById(R.id.order_confirm_address_phone);
         tvPrice1 = findViewById(R.id.order_comfirm_price1);
@@ -68,7 +69,6 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
         tvY = findViewById(R.id.order_comfirm_yf);
         tvB = findViewById(R.id.order_comfirm_bzf);
         tvRemark = findViewById(R.id.order_comfirm_remarks);
-        imageView = findViewById(R.id.order_confirm_shop_logo);
 
         shopid = getIntent().getIntExtra("id",-1);
         logoId = getIntent().getIntExtra("logoId",-1);
@@ -79,15 +79,14 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
 
         recyclerView = findViewById(R.id.orderconfirm_goodslist);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        adapter = new OrderConfirmGoodsAdapter(R.layout.item_order_goods,new ArrayList());
+        adapter = new MyOrderGoodsAdapter(R.layout.item_myorder_goods,new ArrayList());
         recyclerView.setAdapter(adapter);
 
-        relativeLayoutAddress.setOnClickListener(this);
+        addrCl.setOnClickListener(this);
         tvRemark.setOnClickListener(this);
         findViewById(R.id.shopcart_confirm).setOnClickListener(this);
         findViewById(R.id.order_address_toadd_layout).setOnClickListener(this);
 
-        ImageLoadUtil.loadImageNoCrashRound(mContext,10, StringTools.getImageForCrmInt(logoId),R.mipmap.ic_launcher,imageView);
 
         selectDialog.setOnSelectorListener(selectBean -> {
             addressBean = selectBean;
@@ -106,10 +105,10 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
                     public void onSuccess(SettlementBean o) {
                         price1 = o.getReturnValue().getSumPackingCharges();
                         price2 = o.getReturnValue().getFooting();
-                        tvY.setText(String.format("运费 ￥%s",o.getReturnValue().getTransportCharges()));
-                        tvB.setText(String.format("包装费 ￥%s",o.getReturnValue().getSumPackingCharges()));
-                        tvPrice1.setText(String.valueOf(o.getReturnValue().getFooting()));
-                        tvPrice2.setText(String.valueOf(o.getReturnValue().getFooting()));
+                        tvY.setText(String.format("￥%s",o.getReturnValue().getTransportCharges()));
+                        tvB.setText(String.format("￥%s",o.getReturnValue().getSumPackingCharges()));
+                        tvPrice1.setText(String.format("￥%s",String.valueOf(o.getReturnValue().getFooting())));
+                        tvPrice2.setText(String.format("￥%s",String.valueOf(o.getReturnValue().getFooting())));
                         adapter.getData().clear();
                         adapter.addData(o.getReturnValue().getCommodity());
 
@@ -157,12 +156,12 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
                     public void onSuccess(AddressListBean o) {
                         if (o.getReturnValue()!= null && o.getReturnValue().size() > 0){
                             relativeLayoutAdd.setVisibility(View.GONE);
-                            relativeLayoutAddress.setVisibility(View.VISIBLE);
+                            addrCl.setVisibility(View.VISIBLE);
                             addressBean = o.getReturnValue().get(0);
                             setAddress();
                         }else {
                             relativeLayoutAdd.setVisibility(View.VISIBLE);
-                            relativeLayoutAddress.setVisibility(View.GONE);
+                            addrCl.setVisibility(View.GONE);
                         }
 
                         selectDialog.updateList(o.getReturnValue());
@@ -179,14 +178,8 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
      *
      */
     private void setAddress(){
-        if (addressBean.getLabel() == null || addressBean.getLabel().isEmpty()){
-            tvTag.setVisibility(View.GONE);
-        }else {
-            tvTag.setVisibility(View.VISIBLE);
-        }
         tvName.setText(addressBean.getName());
         tvPhone.setText(addressBean.getPhone());
-        tvTag.setText(addressBean.getLabel());
         tvAddress.setText(addressBean.getProvinceName()
                 +addressBean.getCityName()
                 +addressBean.getAreaName()

@@ -1,248 +1,294 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background3"
-        android:layout_marginTop="130dp"/>
+        android:layout_marginTop="130dp"
+        android:background="@color/background3" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp">
+        android:orientation="vertical">
+
         <RelativeLayout
             android:id="@+id/order_address_toadd_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:background="@drawable/bg_r_white">
+            android:background="@drawable/bg_r_white"
+            android:padding="10dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="添加地址"/>
+                android:text="添加地址" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
-                android:src="@mipmap/ic_order_confirm_address_next"/>
+                android:layout_centerVertical="true"
+                android:src="@drawable/arrow_right" />
         </RelativeLayout>
-        <RelativeLayout
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/order_address_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:background="@drawable/bg_r_white">
-            <LinearLayout
-                android:id="@+id/order_address_layout1"
-                android:layout_width="match_parent"
+            android:background="@drawable/bg_r_white"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/order_confirm_address_name"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/order_confirm_address_right"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/address_tag"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/blue"
-                    android:textColor="@color/white"
-                    android:layout_marginRight="10dp"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp"
-                    android:textSize="11sp"/>
-                <TextView
-                    android:id="@+id/order_confirm_address"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
+                android:text="收款人"
+                android:textSize="16dp"
+                app:layout_constraintLeft_toLeftOf="@+id/order_confirm_address"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/order_confirm_address_phone"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/order_address_layout1"
-                android:layout_marginTop="3dp"
-                android:layout_toLeftOf="@+id/order_confirm_address_right"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/order_confirm_address_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"/>
-                <TextView
-                    android:id="@+id/order_confirm_address_phone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:textSize="14sp"
-                    android:textColor="@color/grey"/>
-            </LinearLayout>
+                android:layout_marginLeft="10dp"
+                android:text="23413212"
+                android:textColor="@color/grey"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/order_confirm_address_name"
+                app:layout_constraintLeft_toRightOf="@+id/order_confirm_address_name"
+                app:layout_constraintTop_toTopOf="@+id/order_confirm_address_name" />
+
+            <ImageView
+                android:id="@+id/addr_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:src="@mipmap/addr_icon"
+                app:layout_constraintBottom_toBottomOf="@+id/order_confirm_address"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/order_confirm_address">
+
+            </ImageView>
+
+            <TextView
+                android:id="@+id/order_confirm_address"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:drawablePadding="5dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="人民大街"
+                android:textSize="14dp"
+                app:layout_constraintLeft_toRightOf="@+id/addr_iv"
+                app:layout_constraintRight_toLeftOf="@+id/order_confirm_address_right"
+                app:layout_constraintTop_toBottomOf="@+id/order_confirm_address_name" />
+
             <ImageView
                 android:id="@+id/order_confirm_address_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_alignParentRight="true"
-                android:src="@mipmap/ic_order_confirm_address_next"/>
-        </RelativeLayout>
+                android:src="@drawable/arrow_right"
+                app:layout_constraintBottom_toBottomOf="@+id/order_confirm_address"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/order_confirm_address" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_r_white"
+            android:orientation="vertical"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            android:paddingBottom="15dp"
-            android:background="@drawable/bg_r_white">
+            android:paddingBottom="15dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:paddingTop="2dp"
-                android:paddingBottom="2dp"
-                android:orientation="horizontal">
+                android:paddingBottom="2dp">
+
                 <ImageView
                     android:id="@+id/order_confirm_shop_logo"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
                     android:scaleType="centerCrop"
-                    android:src="@mipmap/ic_launcher"/>
+                    android:src="@mipmap/shop_icon" />
+
                 <TextView
                     android:id="@+id/order_confirm_shop_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:textSize="18sp"
-                    android:maxLines="1"
                     android:ellipsize="end"
-                    android:text="xxx店"/>
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="xxx店"
+                    android:textSize="18sp" />
             </LinearLayout>
-            <ImageView style="@style/goods_return_line"/>
+
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/orderconfirm_goodslist"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-            <ImageView style="@style/goods_return_line"/>
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/orderconfirm_moneylist"
-                android:layout_width="match_parent"
-                android:visibility="gone"
-                android:layout_height="wrap_content"/>
-            <ImageView style="@style/goods_return_line"/>
+                 />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="right">
+                android:padding="3dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="小计："/>
-                <TextView
-                    android:id="@+id/order_comfirm_price1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="24sp"
-                    android:text="45"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="right">
+                    android:layout_weight="1"
+                    android:text="包装费"
+                    android:textSize="14dp" />
+
                 <TextView
                     android:id="@+id/order_comfirm_bzf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:textColor="@color/red"/>
-                <TextView
-                    android:id="@+id/order_comfirm_yf"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:textSize="14sp"
-                    android:textColor="@color/red"/>
+                    android:text="￥0.0元"
+                    android:textColor="@color/red"
+                    android:textSize="14dp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="10dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="备注"/>
-                <TextView
-                    android:id="@+id/order_comfirm_remarks"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="10dp"
-                    android:gravity="right"
-                    android:ellipsize="end"
-                    android:textColor="@android:color/darker_gray"
-                    android:hint="口味、偏好等要求"/>
-            </LinearLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginBottom="15dp">
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="1"
-                android:layout_marginLeft="10dp"
-                android:paddingRight="10dp"
-                android:background="@mipmap/bg_order_confirm_bom">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:textSize="12sp"
-                    android:visibility="gone"
-                    android:textColor="@color/white"
-                    android:text="已优惠￥10"/>
+                android:padding="3dp">
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:gravity="right"
-                    android:layout_weight="1"
-                    android:textColor="@color/white"
-                    android:text="合计："/>
-                <TextView
-                    android:id="@+id/order_comfirm_price2"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/white"
-                    android:textSize="24sp"
-                    android:text="45"/>
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="运费"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/order_comfirm_yf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="￥0.0元"
+                    android:textColor="@color/red"
+                    android:textSize="14dp" />
             </LinearLayout>
-            <ImageView
-                android:id="@+id/shopcart_confirm"
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:padding="3dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="留言"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/order_comfirm_remarks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:hint="建议留言前先与商家沟通确认"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <ImageView style="@style/goods_return_line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="小计：" />
+
+                <TextView
+                    android:id="@+id/order_comfirm_price1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_round_white"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp">
+
+            <TextView
+                android:id="@+id/total_price_tag_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/pre_submit_order"/>
-        </LinearLayout>
+                android:layout_marginLeft="30dp"
+                android:gravity="right"
+                android:text="共计："
+                android:textColor="@color/grey"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/order_comfirm_price2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="45"
+                android:textColor="@color/red"
+                android:textSize="18dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/total_price_tag_tv"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/shopcart_confirm"
+                style="@style/bt_style"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginRight="30dp"
+                android:paddingLeft="30dp"
+                android:layout_marginTop="0dp"
+                android:paddingRight="30dp"
+                android:text="提交订单"
+                app:layout_constraintBottom_toBottomOf="@+id/order_comfirm_price2"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/order_comfirm_price2">
+
+            </TextView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </LinearLayout>
 </FrameLayout>

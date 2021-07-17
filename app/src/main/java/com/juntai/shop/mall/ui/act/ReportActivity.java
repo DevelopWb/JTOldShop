@@ -24,7 +24,7 @@ import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.ReportTypeBesan;
 import com.juntai.shop.mall.ui.goods.ReportDialog;
-import com.juntai.shop.mall.ui.goods.ShopActivity;
+import com.juntai.shop.mall.ui.goods.shop.ShopActivity;
 import com.juntai.shop.mall.utils.imageselect.ImageSelect;
 import com.juntai.shop.mall.utils.imageselect.ImageSelectLoad;
 import com.zhihu.matisse.Matisse;

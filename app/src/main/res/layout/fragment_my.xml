@@ -169,7 +169,7 @@
                         <TextView
                             android:id="@+id/my_wx"
                             style="@style/my_item_textview"
-                            android:drawableRight="@drawable/pre_my_next"
+                            android:drawableRight="@drawable/arrow_right"
                             android:drawablePadding="10dp"
                             android:gravity="right"
                             android:text="未绑定"
@@ -191,7 +191,7 @@
                         <TextView
                             android:id="@+id/my_qq"
                             style="@style/my_item_textview"
-                            android:drawableRight="@drawable/pre_my_next"
+                            android:drawableRight="@drawable/arrow_right"
                             android:drawablePadding="10dp"
                             android:gravity="right"
                             android:text="未绑定"
@@ -210,7 +210,7 @@
 
                         <TextView
                             style="@style/my_item_textview"
-                            android:drawableRight="@drawable/pre_my_next"
+                            android:drawableRight="@drawable/arrow_right"
                             android:text="个人设置" />
                     </LinearLayout>
 

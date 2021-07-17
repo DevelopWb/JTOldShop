@@ -14,7 +14,7 @@ import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.ShopInfoBean;
-import com.juntai.shop.mall.ui.goods.ShopActivity;
+import com.juntai.shop.mall.ui.goods.shop.ShopActivity;
 import com.juntai.shop.mall.utils.AppUtils;
 import com.juntai.shop.mall.utils.StringTools;
 

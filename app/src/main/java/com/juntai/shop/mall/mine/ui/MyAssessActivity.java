@@ -31,6 +31,8 @@ import io.reactivex.schedulers.Schedulers;
  * Created by Ma
  * on 2019/11/27
  */
+
+// TODO: 2021/7/16 个人中心 我的评价 这个需要优化 
 public class MyAssessActivity extends BaseActivity {
     private SmartRefreshLayout smartRefreshLayout ;
     private RecyclerView recyclerView;

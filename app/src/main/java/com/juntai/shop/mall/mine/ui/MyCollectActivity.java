@@ -69,6 +69,7 @@ public class MyCollectActivity extends BaseActivity implements ViewPager.OnPageC
         //TabLayout
 //        tabLayout.addTab(tabLayout.newTab().setText("index").setIcon(R.mipmap.point_focus));
         mainTablayout.setupWithViewPager(mainViewpager);
+        mainTablayout.setTabTextColors(R.color.black,R.color.red);
 //        tabLayout.setOnTabSelectedListener();
         /**
          * 添加自定义tab布局
@@ -97,6 +98,9 @@ public class MyCollectActivity extends BaseActivity implements ViewPager.OnPageC
     @Override
     public void onPageSelected(int position) {
         nowFragment = position;
+        //编辑状态清除
+        getTitleRightTv().setText("编辑");
+        ((MyCollectFragment)mFragments.get(nowFragment)).setEdit(false);
     }
 
     @Override

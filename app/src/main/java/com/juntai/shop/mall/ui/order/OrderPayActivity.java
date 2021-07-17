@@ -39,6 +39,8 @@ import io.reactivex.schedulers.Schedulers;
  * Created by Ma
  * on 2019/9/8
  */
+
+// TODO: 2021/7/15 订单支付的界面
 public class OrderPayActivity extends BaseActivity implements View.OnClickListener {
     private int SDK_PAY_FLAG = 1;
     private int UPDATE_TIME = 2;

@@ -14,6 +14,7 @@ import com.juntai.shop.mall.MainActivity;
  * Created by Ma
  * on 2019/9/8
  */
+// TODO: 2021/7/15 支付成功的界面
 public class PayCompleteActivity extends BaseActivity implements View.OnClickListener {
     LinearLayout layoutSuc,layoutFia;
     @Override
@@ -23,6 +24,10 @@ public class PayCompleteActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void initView() {
+        mImmersionBar.reset().transparentStatusBar().statusBarDarkFont(false).init();
+        mBaseRootCol.setFitsSystemWindows(false);
+        setTitleName("");
+        setToolbarBg(R.mipmap.my_center_red_bg);
         layoutSuc = findViewById(R.id.pay_end_success_layout);
         layoutFia = findViewById(R.id.pay_end_failure_layout);
         findViewById(R.id.pay_end_home1).setOnClickListener(this);

@@ -121,9 +121,10 @@
         android:src="@mipmap/ic_btn_comment"/>
     <ImageView
         android:id="@+id/item_myorder_more"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:padding="5dp"
+        android:layout_marginTop="5dp"
         android:layout_below="@+id/item_myorder_price_ll"
         android:layout_toLeftOf="@+id/item_myorder_null"
         android:src="@mipmap/ic_btn_more"/>

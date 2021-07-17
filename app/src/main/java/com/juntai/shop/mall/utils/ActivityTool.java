@@ -13,7 +13,7 @@ import com.juntai.shop.mall.ui.after_sales.GoodsReturnActivity;
 import com.juntai.shop.mall.ui.after_sales.GoodsSelectActivity;
 import com.juntai.shop.mall.ui.after_sales.ReturnDetailsActivity;
 import com.juntai.shop.mall.ui.after_sales.ReturnSelectActivity;
-import com.juntai.shop.mall.ui.goods.ShopActivity;
+import com.juntai.shop.mall.ui.goods.shop.ShopActivity;
 import com.juntai.shop.mall.ui.order.OrderConfirmActivity;
 import com.juntai.shop.mall.ui.order.OrderDeatilsActivity;
 import com.juntai.shop.mall.ui.order.OrderPayActivity;

@@ -19,11 +19,15 @@
         <TextView
             android:id="@+id/mycollect_bottom_all"
             android:text="全部标记"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:layout_weight="1"
             style="@style/bt_style"/>
         <TextView
             android:id="@+id/mycollect_bottom_delete"
             android:text="删除"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:layout_weight="1"
             style="@style/bt_style"/>
     </LinearLayout>

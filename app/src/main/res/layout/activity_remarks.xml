@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    android:layout_marginTop="10dp">
+    >
     <EditText
         android:id="@+id/remark_edit"
         android:layout_width="match_parent"
@@ -15,16 +15,15 @@
         android:padding="10dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/bg_r_white"
-        android:hint="请输入口味、偏好等要求"/>
+        android:hint="请输入备注内容"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
-    <ImageView
+    <TextView
         android:id="@+id/remark_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
+        style="@style/bt_style"
+        android:text="完成"
         android:layout_marginBottom="30dp"
-        android:src="@drawable/pre_remark_ok"/>
+        />
 </LinearLayout>

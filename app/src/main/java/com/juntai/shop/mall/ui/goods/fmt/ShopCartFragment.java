@@ -14,7 +14,7 @@ import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.CartItemLocB;
 import com.juntai.shop.mall.bean.event.EventToSubmit;
-import com.juntai.shop.mall.ui.goods.ShopActivity;
+import com.juntai.shop.mall.ui.goods.shop.ShopActivity;
 import com.juntai.shop.mall.ui.goods.adt.ShopCartItemAdapter;
 import com.juntai.shop.mall.utils.Arith;
 

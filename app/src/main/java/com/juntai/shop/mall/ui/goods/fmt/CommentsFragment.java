@@ -16,7 +16,7 @@ import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.ShopCommentsBean;
-import com.juntai.shop.mall.ui.goods.ShopActivity;
+import com.juntai.shop.mall.ui.goods.shop.ShopActivity;
 import com.juntai.shop.mall.ui.goods.adt.CommentsAdapter;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
