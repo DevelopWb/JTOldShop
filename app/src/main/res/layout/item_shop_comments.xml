@@ -1,66 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_line"
     android:padding="10dp">
+
     <ImageView
         android:id="@+id/item_shop_comment_image"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/item_shop_comment_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/item_shop_comment_image"
         android:maxLines="1"
-        android:textSize="13sp"
-        android:textColor="@color/blue"
-        android:layout_toRightOf="@+id/item_shop_comment_image"/>
-
-    <RatingBar
-        android:id="@+id/item_shop_comment_score"
-        android:layout_width="wrap_content"
-        android:isIndicator="true"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/item_shop_comment_image"
-        android:layout_below="@+id/item_shop_comment_name"
-        style="?attr/ratingBarStyleSmall"/>
-
-    <TextView
-        android:id="@+id/item_shop_comment_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:textColor="@color/black"
-        android:layout_toRightOf="@+id/item_shop_comment_image"
-        android:layout_below="@+id/item_shop_comment_score"/>
+        android:textSize="16dp"
+        app:layout_constraintLeft_toRightOf="@+id/item_shop_comment_image"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/item_shop_comment_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="3dp"
         android:maxLines="1"
         android:textSize="12sp"
-        android:layout_marginTop="3dp"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/item_shop_comment_name"/>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/item_shop_comment_name" />
+
+    <RatingBar
+        android:id="@+id/item_shop_comment_score"
+        style="?attr/ratingBarStyleSmall"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:isIndicator="true"
+        app:layout_constraintLeft_toLeftOf="@+id/item_shop_comment_image"
+        app:layout_constraintTop_toBottomOf="@+id/item_shop_comment_image" />
+
+    <TextView
+        android:id="@+id/item_shop_comment_content"
+        android:layout_width="wrap_content"
+        android:paddingBottom="5dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toLeftOf="@+id/item_shop_comment_score"
+        app:layout_constraintTop_toBottomOf="@+id/item_shop_comment_score" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/item_comment_gridview"
+        app:layout_constraintLeft_toLeftOf="@+id/item_shop_comment_content"
+        app:layout_constraintTop_toBottomOf="@+id/item_shop_comment_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/item_shop_comment_image"
-        android:layout_below="@+id/item_shop_comment_content"/>
+        android:layout_below="@+id/item_shop_comment_content"
+        android:layout_toRightOf="@+id/item_shop_comment_image" />
 
     <TextView
         android:id="@+id/item_shop_comment_sj"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/item_comment_gridview"
         android:layout_marginLeft="3dp"
-        android:textSize="12sp"
         android:layout_toRightOf="@+id/item_shop_comment_image"
-        android:layout_below="@+id/item_comment_gridview"/>
-</RelativeLayout>
+        android:textSize="12sp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

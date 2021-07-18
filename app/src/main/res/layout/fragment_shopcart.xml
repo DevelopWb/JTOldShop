@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:background="@color/transparent">
     <View
@@ -79,56 +80,112 @@
             android:id="@+id/dialog_shopcart_bottomLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/bg_round_white"
             android:gravity="center_vertical">
-            <ImageView
-                android:id="@+id/tochat"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:src="@drawable/pre_shop_cart_sj"/>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:layout_marginLeft="5dp"
-                android:background="@mipmap/bg_shop_cart_text"
-                android:padding="5dp">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/shop_bottom_cl"
+                android:layout_width="match_parent"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent">
+
                 <ImageView
-                    android:id="@+id/cart_image"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@mipmap/ic_shop_cart"/>
+                    android:id="@+id/shop_cs_iv"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginLeft="30dp"
+                    android:src="@mipmap/custom_service_icon"
+                    app:layout_constraintBottom_toTopOf="@+id/textView"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed"></ImageView>
+
                 <TextView
-                    android:id="@+id/shop_cart_number"
+                    android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="@color/white"/>
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1"/>
+                    android:text="客服"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="@+id/shop_cs_iv"
+                    app:layout_constraintRight_toRightOf="@+id/shop_cs_iv"
+                    app:layout_constraintTop_toBottomOf="@+id/shop_cs_iv"></TextView>
+
+                <ImageView
+                    android:id="@+id/shop_car_iv"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginLeft="40dp"
+                    android:src="@mipmap/shoping_car_icon"
+                    app:layout_constraintBottom_toTopOf="@+id/shopping_car_tv"
+                    app:layout_constraintLeft_toRightOf="@+id/shop_cs_iv"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed"></ImageView>
+
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/orange"
-                    android:text="￥"/>
-                <TextView
-                    android:id="@+id/shop_cart_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/selected_goods_account_tv"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:background="@drawable/bg_red_border"
+                    android:gravity="center"
+                    android:text="99"
+                    android:visibility="invisible"
                     android:textColor="@color/white"
-                    android:text="0"/>
-            </LinearLayout>
-            <ImageView
-                android:id="@+id/shopcart_confirm"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/pre_shop_cart_settlement"/>
+                    android:textSize="10dp"
+                    app:layout_constraintBottom_toTopOf="@+id/shop_car_iv"
+                    app:layout_constraintLeft_toRightOf="@+id/shop_car_iv"
+                    app:layout_constraintTop_toTopOf="@+id/shop_car_iv">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/shopping_car_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="购物车"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintLeft_toLeftOf="@+id/shop_car_iv"
+                    app:layout_constraintRight_toRightOf="@+id/shop_car_iv"
+                    app:layout_constraintTop_toBottomOf="@+id/shop_car_iv"></TextView>
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="共计："
+                    app:layout_constraintRight_toLeftOf="@+id/goods_total_money_tv"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"></TextView>
+
+                <TextView
+                    android:id="@+id/goods_total_money_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red"
+                    android:text="200"
+                    android:textSize="18dp"
+                    android:layout_marginRight="20dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/shopcart_confirm"
+                    app:layout_constraintRight_toLeftOf="@+id/shopcart_confirm"
+                    app:layout_constraintTop_toTopOf="@+id/shopcart_confirm"></TextView>
+
+                <TextView
+                    android:id="@+id/shopcart_confirm"
+                    style="@style/bt_style"
+                    android:layout_width="90dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="0dp"
+                    android:text="结算"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"></TextView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

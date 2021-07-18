@@ -36,7 +36,7 @@ public class CommentsAdapter extends BaseQuickAdapter<ShopCommentsBean.ReturnVal
         RatingBar ratingBar = helper.getView(R.id.item_shop_comment_score);
         ratingBar.setRating(item.getDegreeOfSatisfaction());
         //
-        ImageLoadUtil.loadImage(mContext,AppHttpPath.IMAGE + item.getHeadUrl(),R.mipmap.ic_launcher,R.mipmap.ic_launcher,helper.getView(R.id.item_shop_comment_image));
+        ImageLoadUtil.loadCircularImage(mContext,AppHttpPath.IMAGE + item.getHeadUrl(),R.mipmap.ic_launcher,R.mipmap.ic_launcher,helper.getView(R.id.item_shop_comment_image));
 
         RecyclerView recyclerView = helper.getView(R.id.item_comment_gridview);
         ItemImagesAdapter imagesAdapter = new ItemImagesAdapter(R.layout.item_comments_images,new ArrayList());

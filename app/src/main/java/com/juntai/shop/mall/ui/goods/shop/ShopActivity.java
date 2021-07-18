@@ -7,12 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -39,7 +37,7 @@ import com.juntai.shop.mall.ui.goods.fmt.CommentsFragment;
 import com.juntai.shop.mall.ui.goods.fmt.GoodsDetailsFragment;
 import com.juntai.shop.mall.ui.goods.fmt.GoodsFragment;
 import com.juntai.shop.mall.ui.goods.fmt.ShopCartFragment;
-import com.juntai.shop.mall.ui.goods.fmt.ShopInfoFragment;
+import com.juntai.shop.mall.ui.goods.fmt.ShopDesFragment;
 import com.juntai.shop.mall.utils.AppUtils;
 import com.juntai.shop.mall.utils.DpTools;
 import com.juntai.shop.mall.utils.GlideImageLoader;
@@ -85,8 +83,8 @@ public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPa
     //title
     ImageView ivBack,ivCollect,ivMore;
     TextView tvTItle;
-    LinearLayout titlelayout;
-    CoordinatorLayout coordinatorLayout;
+//    LinearLayout titlelayout;
+//    CoordinatorLayout coordinatorLayout;
     boolean isToSubmit = false,isCollect = false;
     //cart
     GoodsDetailsFragment detailsFragment = new GoodsDetailsFragment();
@@ -106,14 +104,13 @@ public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPa
         getToolbar().setVisibility(View.GONE);
         mImmersionBar.reset().transparentStatusBar().statusBarDarkFont(false).init();
         mBaseRootCol.setFitsSystemWindows(false);
-        titlelayout = findViewById(R.id.shop_title_layout);
-        coordinatorLayout = findViewById(R.id.shop_content);
-        ivBack = findViewById(R.id.title_shop_back);
-        tvTItle = findViewById(R.id.title_shop_title);
+//        titlelayout = findViewById(R.id.shop_title_layout);
+//        coordinatorLayout = findViewById(R.id.shop_content);
+        ivBack = findViewById(R.id.shop_details_back);
+        tvTItle = findViewById(R.id.shop_name_tv);
         ivCollect = findViewById(R.id.title_shop_check);
-        ivMore = findViewById(R.id.title_shop_more);
+        ivMore = findViewById(R.id.shop_details_more_iv);
         ivBack.setOnClickListener(this);
-        findViewById(R.id.title_goods_back).setOnClickListener(this);
         ivCollect.setOnClickListener(this);
         ivMore.setOnClickListener(this);
         initBannerView();
@@ -131,7 +128,7 @@ public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPa
         //是否直接展示商品
         gid = getIntent().getIntExtra("goodsId",-1);
         if (gid != -1){
-            titlelayout.setVisibility(View.GONE);
+//            titlelayout.setVisibility(View.GONE);
             detailsFragment.setGoodsId(gid);
         }else {
             getSupportFragmentManager().beginTransaction().hide(detailsFragment).commit();
@@ -223,7 +220,7 @@ public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPa
                         //
                         goodsFragment.setDateList(result.getReturnValue().getShopClassify());
                         if (gid != -1){
-                            coordinatorLayout.setVisibility(View.GONE);
+//                            coordinatorLayout.setVisibility(View.GONE);
                         }
                         //
                         ModuleIm_Init.setUser(new UserIM(shopInfoBean.getShopAccount(),shopName,StringTools.getImageForCrmInt(shopInfoBean.getShopUserId())));
@@ -332,7 +329,7 @@ public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPa
         tablayout = findViewById(R.id.shop_tablayout);
         mFragments.add(goodsFragment);
         mFragments.add(new CommentsFragment());
-        mFragments.add(new ShopInfoFragment());
+        mFragments.add(new ShopDesFragment());
         adapter = new TopTabAdapter(getSupportFragmentManager(), this, title, mFragments);
         viewpager.setAdapter(adapter);
         viewpager.setOffscreenPageLimit(title.length);
@@ -477,12 +474,12 @@ public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPa
     public void onMessageEvent(EventDetailsMessage detailsMessage){
         if (detailsMessage.goodsId == -1){
             //隐藏fragment
-            titlelayout.setVisibility(View.VISIBLE);
-            coordinatorLayout.setVisibility(View.VISIBLE);
+//            titlelayout.setVisibility(View.VISIBLE);
+//            coordinatorLayout.setVisibility(View.VISIBLE);
             getSupportFragmentManager().beginTransaction().hide(detailsFragment).commit();
         }else {
-            titlelayout.setVisibility(View.GONE);
-            coordinatorLayout.setVisibility(View.GONE);
+//            titlelayout.setVisibility(View.GONE);
+//            coordinatorLayout.setVisibility(View.GONE);
             detailsFragment.setGoodsId(detailsMessage.goodsId);
             getSupportFragmentManager().beginTransaction().show(detailsFragment).commit();
         }
@@ -517,8 +514,8 @@ public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPa
     public void onBackPressed() {
         if (detailsFragment.isVisible()){
             getSupportFragmentManager().beginTransaction().hide(detailsFragment).commit();
-            titlelayout.setVisibility(View.VISIBLE);
-            coordinatorLayout.setVisibility(View.VISIBLE);
+//            titlelayout.setVisibility(View.VISIBLE);
+//            coordinatorLayout.setVisibility(View.VISIBLE);
         }else {
             super.onBackPressed();
         }

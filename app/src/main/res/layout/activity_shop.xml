@@ -1,117 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:id="@+id/shop_content"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:fitsSystemWindows="true">
+    android:background="@color/gray_lighter">
 
-    <LinearLayout
-        android:id="@+id/shop_title_layout"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:visibility="gone">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/shop_bottom_cl"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/title_shop_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/ic_back_black" />
-
-        <View
-            android:layout_width="30dp"
-            android:layout_height="30dp" />
-
-        <TextView
-            android:id="@+id/title_shop_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center" />
-
-        <ImageView
-            android:id="@+id/title_shop_check"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:padding="6dp"
-            android:src="@mipmap/ic_collect" />
-
-        <ImageView
-            android:id="@+id/title_shop_more"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:src="@mipmap/ic_shop_more" />
-    </LinearLayout>
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/visit_analyze_appbarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:background="@null"
-        app:elevation="0dp">
-
-        <com.google.android.material.appbar.CollapsingToolbarLayout
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/visit_analyze_appbarLayout"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_margin="0dp"
-            android:background="@null"
-            android:padding="0dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            android:layout_height="180dp">
+            <!--        android:theme="@style/AppTheme.AppBarOverlay"-->
 
-            <com.youth.banner.Banner
-                android:id="@+id/banner"
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/toolbar_layout"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:fitsSystemWindows="true"
-                app:indicator_height="4dp"
-                app:indicator_margin="4dp"
-                app:indicator_width="20dp" />
+                android:layout_height="match_parent"
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+                app:contentScrim="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                <com.youth.banner.Banner
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+
+                    app:indicator_height="4dp"
+                    app:indicator_margin="4dp"
+                    app:indicator_width="20dp" />
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center"
+                    android:minHeight="50dp"
+                    app:layout_collapseMode="pin">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingBottom="5dp"
+                        android:gravity="bottom">
+
+                        <ImageView
+                            android:id="@+id/shop_details_back"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="15dp"
+                            android:padding="5dp"
+                            android:src="@mipmap/back_gray_round_bg" />
+
+                        <TextView
+                            android:id="@+id/shop_detail_title_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:textColor="@color/black"></TextView>
+
+                        <ImageView
+                            android:id="@+id/shop_details_more_iv"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginRight="15dp"
+                            android:padding="5dp"
+                            android:src="@mipmap/more_gray_round_bg" />
+                    </LinearLayout>
+                </androidx.appcompat.widget.Toolbar>
+
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:minHeight="40dp"
-                app:layout_collapseMode="pin">
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/bg_round_white"
+                android:paddingBottom="5dp">
+
+                <TextView
+                    android:id="@+id/shop_name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:paddingTop="10dp"
+                    android:textStyle="bold"
+                    android:paddingBottom="10dp"
+                    android:text="商铺名称"
+                    android:textSize="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"></TextView>
 
                 <ImageView
-                    android:id="@+id/details_back"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="5dp"
-                    android:padding="5dp"
-                    android:src="@mipmap/back_gray_round_bg" />
-            </androidx.appcompat.widget.Toolbar>
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-        <!-- 要固定在toolbar上面的控件 -->
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/shop_tablayout"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@color/white"
-            app:tabBackground="@color/white"
-            app:tabGravity="fill"
-            app:tabIndicatorFullWidth="false"
-            app:tabIndicatorHeight="1dp"
-            app:tabMaxWidth="0dp"
-            app:tabMode="fixed" />
-    </com.google.android.material.appbar.AppBarLayout>
+                    android:id="@+id/title_shop_check"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:padding="8dp"
+                    android:src="@mipmap/ic_collect"
+                    app:layout_constraintBottom_toBottomOf="@+id/collect_shop_tv"
+                    app:layout_constraintRight_toLeftOf="@+id/collect_shop_tv"
+                    app:layout_constraintTop_toTopOf="@+id/collect_shop_tv" />
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/shop_viewpager"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:paddingBottom="80dp"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+                <TextView
+                    android:id="@+id/collect_shop_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="20dp"
+                    android:text="收藏"
+                    android:textSize="14dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/shop_name_tv"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/shop_name_tv"></TextView>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@color/gray"
+                    app:layout_constraintTop_toBottomOf="@+id/shop_name_tv"></View>
+
+                <!-- 要固定在toolbar上面的控件 -->
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/shop_tablayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/shop_name_tv"
+                    app:tabGravity="fill"
+                    app:tabIndicatorFullWidth="false"
+                    app:tabIndicatorHeight="1dp"
+                    app:tabMaxWidth="0dp"
+                    app:tabMode="fixed" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/shop_viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_round_white"
+                android:paddingBottom="5dp"></androidx.viewpager.widget.ViewPager>
+
+
+        </LinearLayout>
+
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
     <fragment
         android:id="@+id/shop_fragment_goodsdetails"
         android:name="com.juntai.shop.mall.ui.goods.fmt.GoodsDetailsFragment"
@@ -122,5 +177,106 @@
         android:id="@+id/shop_fragment_shopcart"
         android:name="com.juntai.shop.mall.ui.goods.fmt.ShopCartFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        android:layout_height="match_parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/shop_bottom_cl"
+        android:layout_width="match_parent"
+        android:paddingTop="5dp"
+        android:visibility="gone"
+        android:paddingBottom="5dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:id="@+id/shop_cs_iv"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginLeft="30dp"
+            android:src="@mipmap/custom_service_icon"
+            app:layout_constraintBottom_toTopOf="@+id/textView"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"></ImageView>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="客服"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@+id/shop_cs_iv"
+            app:layout_constraintRight_toRightOf="@+id/shop_cs_iv"
+            app:layout_constraintTop_toBottomOf="@+id/shop_cs_iv"></TextView>
+
+        <ImageView
+            android:id="@+id/shop_car_iv"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginLeft="40dp"
+            android:src="@mipmap/shoping_car_icon"
+            app:layout_constraintBottom_toTopOf="@+id/shopping_car_tv"
+            app:layout_constraintLeft_toRightOf="@+id/shop_cs_iv"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"></ImageView>
+
+        <TextView
+            android:id="@+id/selected_goods_account_tv"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:background="@drawable/bg_red_border"
+            android:gravity="center"
+            android:text="99"
+            android:textColor="@color/white"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/shop_car_iv"
+            app:layout_constraintLeft_toRightOf="@+id/shop_car_iv"
+            app:layout_constraintTop_toTopOf="@+id/shop_car_iv">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/shopping_car_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="购物车"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintLeft_toLeftOf="@+id/shop_car_iv"
+            app:layout_constraintRight_toRightOf="@+id/shop_car_iv"
+            app:layout_constraintTop_toBottomOf="@+id/shop_car_iv"></TextView>
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="共计："
+            app:layout_constraintRight_toLeftOf="@+id/goods_total_money_tv"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></TextView>
+
+        <TextView
+            android:id="@+id/goods_total_money_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red"
+            android:text="200"
+            android:textSize="18dp"
+            android:layout_marginRight="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/shopcart_confirm"
+            app:layout_constraintRight_toLeftOf="@+id/shopcart_confirm"
+            app:layout_constraintTop_toTopOf="@+id/shopcart_confirm"></TextView>
+
+        <TextView
+            android:id="@+id/shopcart_confirm"
+            style="@style/bt_style"
+            android:layout_width="90dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="0dp"
+            android:text="结算"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></TextView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

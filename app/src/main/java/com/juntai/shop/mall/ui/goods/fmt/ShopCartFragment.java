@@ -23,7 +23,9 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.ArrayList;
 
 /**
- * 购物车
+ * @aouther tobato
+ * @description 描述  购物车
+ * @date 2021/7/18 9:09
  */
 public class ShopCartFragment extends BaseFragment implements View.OnClickListener {
     RecyclerView recyclerView;
@@ -43,16 +45,16 @@ public class ShopCartFragment extends BaseFragment implements View.OnClickListen
 
         recyclerView = getView(R.id.dialog_shopcart_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        cartImage = getView(R.id.cart_image);
-        tvCartNumber = getView( R.id.shop_cart_number);
+        cartImage = getView(R.id.shop_car_iv);
+        tvCartNumber = getView( R.id.selected_goods_account_tv);
         tvCartpackprice = getView( R.id.shop_cart_packprice);
-        tvCartPrice = getView( R.id.shop_cart_price);
+        tvCartPrice = getView( R.id.goods_total_money_tv);
         linearLayout = getView(R.id.dialog_shopcart_Layout);
         cartImage.setOnClickListener(this);
         view1 = getView(R.id.dialog_shopcart_nullview1);
         view2 = getView(R.id.dialog_shopcart_nullview2);
         view1.setOnClickListener(this);
-        getView(R.id.tochat).setOnClickListener(this);
+        getView(R.id.shop_cs_iv).setOnClickListener(this);
         getView(R.id.shopcart_confirm).setOnClickListener(this);
         getView(R.id.dialog_shopcart_clear).setOnClickListener(this);
         initData();
@@ -96,13 +98,14 @@ public class ShopCartFragment extends BaseFragment implements View.OnClickListen
             linearLayout.setVisibility(View.GONE);
         }
         if (cartSize == 0){
-            tvCartNumber.setText("");
+            tvCartNumber.setVisibility(View.INVISIBLE);
             tvCartpackprice.setText("￥0");
             tvCartPrice.setText("0");
             linearLayout.setVisibility(View.GONE);
             view1.setVisibility(View.GONE);
             view2.setVisibility(View.GONE);
         }else {
+            tvCartNumber.setVisibility(View.VISIBLE);
             tvCartNumber.setText("X" + cartSize);
             tvCartpackprice.setText("￥" + sumPack);
             tvCartPrice.setText("" + sumPrice);
@@ -113,7 +116,7 @@ public class ShopCartFragment extends BaseFragment implements View.OnClickListen
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.cart_image://购物车图标，需要判断购物车数量，0不需要操作
+            case R.id.shop_car_iv://购物车图标，需要判断购物车数量，0不需要操作
                 if (cartSize > 0){
                     if (linearLayout.getVisibility() == View.VISIBLE){
                         linearLayout.setVisibility(View.GONE);
@@ -131,7 +134,7 @@ public class ShopCartFragment extends BaseFragment implements View.OnClickListen
                 view1.setVisibility(View.GONE);
                 view2.setVisibility(View.GONE);
                 break;
-            case R.id.tochat://联系商家
+            case R.id.shop_cs_iv://联系商家
                 ModuleIm_Init.chat(mContext,ShopActivity.shopRyid,ShopActivity.shopName);
                 break;
             case R.id.shopcart_confirm://确定

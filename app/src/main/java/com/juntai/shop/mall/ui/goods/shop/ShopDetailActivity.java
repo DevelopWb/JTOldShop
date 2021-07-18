@@ -6,8 +6,6 @@ import androidx.viewpager.widget.ViewPager;
 import android.view.View;
 
 import com.google.android.material.tabs.TabLayout;
-import com.juntai.mall.im.ModuleIm_Init;
-import com.juntai.mall.im.UserIM;
 import com.juntai.shop.mall.AppHttpPath;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.baseinfo.BaseAppActivity;
@@ -15,7 +13,7 @@ import com.juntai.shop.mall.bean.ShopBean;
 import com.juntai.shop.mall.ui.adapter.TopTabAdapter;
 import com.juntai.shop.mall.ui.goods.fmt.CommentsFragment;
 import com.juntai.shop.mall.ui.goods.fmt.GoodsFragment;
-import com.juntai.shop.mall.ui.goods.fmt.ShopInfoFragment;
+import com.juntai.shop.mall.ui.goods.fmt.ShopDesFragment;
 import com.juntai.shop.mall.utils.GlideImageLoader;
 import com.juntai.shop.mall.utils.StringTools;
 import com.youth.banner.Banner;
@@ -66,7 +64,7 @@ public class ShopDetailActivity extends BaseAppActivity<ShopPresent> implements 
         tablayout = findViewById(R.id.shop_tablayout);
         mFragments.add(goodsFragment);
         mFragments.add(new CommentsFragment());
-        mFragments.add(new ShopInfoFragment());
+        mFragments.add(new ShopDesFragment());
         adapter = new TopTabAdapter(getSupportFragmentManager(), this, title, mFragments);
         viewpager.setAdapter(adapter);
         viewpager.setOffscreenPageLimit(title.length);

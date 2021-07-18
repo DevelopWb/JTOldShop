@@ -13,7 +13,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/app_bar"
+            android:id="@+id/visit_analyze_appbarLayout"
             android:layout_width="match_parent"
             android:layout_height="180dp">
             <!--        android:theme="@style/AppTheme.AppBarOverlay"-->
@@ -140,13 +140,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/location_icon"
-                    app:layout_constraintBottom_toBottomOf="@+id/shop_addr_tv"
+                    app:layout_constraintBottom_toBottomOf="@+id/shop_info_palce"
                     app:layout_constraintLeft_toLeftOf="@+id/shop_name_tv"
                     app:layout_constraintTop_toBottomOf="@+id/shop_name_tv"
-                    app:layout_constraintTop_toTopOf="@+id/shop_addr_tv"></ImageView>
+                    app:layout_constraintTop_toTopOf="@+id/shop_info_palce"></ImageView>
 
                 <TextView
-                    android:id="@+id/shop_addr_tv"
+                    android:id="@+id/shop_info_palce"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -155,11 +155,11 @@
                     android:text="人民大街 君泰科技世纪东方卡拉胶史君"
                     android:textSize="14dp"
                     app:layout_constraintLeft_toRightOf="@+id/shop_addr_tag_iv"
-                    app:layout_constraintRight_toLeftOf="@+id/shop_tel_tv"
+                    app:layout_constraintRight_toLeftOf="@+id/shop_info_call"
                     app:layout_constraintTop_toBottomOf="@+id/shop_name_tv"></TextView>
 
                 <TextView
-                    android:id="@+id/shop_tel_tv"
+                    android:id="@+id/shop_info_call"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@mipmap/tel_icon_black"
@@ -170,9 +170,9 @@
                     android:paddingBottom="15dp"
                     android:text="电话"
                     android:textSize="14dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/shop_addr_tv"
+                    app:layout_constraintBottom_toBottomOf="@+id/shop_info_palce"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/shop_addr_tv"></TextView>
+                    app:layout_constraintTop_toTopOf="@+id/shop_info_palce"></TextView>
 
                 <View
                     android:layout_width="match_parent"
@@ -182,13 +182,13 @@
                     android:layout_marginRight="15dp"
                     android:background="@color/gray"
                     app:layout_constraintBottom_toTopOf="@+id/shop_tablayout"
-                    app:layout_constraintTop_toBottomOf="@+id/shop_addr_tv"></View>
+                    app:layout_constraintTop_toBottomOf="@+id/shop_info_palce"></View>
                 <!-- 要固定在toolbar上面的控件 -->
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/shop_tablayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/shop_addr_tv"
+                    app:layout_constraintTop_toBottomOf="@+id/shop_info_palce"
                     app:tabGravity="fill"
                     app:tabIndicatorFullWidth="false"
                     app:tabIndicatorHeight="1dp"
@@ -211,117 +211,18 @@
         </LinearLayout>
 
 
-        <!--    <fragment-->
-        <!--        android:id="@+id/shop_fragment_goodsdetails"-->
-        <!--        android:name="com.juntai.shop.mall.ui.goods.fmt.GoodsDetailsFragment"-->
-        <!--        android:layout_width="match_parent"-->
-        <!--        android:layout_height="match_parent" />-->
 
-        <!--    <fragment-->
-        <!--        android:id="@+id/shop_fragment_shopcart"-->
-        <!--        android:name="com.juntai.shop.mall.ui.goods.fmt.ShopCartFragment"-->
-        <!--        android:layout_width="match_parent"-->
-        <!--        android:layout_height="wrap_content" />-->
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/shop_bottom_cl"
+    <fragment
+        android:id="@+id/shop_fragment_goodsdetails"
+        android:name="com.juntai.shop.mall.ui.goods.fmt.GoodsDetailsFragment"
         android:layout_width="match_parent"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent">
+        android:layout_height="match_parent" />
 
-        <ImageView
-            android:id="@+id/shop_cs_iv"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_marginLeft="30dp"
-            android:src="@mipmap/custom_service_icon"
-            app:layout_constraintBottom_toTopOf="@+id/textView"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"></ImageView>
+    <fragment
+        android:id="@+id/shop_fragment_shopcart"
+        android:name="com.juntai.shop.mall.ui.goods.fmt.ShopCartFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="客服"
-            android:textSize="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="@+id/shop_cs_iv"
-            app:layout_constraintRight_toRightOf="@+id/shop_cs_iv"
-            app:layout_constraintTop_toBottomOf="@+id/shop_cs_iv"></TextView>
-
-        <ImageView
-            android:id="@+id/shop_car_iv"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_marginLeft="40dp"
-            android:src="@mipmap/shoping_car_icon"
-            app:layout_constraintBottom_toTopOf="@+id/shopping_car_tv"
-            app:layout_constraintLeft_toRightOf="@+id/shop_cs_iv"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"></ImageView>
-
-        <TextView
-            android:id="@+id/selected_goods_account_tv"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:background="@drawable/bg_red_border"
-            android:gravity="center"
-            android:text="99"
-            android:textColor="@color/white"
-            android:textSize="10dp"
-            app:layout_constraintBottom_toTopOf="@+id/shop_car_iv"
-            app:layout_constraintLeft_toRightOf="@+id/shop_car_iv"
-            app:layout_constraintTop_toTopOf="@+id/shop_car_iv">
-
-        </TextView>
-
-        <TextView
-            android:id="@+id/shopping_car_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="购物车"
-            android:textSize="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintLeft_toLeftOf="@+id/shop_car_iv"
-            app:layout_constraintRight_toRightOf="@+id/shop_car_iv"
-            app:layout_constraintTop_toBottomOf="@+id/shop_car_iv"></TextView>
-
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="共计："
-            app:layout_constraintRight_toLeftOf="@+id/goods_total_money_tv"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></TextView>
-
-        <TextView
-            android:id="@+id/goods_total_money_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/red"
-            android:text="200"
-            android:textSize="18dp"
-            android:layout_marginRight="20dp"
-            app:layout_constraintBottom_toBottomOf="@+id/pay_tv"
-            app:layout_constraintRight_toLeftOf="@+id/pay_tv"
-            app:layout_constraintTop_toTopOf="@+id/pay_tv"></TextView>
-
-        <TextView
-            android:id="@+id/pay_tv"
-            style="@style/bt_style"
-            android:layout_width="90dp"
-            android:layout_height="35dp"
-            android:layout_marginTop="0dp"
-            android:text="结算"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></TextView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

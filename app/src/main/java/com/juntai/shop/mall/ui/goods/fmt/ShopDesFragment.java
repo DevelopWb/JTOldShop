@@ -29,9 +29,9 @@ import io.reactivex.schedulers.Schedulers;
  * Created by Ma
  * on 2019/9/2
  */
-public class ShopInfoFragment extends BaseLazyFragment implements View.OnClickListener {
+public class ShopDesFragment extends BaseLazyFragment implements View.OnClickListener {
     TextView tvPlace,tvJj;
-    ImageView ivCall,iv1,iv2;
+    ImageView iv1,iv2;
     String phone,image1,image2;
 
 
@@ -44,7 +44,7 @@ public class ShopInfoFragment extends BaseLazyFragment implements View.OnClickLi
     protected void initView() {
         tvPlace = getView(R.id.shop_info_palce);
         tvJj = getView(R.id.shop_info_jj);
-        ivCall = getView(R.id.shop_info_call);
+        TextView ivCall = getView(R.id.shop_info_call);
         iv1 = getView(R.id.shop_info_image1);
         iv2 = getView(R.id.shop_info_image2);
         ivCall.setOnClickListener(this);

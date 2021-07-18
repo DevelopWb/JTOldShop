@@ -30,7 +30,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * 商品分类
+ * 店铺商品  分类
  */
 public class GoodsFragment extends BaseFragment {
     RecyclerView recyclerViewLeft,recyclerViewRight;
