@@ -18,7 +18,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.juntai.mall.base.base.BaseObserver;
-import com.juntai.mall.base.utils.ImageLoadUtil;
 import com.juntai.mall.base.utils.LogUtil;
 import com.juntai.mall.base.utils.ToastUtils;
 import com.juntai.mall.im.ModuleIm_Init;
@@ -69,6 +68,8 @@ import io.reactivex.schedulers.Schedulers;
  * on 2019/8/28
  * update  2021-7-16 tobato
  */
+
+// TODO: 2021/7/17 店铺详情 需要大改 
 public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPager.OnPageChangeListener, View.OnClickListener,ShopContract.IShopContractView {
     public static int shopId;
     public static String shopRyid,shopName;
@@ -77,7 +78,7 @@ public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPa
     TopTabAdapter adapter;
     ViewPager viewpager;
     TabLayout tablayout;
-    ShopBean.ReturnValueBean shopInfoB;
+    ShopBean.ReturnValueBean shopInfoBean;
     private String[] title = new String[]{"商品","评价", "商家"};
     List<Fragment> mFragments = new ArrayList<>();
     GoodsFragment goodsFragment = new GoodsFragment();
@@ -115,6 +116,35 @@ public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPa
         findViewById(R.id.title_goods_back).setOnClickListener(this);
         ivCollect.setOnClickListener(this);
         ivMore.setOnClickListener(this);
+        initBannerView();
+
+        //
+        initTab();
+        //
+        showTitleRes(R.id.title_collect,R.id.title_more);
+        goodsFragment.setGoodsStatusChangeListener(new GoodsStatusChangeListener(){
+
+        });
+
+        detailsFragment = (GoodsDetailsFragment) getSupportFragmentManager().findFragmentById(R.id.shop_fragment_goodsdetails);
+        shopCartFragment = (ShopCartFragment) getSupportFragmentManager().findFragmentById(R.id.shop_fragment_shopcart);
+        //是否直接展示商品
+        gid = getIntent().getIntExtra("goodsId",-1);
+        if (gid != -1){
+            titlelayout.setVisibility(View.GONE);
+            detailsFragment.setGoodsId(gid);
+        }else {
+            getSupportFragmentManager().beginTransaction().hide(detailsFragment).commit();
+        }
+
+        //ShopCartFragment shopCartFragment = new ShopCartFragment();
+        //getSupportFragmentManager().beginTransaction().add(R.id.shop_shopcart_goodsdetails,shopCartFragment,"cart").show(shopCartFragment).commit();
+    }
+
+    /**
+     * banner
+     */
+    private void initBannerView() {
         banner = findViewById(R.id.banner);
         banner.isAutoPlay(false);
         banner.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -149,33 +179,6 @@ public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPa
 //                        .putExtra("item",imagepos));
 //            }
         });
-        //
-        viewpager = findViewById(R.id.shop_viewpager);
-        tablayout = findViewById(R.id.shop_tablayout);
-        mFragments.add(goodsFragment);
-        mFragments.add(new CommentsFragment());
-        mFragments.add(new ShopInfoFragment());
-        //
-        initTab();
-        //
-        showTitleRes(R.id.title_collect,R.id.title_more);
-        goodsFragment.setGoodsStatusChangeListener(new GoodsStatusChangeListener(){
-
-        });
-
-        detailsFragment = (GoodsDetailsFragment) getSupportFragmentManager().findFragmentById(R.id.shop_fragment_goodsdetails);
-        shopCartFragment = (ShopCartFragment) getSupportFragmentManager().findFragmentById(R.id.shop_fragment_shopcart);
-        //是否直接展示商品
-        gid = getIntent().getIntExtra("goodsId",-1);
-        if (gid != -1){
-            titlelayout.setVisibility(View.GONE);
-            detailsFragment.setGoodsId(gid);
-        }else {
-            getSupportFragmentManager().beginTransaction().hide(detailsFragment).commit();
-        }
-
-        //ShopCartFragment shopCartFragment = new ShopCartFragment();
-        //getSupportFragmentManager().beginTransaction().add(R.id.shop_shopcart_goodsdetails,shopCartFragment,"cart").show(shopCartFragment).commit();
     }
 
     @Override
@@ -205,15 +208,15 @@ public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPa
                 .subscribe(new BaseObserver<ShopBean>() {
                     @Override
                     public void onSuccess(ShopBean result) {
-                        shopInfoB = result.getReturnValue();
-                        shopRyid = shopInfoB.getShopAccount();
-                        shopName = shopInfoB.getShopName();
+                        shopInfoBean = result.getReturnValue();
+                        shopRyid = shopInfoBean.getShopAccount();
+                        shopName = shopInfoBean.getShopName();
                         //0：未收藏 1：已收藏
-                        ivCollect.setImageResource(shopInfoB.getIsCollect() == 0?R.mipmap.ic_collect:R.mipmap.ic_collect_check);
+                        ivCollect.setImageResource(shopInfoBean.getIsCollect() == 0?R.mipmap.ic_collect:R.mipmap.ic_collect_check);
                         tvTItle.setText(result.getReturnValue().getShopName());
                         List<String> sssss = new ArrayList<>();
-                        if (shopInfoB.getVideoUrl() != null && !shopInfoB.getVideoUrl().isEmpty()){
-                            sssss.add(AppHttpPath.VIDEO_FOR_CRM + shopInfoB.getShopId());
+                        if (shopInfoBean.getVideoUrl() != null && !shopInfoBean.getVideoUrl().isEmpty()){
+                            sssss.add(AppHttpPath.VIDEO_FOR_CRM + shopInfoBean.getShopId());
                         }
                         sssss.addAll(StringTools.getImagesForCrmBig(result.getReturnValue().getImgId()));
                         banner.setImages(sssss).setImageLoader(glideImageLoader).start();
@@ -223,7 +226,7 @@ public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPa
                             coordinatorLayout.setVisibility(View.GONE);
                         }
                         //
-                        ModuleIm_Init.setUser(new UserIM(shopInfoB.getShopAccount(),shopName,StringTools.getImageForCrmInt(shopInfoB.getShopUserId())));
+                        ModuleIm_Init.setUser(new UserIM(shopInfoBean.getShopAccount(),shopName,StringTools.getImageForCrmInt(shopInfoBean.getShopUserId())));
                     }
                     @Override
                     public void onError(String msg) {
@@ -283,19 +286,19 @@ public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPa
      * 收藏
      */
     public void collect(){
-        if (shopInfoB == null || isCollect) return;
+        if (shopInfoBean == null || isCollect) return;
         isCollect = true;
         AppNetModule.createrRetrofit()
                 .collectOperateOne(MyApp.app.getAccount(), MyApp.app.getUserToken(), MyApp.app.getUid(),
-                        0,shopId,0,shopInfoB.getIsCollect(),shopInfoB.getIsCollect())
+                        0,shopId,0, shopInfoBean.getIsCollect(), shopInfoBean.getIsCollect())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<IntBean>() {
                     @Override
                     public void onSuccess(IntBean result) {
                         //0：未收藏 1：已收藏
-                        shopInfoB.setIsCollect(result.getReturnValue());
-                        ivCollect.setImageResource(shopInfoB.getIsCollect() == 0?R.mipmap.ic_collect:R.mipmap.ic_collect_check);
+                        shopInfoBean.setIsCollect(result.getReturnValue());
+                        ivCollect.setImageResource(shopInfoBean.getIsCollect() == 0?R.mipmap.ic_collect:R.mipmap.ic_collect_check);
                     }
                     @Override
                     public void onError(String msg) {
@@ -324,6 +327,12 @@ public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPa
     }
 
     public void initTab() {
+        //
+        viewpager = findViewById(R.id.shop_viewpager);
+        tablayout = findViewById(R.id.shop_tablayout);
+        mFragments.add(goodsFragment);
+        mFragments.add(new CommentsFragment());
+        mFragments.add(new ShopInfoFragment());
         adapter = new TopTabAdapter(getSupportFragmentManager(), this, title, mFragments);
         viewpager.setAdapter(adapter);
         viewpager.setOffscreenPageLimit(title.length);
@@ -368,12 +377,12 @@ public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPa
                 startActivity(new Intent(mContext, ReportActivity.class));
                 break;
             case R.id.share_shop://分享
-                if (shopInfoB.getWebUrl() != null && !shopInfoB.getWebUrl().isEmpty()){
+                if (shopInfoBean.getWebUrl() != null && !shopInfoBean.getWebUrl().isEmpty()){
                     ShareUtils.shareForMob(mContext,
                             AppUtils.getAppName(),
-                            shopInfoB.getWebUrl(),
-                            shopInfoB.getShopName(),
-                            StringTools.getImageForCrmInt(shopInfoB.getLogoId()));
+                            shopInfoBean.getWebUrl(),
+                            shopInfoBean.getShopName(),
+                            StringTools.getImageForCrmInt(shopInfoBean.getLogoId()));
                 }
                 break;
             case R.id.title_goods_back:
@@ -420,7 +429,7 @@ public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPa
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(result -> {
                     if (isToSubmit){
-                        MyApp.app.activityTool.toOrderConfirmActivity(mContext,shopId,shopInfoB.getLogoId(),shopInfoB.getShopName());
+                        MyApp.app.activityTool.toOrderConfirmActivity(mContext,shopId, shopInfoBean.getLogoId(), shopInfoBean.getShopName());
                     }
                     LogUtil.d("购物车同步success-："+ result.success);
                 }, throwable -> {

@@ -14,6 +14,7 @@ import com.juntai.shop.mall.ui.after_sales.GoodsSelectActivity;
 import com.juntai.shop.mall.ui.after_sales.ReturnDetailsActivity;
 import com.juntai.shop.mall.ui.after_sales.ReturnSelectActivity;
 import com.juntai.shop.mall.ui.goods.shop.ShopActivity;
+import com.juntai.shop.mall.ui.goods.shop.ShopDetailActivity;
 import com.juntai.shop.mall.ui.order.OrderConfirmActivity;
 import com.juntai.shop.mall.ui.order.OrderDeatilsActivity;
 import com.juntai.shop.mall.ui.order.OrderPayActivity;
@@ -42,6 +43,15 @@ public class ActivityTool {
      */
     public void toShopActivity(Context context,int shopid){
         context.startActivity(new Intent(context, ShopActivity.class)
+                .putExtra("shopId",shopid));
+    }
+    /**
+     * 商铺页
+     * @param context
+     * @param shopid
+     */
+    public void toShopActivityTest(Context context,int shopid){
+        context.startActivity(new Intent(context, ShopDetailActivity.class)
                 .putExtra("shopId",shopid));
     }
 

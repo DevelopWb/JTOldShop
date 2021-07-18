@@ -2,34 +2,33 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.juntai.shop.mall">
 
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:name=".MyApp"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/MyAppTheme"
-        android:resizeableActivity="true"
         android:maxAspectRatio="2.4"
-        android:hardwareAccelerated="true"
-        android:networkSecurityConfig="@xml/network_security_config">
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:resizeableActivity="true"
+        android:supportsRtl="true"
+        android:theme="@style/MyAppTheme">
+        <activity android:name=".ui.goods.shop.ShopDetailActivity"></activity>
+
         <meta-data
             android:name="android.max_aspect"
-            android:value="2.4" />
-        <!--适配华为（huawei）刘海屏-->
+            android:value="2.4" /> <!-- 适配华为（huawei）刘海屏 -->
         <meta-data
             android:name="android.notch_support"
-            android:value="true"/>
-        <!--适配小米（xiaomi）刘海屏-->
+            android:value="true" /> <!-- 适配小米（xiaomi）刘海屏 -->
         <meta-data
             android:name="notch.config"
-            android:value="portrait|landscape" />
-        <!--Ma = rQAy36GhVBIgyf6vP9pZY0XpNe0Slqon-->
+            android:value="portrait|landscape" /> <!-- Ma = rQAy36GhVBIgyf6vP9pZY0XpNe0Slqon -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="rQAy36GhVBIgyf6vP9pZY0XpNe0Slqon" />
-        <!-- 融云配置 -->
+            android:value="rQAy36GhVBIgyf6vP9pZY0XpNe0Slqon" /> <!-- 融云配置 -->
         <meta-data
             android:name="RONG_CLOUD_APP_KEY"
             android:value="3argexb63qcfe" /> <!-- 融云配置   end ||| -->
@@ -38,15 +37,14 @@
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|locale"
             android:theme="@android:style/Theme.Translucent" /> <!-- 启动页 -->
-
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent"/>
-
-        <activity android:name=".ui.act.StartActivity"
+            android:theme="@android:style/Theme.Translucent" />
+        <activity
+            android:name=".ui.act.StartActivity"
             android:theme="@style/splashThemeImage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -54,9 +52,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".ui.act.ImageToViewActivity"/>
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".ui.act.ImageToViewActivity" />
         <activity android:name=".mine.set.SettingActivity" />
         <activity android:name=".ui.order.OrderConfirmActivity" />
         <activity android:name=".mine.set.address.AddressListActivity" />
@@ -64,15 +63,17 @@
         <activity android:name=".ui.act.FragmentContainerActivity" />
         <activity android:name=".mine.MyInfoActivity" />
         <activity android:name=".mine.set.ModifyPwd" />
-        <activity android:name=".ui.goods.shop.ShopActivity"
-            android:launchMode="singleTop"/>
+        <activity
+            android:name=".ui.goods.shop.ShopActivity"
+            android:launchMode="singleTop" />
         <activity android:name=".ui.order.RemarksActivity" />
         <activity android:name=".ui.order.OrderPayActivity" />
         <activity android:name=".ui.order.PayCompleteActivity" />
         <activity android:name=".ui.act.ReportActivity" />
         <activity android:name=".ui.act.CodeActivity" />
-        <activity android:name=".ui.act.LoginActivity"
-            android:launchMode="singleTop"/>
+        <activity
+            android:name=".ui.act.LoginActivity"
+            android:launchMode="singleTop" />
         <activity android:name=".ui.act.ImageCropActivity" />
         <activity android:name=".ui.act.ImageZoomActivity" />
         <activity android:name=".ui.act.SearchActivity" />
@@ -91,20 +92,22 @@
         <activity android:name=".ui.after_sales.ReturnSelectActivity" />
         <activity android:name=".ui.after_sales.ReturnDetailsActivity" />
         <activity android:name=".ui.act.CameraFullScreenActivity" />
-        <activity android:name=".ui.act.CameraActivity"
+        <activity
+            android:name=".ui.act.CameraActivity"
             android:configChanges="orientation|screenSize"
             android:launchMode="singleTask"
             android:theme="@style/edit_AlertDialog_style" />
         <activity android:name=".ui.act.CitySelectActivity" />
         <activity android:name=".ui.act.WeatherActivity" />
         <activity android:name=".ui.act.PhoneBindActivity" />
-        <service android:name="com.juntai.shop.mall.homepage.camera.ijkplayer.KeepAliveService" />
-        <activity android:name=".homepage.camera.ijkplayer.StreamCameraFullScreenActivity" />
 
+        <service android:name=".homepage.camera.ijkplayer.KeepAliveService" />
+
+        <activity android:name=".homepage.camera.ijkplayer.StreamCameraFullScreenActivity" />
         <activity
             android:name=".homepage.camera.ijkplayer.PlayerLiveActivity"
-            android:theme="@style/edit_AlertDialog_style"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/edit_AlertDialog_style" />
     </application>
 
 </manifest>

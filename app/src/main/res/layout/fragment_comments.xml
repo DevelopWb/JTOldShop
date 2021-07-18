@@ -9,7 +9,7 @@
         android:id="@+id/shop_flowlayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white">
+       >
     </com.zhy.view.flowlayout.TagFlowLayout>
 
     <androidx.recyclerview.widget.RecyclerView

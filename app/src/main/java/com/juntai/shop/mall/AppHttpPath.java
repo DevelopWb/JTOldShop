@@ -87,7 +87,7 @@ public class AppHttpPath {
     /**
      * 查询商家店铺详情
      */
-    public static final String SHOP_INFO1 = BASE + "selectMerchantShopInfo.shtml";
+    public static final String SHOP_INFO = BASE + "selectMerchantShopInfo.shtml";
     /**
      * 店铺评论列表
      */

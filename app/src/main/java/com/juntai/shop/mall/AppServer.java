@@ -6,15 +6,11 @@ import com.juntai.shop.mall.bean.AddressInfoBean;
 import com.juntai.shop.mall.bean.AddressListBean;
 import com.juntai.shop.mall.bean.CameraDetailsBean;
 import com.juntai.shop.mall.bean.CameraLocBean;
-import com.juntai.shop.mall.bean.CartB;
 import com.juntai.shop.mall.bean.GoodsB;
 import com.juntai.shop.mall.bean.IntBean;
 import com.juntai.shop.mall.bean.LogisticsBean;
-import com.juntai.shop.mall.bean.MallHomeB;
 import com.juntai.shop.mall.bean.MyCollcetB;
 import com.juntai.shop.mall.bean.MyCommentB;
-import com.juntai.shop.mall.bean.NearB;
-import com.juntai.shop.mall.bean.OrderConfirmB;
 import com.juntai.shop.mall.bean.OrderCreateBean;
 import com.juntai.shop.mall.bean.OrderInfoBean;
 import com.juntai.shop.mall.bean.OrderListBean;
@@ -43,8 +39,6 @@ import io.reactivex.Observable;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -194,7 +188,7 @@ public interface AppServer {
      * @param purchaserId：用户id
      * @return
      */
-    @GET(AppHttpPath.SHOP_INFO1)
+    @GET(AppHttpPath.SHOP_INFO)
     Observable<ShopBean> shop(@Query("account")String account,
                               @Query("token")String token,
                               @Query("shopId")int shopId,
