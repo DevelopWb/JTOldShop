@@ -91,7 +91,7 @@ public class ShopCartFragment extends BaseFragment implements View.OnClickListen
                     sumPrice = Arith.add(sumPrice,Arith.mul(b.getPrice() , b.getNum()));
                     cartSize++;
                 }
-                ((ShopActivity)getActivity()).refrehsGoods(b);
+//                ((ShopActivity)getActivity()).refrehsGoods(b);
             }
         }
         if (MyApp.app.getCartBeansForShop((ShopActivity.shopId)).size() == 0){

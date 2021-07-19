@@ -39,6 +39,7 @@ import com.juntai.shop.mall.ui.goods.fmt.GoodsFragment;
 import com.juntai.shop.mall.ui.goods.fmt.GoodsFragment;
 import com.juntai.shop.mall.ui.goods.fmt.ShopCartFragment;
 import com.juntai.shop.mall.ui.goods.fmt.ShopDesFragment;
+import com.juntai.shop.mall.utils.ActivityTool;
 import com.juntai.shop.mall.utils.AppUtils;
 import com.juntai.shop.mall.utils.DpTools;
 import com.juntai.shop.mall.utils.GlideImageLoader;
@@ -88,7 +89,6 @@ public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPa
 //    CoordinatorLayout coordinatorLayout;
     boolean isToSubmit = false,isCollect = false;
     //cart
-    GoodsDetailsFragment detailsFragment = new GoodsDetailsFragment();
     ShopCartFragment shopCartFragment = new ShopCartFragment();
     int gid;
     @Override
@@ -102,6 +102,7 @@ public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPa
         if (shopId == -1){
             finish();
         }
+
         getToolbar().setVisibility(View.GONE);
         mImmersionBar.reset().transparentStatusBar().statusBarDarkFont(false).init();
         mBaseRootCol.setFitsSystemWindows(false);
@@ -120,23 +121,9 @@ public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPa
         initTab();
         //
         showTitleRes(R.id.title_collect,R.id.title_more);
-//        goodsFragment.setGoodsStatusChangeListener(new GoodsStatusChangeListener(){
-//
-//        });
 
-        detailsFragment = (GoodsDetailsFragment) getSupportFragmentManager().findFragmentById(R.id.shop_fragment_goodsdetails);
         shopCartFragment = (ShopCartFragment) getSupportFragmentManager().findFragmentById(R.id.shop_fragment_shopcart);
-        //是否直接展示商品
-        gid = getIntent().getIntExtra("goodsId",-1);
-        if (gid != -1){
-//            titlelayout.setVisibility(View.GONE);
-            detailsFragment.setGoodsId(gid);
-        }else {
-            getSupportFragmentManager().beginTransaction().hide(detailsFragment).commit();
-        }
 
-        //ShopCartFragment shopCartFragment = new ShopCartFragment();
-        //getSupportFragmentManager().beginTransaction().add(R.id.shop_shopcart_goodsdetails,shopCartFragment,"cart").show(shopCartFragment).commit();
     }
 
     /**
@@ -383,15 +370,11 @@ public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPa
                             StringTools.getImageForCrmInt(shopInfoBean.getLogoId()));
                 }
                 break;
-            case R.id.title_goods_back:
-                //商品详情返回
-                onMessageEvent(new EventDetailsMessage(-1));
+            case R.id.title_shop_check:
+                collect();
                 break;
             case R.id.title_shop_back:
                 finish();
-                break;
-            case R.id.title_shop_check:
-                collect();
                 break;
             case R.id.title_shop_more:
                 showPopMore();
@@ -457,35 +440,7 @@ public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPa
         shopCartFragment.update();
     }
 
-    /**
-     * @param locB
-     */
-    public void refrehsGoods(CartItemLocB locB){
-//        goodsFragment.refreshList(locB.getGoodsId(),locB.getNum());
-//        if (detailsFragment != null){
-//            detailsFragment.refreshNum(locB.getGoodsId(),locB.getNum());
-//        }
-    }
 
-    /**
-     * 展示商品详情
-     * @param detailsMessage
-     */
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(EventDetailsMessage detailsMessage){
-        if (detailsMessage.goodsId == -1){
-            //隐藏fragment
-//            titlelayout.setVisibility(View.VISIBLE);
-//            coordinatorLayout.setVisibility(View.VISIBLE);
-            getSupportFragmentManager().beginTransaction().hide(detailsFragment).commit();
-        }else {
-//            titlelayout.setVisibility(View.GONE);
-//            coordinatorLayout.setVisibility(View.GONE);
-            detailsFragment.setGoodsId(detailsMessage.goodsId);
-            getSupportFragmentManager().beginTransaction().show(detailsFragment).commit();
-        }
-        glideImageLoader.pause();
-    }
 
     @Override
     protected ShopPresent createPresenter() {
@@ -499,31 +454,26 @@ public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPa
 
     @Override
     protected void onDestroy() {
-        if (detailsFragment.isVisible()){
-            getSupportFragmentManager().beginTransaction().hide(detailsFragment).commit();
-        }else {
-            //上传购物车
-            cartSys();
+        //上传购物车
+        cartSys();
 //            goodsFragment.setGoodsStatusChangeListener(null);
-            goodsFragment.setDateList(null);
-            glideImageLoader.release();
-            super.onDestroy();
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (detailsFragment.isVisible()){
-            getSupportFragmentManager().beginTransaction().hide(detailsFragment).commit();
-//            titlelayout.setVisibility(View.VISIBLE);
-//            coordinatorLayout.setVisibility(View.VISIBLE);
-        }else {
-            super.onBackPressed();
-        }
+        goodsFragment.setDateList(null);
+        glideImageLoader.release();
+        super.onDestroy();
     }
 
     @Override
     public void onSuccess(String tag, Object o) {
+
+    }
+
+    /**
+     * 展示商品详情
+     * @param detailsMessage
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(EventDetailsMessage detailsMessage){
+        MyApp.app.activityTool.toGoodsActivity(mContext, shopId,detailsMessage.goodsId);
 
     }
 }

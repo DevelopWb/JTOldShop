@@ -13,28 +13,25 @@
         android:layout_width="wrap_content"
         android:gravity="center_vertical"
         android:visibility="gone"
-        android:layout_height="24dp">
+        android:layout_height="30dp">
         <ImageView
             android:id="@+id/count_subtract"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:padding="2dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:padding="5dp"
             android:scaleType="fitXY"
             android:src="@mipmap/ic_cart_subtract"/>
         <TextView
             android:id="@+id/count_num"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
             android:gravity="center"
-            android:layout_marginLeft="3dp"
-            android:layout_marginRight="3dp"/>
+            />
         <ImageView
             android:id="@+id/count_add"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:padding="2dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:padding="5dp"
             android:scaleType="fitXY"
             android:src="@mipmap/ic_cart_add"/>
     </LinearLayout>

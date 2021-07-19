@@ -13,6 +13,7 @@ import com.juntai.shop.mall.ui.after_sales.GoodsReturnActivity;
 import com.juntai.shop.mall.ui.after_sales.GoodsSelectActivity;
 import com.juntai.shop.mall.ui.after_sales.ReturnDetailsActivity;
 import com.juntai.shop.mall.ui.after_sales.ReturnSelectActivity;
+import com.juntai.shop.mall.ui.goods.shop.GoodsDetailActivity;
 import com.juntai.shop.mall.ui.goods.shop.ShopActivity;
 import com.juntai.shop.mall.ui.goods.shop.ShopDetailActivity;
 import com.juntai.shop.mall.ui.order.OrderConfirmActivity;
@@ -45,15 +46,6 @@ public class ActivityTool {
         context.startActivity(new Intent(context, ShopActivity.class)
                 .putExtra("shopId",shopid));
     }
-    /**
-     * 商铺页
-     * @param context
-     * @param shopid
-     */
-    public void toShopActivityTest(Context context,int shopid){
-        context.startActivity(new Intent(context, ShopDetailActivity.class)
-                .putExtra("shopId",shopid));
-    }
 
     /**
      * 查看商品详情
@@ -62,7 +54,7 @@ public class ActivityTool {
      * @param goodsid
      */
     public void toGoodsActivity(Context context,int shopid,int goodsid){
-        context.startActivity(new Intent(context, ShopActivity.class)
+        context.startActivity(new Intent(context, GoodsDetailActivity.class)
                 .putExtra("shopId",shopid)
                 .putExtra("goodsId",goodsid));
     }
