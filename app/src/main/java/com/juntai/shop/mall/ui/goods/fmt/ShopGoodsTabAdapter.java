@@ -1,4 +1,4 @@
-package com.juntai.shop.mall.ui.adapter;
+package com.juntai.shop.mall.ui.goods.fmt;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.juntai.shop.mall.R;
 
@@ -18,12 +19,12 @@ import java.util.List;
  * Created by Ma
  * on 2019/8/29
  */
-public class TopTabAdapter extends FragmentPagerAdapter {
+public class ShopGoodsTabAdapter extends FragmentStatePagerAdapter {
     private Context mContext;
     List<Fragment> mFragments;
     private String[] titles;
 
-    public TopTabAdapter(FragmentManager fm, Context contexts, String[] title, List<Fragment> fragments) {
+    public ShopGoodsTabAdapter(FragmentManager fm, Context contexts, String[] title, List<Fragment> fragments) {
         super(fm);
         mContext = contexts;
         mFragments = fragments;
@@ -53,18 +54,6 @@ public class TopTabAdapter extends FragmentPagerAdapter {
      * @return
      */
     public View getTabView(int position) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.custom_top_tabitem, null);
-        TextView title = v.findViewById(R.id.tabitem_text);
-        title.setText(titles[position]);
-        return v;
-    }
-    /**
-     * 自定义底部消息tab
-     *
-     * @param position
-     * @return
-     */
-    public View getTabView2(int position) {
         View v = LayoutInflater.from(mContext).inflate(R.layout.custom_top_tabitem2, null);
         TextView title = v.findViewById(R.id.tab_title_tv);
         title.setText(titles[position]);

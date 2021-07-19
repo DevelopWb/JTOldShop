@@ -45,10 +45,10 @@ public class SectionClassftAdapter extends BaseSectionQuickAdapter<MySection, Ba
     protected void convert(BaseViewHolder helper, MySection item) {
         dataMap.put(item.t.getCommodityId(),helper.getAdapterPosition());
         helper.addOnClickListener(R.id.item_shop_goodsimage);
-        helper.setText(R.id.item_shop_goodsname,item.t.getCommodityName());
+//        helper.setText(R.id.item_shop_goodsname,item.t.getCommodityName());
         helper.setText(R.id.item_shop_specification,item.t.getCommoditySynopsis());
-        helper.setText(R.id.item_shop_mon,"月销 " + item.t.getMonthlySales());
-        helper.setText(R.id.item_shop_price,String.valueOf(item.t.getPrice()));
+        helper.setText(R.id.item_shop_mon,"已销售 " + item.t.getMonthlySales()+"件");
+        helper.setText(R.id.item_shop_price,"¥"+String.valueOf(item.t.getPrice()));
         CountView view = helper.getView(R.id.cart_countview);
         view.setNumber(item.t.getCommodityNum());
         view.setMaxNumber(item.t.getInventoryNum());
@@ -64,7 +64,7 @@ public class SectionClassftAdapter extends BaseSectionQuickAdapter<MySection, Ba
                     item.t.getPrice(),item.t.getAttrId(),"");
             EventBus.getDefault().post(cartItemLocB);
         });
-        ImageLoadUtil.loadImage(mContext, AppHttpPath.IMAGE + item.t.getCommodityImg(),R.mipmap.ic_launcher,helper.getView(R.id.item_shop_goodsimage));
+        ImageLoadUtil.loadImage(mContext, AppHttpPath.IMAGE + item.t.getCommodityImg(),R.mipmap.empty_image,helper.getView(R.id.item_shop_goodsimage));
         //没有多规格，显示添加购物车。多规格显示选规格
         if (item.t.getIsType() == 0){
             if (item.t.getInventoryNum() < item.t.getCommodityNum()){

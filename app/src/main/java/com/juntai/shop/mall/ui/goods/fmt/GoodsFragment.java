@@ -1,24 +1,23 @@
 package com.juntai.shop.mall.ui.goods.fmt;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.juntai.mall.base.base.BaseFragment;
 import com.juntai.mall.base.utils.LogUtil;
-import com.juntai.mall.base.utils.ToastUtils;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.MySection;
 import com.juntai.shop.mall.bean.ShopBean;
 import com.juntai.shop.mall.bean.event.EventDetailsMessage;
-import com.juntai.shop.mall.ui.adapter.ClassftLeftAdapter;
+import com.juntai.shop.mall.ui.adapter.ClassftTopAdapter;
 import com.juntai.shop.mall.ui.goods.adt.SectionClassftAdapter;
 import com.juntai.shop.mall.ui.goods.SpecificationsDialog;
 import com.juntai.shop.mall.utils.listener.GoodsStatusChangeListener;
@@ -33,8 +32,8 @@ import java.util.List;
  * 店铺商品  分类
  */
 public class GoodsFragment extends BaseFragment {
-    RecyclerView recyclerViewLeft,recyclerViewRight;
-    ClassftLeftAdapter leftAdapter;
+    RecyclerView recyclerViewtop, recyclerViewBottom;
+    ClassftTopAdapter topAdapter;
     SectionClassftAdapter sectionAdapter;
     List<MySection> mData;
     LinearLayoutManager manager;
@@ -43,7 +42,6 @@ public class GoodsFragment extends BaseFragment {
     LinearSmoothScroller smoothScrollerLeft;
     HashMap<String,Integer> tagLeft = new HashMap<>();
     HashMap<String,Integer> tagRight = new HashMap<>();
-    TextView tvHead;
     //右侧滑动，左侧标记
     int nowTypePosition = -1;
     String nowType = "";
@@ -61,34 +59,30 @@ public class GoodsFragment extends BaseFragment {
 
     @Override
     public void initView() {
-        recyclerViewLeft = getView(R.id.classftLeftList);
-        tvHead = getView(R.id.shop_header);
-        recyclerViewRight = getView(R.id.classftRightList);
-        recyclerViewLeft.setLayoutManager(new LinearLayoutManager(mContext));
+        recyclerViewtop = getView(R.id.classftTopList);
+        recyclerViewBottom = getView(R.id.classftBottomList);
+        recyclerViewtop.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL,false));
         //左侧
-        leftAdapter = new ClassftLeftAdapter(R.layout.item_classft_left,dateListLeft);
-        recyclerViewLeft.setAdapter(leftAdapter);
-        TextView textView = new TextView(mContext);
-        textView.setLayoutParams(new ViewGroup.LayoutParams(1,200));
-        leftAdapter.addFooterView(textView);
-        leftAdapter.setOnItemClickListener((adapter, view, position) -> {
+        topAdapter = new ClassftTopAdapter(R.layout.item_classft_left,dateListLeft);
+        recyclerViewtop.setAdapter(topAdapter);
+        topAdapter.setOnItemClickListener((adapter, view, position) -> {
             isAuto = true;
-            nowType = leftAdapter.getData().get(position);
-            tvHead.setText(nowType);
-            if (leftView != null) leftView.setBackgroundResource(R.color.background3);
-            view.setBackgroundResource(R.drawable.line_classft_left);
+            nowType = topAdapter.getData().get(position);
+            if (leftView != null){
+                leftView.setBackgroundResource(R.drawable.bg_circle_white);
+                ((TextView) leftView).setTextColor(ContextCompat.getColor(mContext,R.color.black));
+            }
+            view.setBackgroundResource(R.drawable.bg_red_border);
+            ((TextView) view).setTextColor(ContextCompat.getColor(mContext,R.color.white));
             leftView = view;
-            smoothScroller.setTargetPosition(tagRight.get(leftAdapter.getData().get(position)));
-            recyclerViewRight.getLayoutManager().startSmoothScroll(smoothScroller);
+            smoothScroller.setTargetPosition(tagRight.get(topAdapter.getData().get(position)));
+            recyclerViewBottom.getLayoutManager().startSmoothScroll(smoothScroller);
         });
         //右侧
-        recyclerViewRight.setLayoutManager(new LinearLayoutManager(mContext));
+        GridLayoutManager manager = new GridLayoutManager(mContext,2);
+        recyclerViewBottom.setLayoutManager(manager);
         mData = new ArrayList<>();
         sectionAdapter = new SectionClassftAdapter(R.layout.item_section_content, R.layout.item_section_head, mData);
-
-//        TextView textView2 = new TextView(mContext);
-//        textView2.setLayoutParams(new ViewGroup.LayoutParams(1,200));
-//        sectionAdapter.addFooterView(textView2);
 
         sectionAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             if (view.getId() == R.id.item_shop_goodsimage){
@@ -104,12 +98,12 @@ public class GoodsFragment extends BaseFragment {
                 specificationsDialog.show(getChildFragmentManager(),"spec");
             }
         });
-        recyclerViewRight.setAdapter(sectionAdapter);
-        recyclerViewRight.setOnTouchListener((v, event) -> {
+        recyclerViewBottom.setAdapter(sectionAdapter);
+        recyclerViewBottom.setOnTouchListener((v, event) -> {
             isAuto = false;
             return false;
         });
-        recyclerViewRight.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        recyclerViewBottom.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -124,22 +118,26 @@ public class GoodsFragment extends BaseFragment {
                     nowMySection = sectionAdapter.getData().get(nowTypePosition);
                     if (!nowType.equals(nowMySection.getStrHead()) && !isAuto){
                         nowType = nowMySection.getStrHead();
-                        tvHead.setText(nowType);
                         smoothScrollerLeft.setTargetPosition(tagLeft.get(nowMySection.getStrHead()));
-                        recyclerViewLeft.getLayoutManager().startSmoothScroll(smoothScrollerLeft);
-//                    recyclerViewLeft.getLayoutManager().scrollToPosition(tagLeft.get(nowMySection.getStrHead()));
-                        if (leftView != null)
-                            leftView.setBackgroundResource(R.color.background3);
-                        if (leftAdapter.getTextViews().size() > 0){
-                            leftView = leftAdapter.getTextViews().get(tagLeft.get(nowMySection.getStrHead()));
+                        recyclerViewtop.getLayoutManager().startSmoothScroll(smoothScrollerLeft);
+
+                        if (leftView != null){
+                            leftView.setBackgroundResource(R.drawable.bg_circle_white);
+                            ((TextView) leftView).setTextColor(ContextCompat.getColor(mContext,R.color.black));
                         }
-                        if (leftView != null)
-                            leftView.setBackgroundResource(R.drawable.line_classft_left);
+                        if (topAdapter.getTextViews().size() > 0){
+                            leftView = topAdapter.getTextViews().get(tagLeft.get(nowMySection.getStrHead()));
+                        }
+                        if (leftView != null){
+                            leftView.setBackgroundResource(R.drawable.bg_red_border);
+                            ((TextView) leftView).setTextColor(ContextCompat.getColor(mContext,R.color.white));
+                        }
+
                     }
                 }
             }
         });
-        layoutManager = (LinearLayoutManager) recyclerViewRight.getLayoutManager();
+        layoutManager = (LinearLayoutManager) recyclerViewBottom.getLayoutManager();
 //        recyclerViewRight.getLayoutManager().scrollToPosition();
         //顶部图片
 //        ImageView imageView = new ImageView(mContext);
@@ -195,15 +193,15 @@ public class GoodsFragment extends BaseFragment {
     public void setDateList(List<ShopBean.ReturnValueBean.ShopClassifyBean> list) {
         this.dateList = list;
         if (dateList == null){
-            if (leftAdapter != null){
-                leftAdapter.getData().clear();
+            if (topAdapter != null){
+                topAdapter.getData().clear();
                 sectionAdapter.getData().clear();
             }
             return;
         }else {
             initListData();
-            if (leftAdapter != null){
-                leftAdapter.notifyDataSetChanged();
+            if (topAdapter != null){
+                topAdapter.notifyDataSetChanged();
                 sectionAdapter.notifyDataSetChanged();
             }
         }
@@ -214,8 +212,7 @@ public class GoodsFragment extends BaseFragment {
         int size = dateList.size();
         for (int i = 0; i < size; i++) {
             tagLeft.put(dateList.get(i).getShopClassifyName(),i);
-            leftAdapter.addData(dateList.get(i).getShopClassifyName());
-            mData.add(new MySection(true,dateList.get(i).getShopClassifyName(),false));
+            topAdapter.addData(dateList.get(i).getShopClassifyName());
             if(dateList.get(i).getCommodity() != null
                     && dateList.get(i).getCommodity().size() > 0
                     && dateList.get(i).getCommodity().get(0) != null){

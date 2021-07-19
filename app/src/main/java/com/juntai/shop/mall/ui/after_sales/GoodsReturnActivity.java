@@ -123,7 +123,7 @@ public class GoodsReturnActivity extends BaseActivity implements View.OnClickLis
                 .setImageChoose(new ImageSelect(this))
                 .setImageLoader(new ImageSelectLoad())
                 .setNumColumn(3)
-                .setImageAddResource(R.mipmap.ic_report_image)
+                .setImageAddResource(R.mipmap.empty_image)
                 .setScaleType(ImageView.ScaleType.FIT_CENTER)
                 .init();
         imageSelectionView.setBackgroundResource(R.color.content_layout);

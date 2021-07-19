@@ -102,7 +102,7 @@ public class OrderCommentActivicty extends BaseActivity {
                 .setImageChoose(new ImageSelect(this))
                 .setImageLoader(new ImageSelectLoad())
                 .setNumColumn(4)
-                .setImageAddResource(R.mipmap.ic_report_image)
+                .setImageAddResource(R.mipmap.empty_image)
                 .setVideoAddRous(R.mipmap.ic_report_video)
                 .setScaleType(ImageView.ScaleType.FIT_CENTER)
                 .init();
