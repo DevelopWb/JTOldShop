@@ -167,6 +167,11 @@
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <fragment
+        android:id="@+id/shop_fragment_goodsdetails"
+        android:name="com.juntai.shop.mall.ui.goods.fmt.GoodsDetailsFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <fragment
         android:id="@+id/shop_fragment_shopcart"

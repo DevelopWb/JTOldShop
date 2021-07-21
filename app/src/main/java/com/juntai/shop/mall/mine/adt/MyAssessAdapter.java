@@ -1,6 +1,7 @@
 package com.juntai.shop.mall.mine.adt;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.widget.RatingBar;
 
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -35,13 +36,17 @@ public class MyAssessAdapter extends BaseQuickAdapter<MyCommentB.ReturnValueBean
 
         ImageLoadUtil.loadCircularImage(mContext, AppHttpPath.IMAGE + item.getHeadUrl(),R.mipmap.ic_launcher,R.mipmap.ic_launcher,helper.getView(R.id.item_myassess_head));
         ImageLoadUtil.loadImageNoCrash(mContext, StringTools.getImageForCrmInt(item.getLogoId()),R.mipmap.ic_launcher,helper.getView(R.id.item_myassess_shop_logo));
-        helper.setText(R.id.item_myassess_name,item.getNickName());
         helper.setText(R.id.item_myassess_time,item.getGmtCreate().substring(0,9));
-        helper.setText(R.id.item_myassess_rj,item.getPerCaPita()+"/人");
         helper.setText(R.id.item_myassess_content,item.getEvaluate());
         helper.setText(R.id.item_myassess_shop_name,item.getShopName());
         helper.setText(R.id.item_myassess_scannum,"浏览" + item.getBrowseNum());
-        helper.setText(R.id.item_myassess_sjhf_content,item.getReplyEvaluate());
+        if (TextUtils.isEmpty(item.getReplyEvaluate())) {
+            helper.setGone(R.id.item_myassess_sjhf_content,false);
+        }else {
+            helper.setGone(R.id.item_myassess_sjhf_content,true);
+            helper.setText(R.id.item_myassess_sjhf_content,item.getReplyEvaluate());
+        }
+
 
         RatingBar ratingBar = helper.getView(R.id.item_myassess_ratingBar);
         ratingBar.setRating(item.getDegreeOfSatisfaction());

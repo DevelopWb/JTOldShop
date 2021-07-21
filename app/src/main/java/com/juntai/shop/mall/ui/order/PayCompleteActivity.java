@@ -14,7 +14,6 @@ import com.juntai.shop.mall.MainActivity;
  * Created by Ma
  * on 2019/9/8
  */
-// TODO: 2021/7/15 支付成功的界面
 public class PayCompleteActivity extends BaseActivity implements View.OnClickListener {
     LinearLayout layoutSuc,layoutFia;
     @Override

@@ -35,7 +35,6 @@ import io.reactivex.schedulers.Schedulers;
  * @date 2019/3/6
  */
 
-// TODO: 2021/7/15 提交订单的界面 需要优化
 public class OrderConfirmActivity extends BaseActivity implements View.OnClickListener {
     AddressSelectDialog selectDialog;
     RelativeLayout relativeLayoutAdd;

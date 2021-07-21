@@ -15,7 +15,6 @@
         android:resizeableActivity="true"
         android:supportsRtl="true"
         android:theme="@style/MyAppTheme">
-        <activity android:name=".ui.goods.shop.GoodsDetailActivity"></activity>
         <activity android:name=".ui.goods.shop.ShopDetailActivity" />
 
         <meta-data

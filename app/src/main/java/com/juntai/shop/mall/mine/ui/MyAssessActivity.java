@@ -32,7 +32,6 @@ import io.reactivex.schedulers.Schedulers;
  * on 2019/11/27
  */
 
-// TODO: 2021/7/16 个人中心 我的评价 这个需要优化 
 public class MyAssessActivity extends BaseActivity {
     private SmartRefreshLayout smartRefreshLayout ;
     private RecyclerView recyclerView;
@@ -57,8 +56,6 @@ public class MyAssessActivity extends BaseActivity {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         adapter = new MyAssessAdapter(R.layout.item_myassess,new ArrayList());
-        //添加默认分割线
-        recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(adapter);
         //刷新
         smartRefreshLayout.setEnableRefresh(false);
@@ -116,6 +113,6 @@ public class MyAssessActivity extends BaseActivity {
         loca = new int[2];
         viewP.getLocationOnScreen(loca);
         //显示（自定义位置）
-        popupWindow.showAtLocation(viewP, Gravity.NO_GRAVITY,loca[0] - DpTools.dip2px(mContext,90),loca[1] - DpTools.dip2px(mContext,50));
+        popupWindow.showAtLocation(viewP, Gravity.NO_GRAVITY,loca[0] - DpTools.dip2px(mContext,50),loca[1] - DpTools.dip2px(mContext,60));
     }
 }
