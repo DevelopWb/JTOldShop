@@ -79,7 +79,7 @@ public class PhoneChangeActivity extends SmsCheckCodeActivity implements View.On
                     @Override
                     public void onSuccess(BaseResult result) {
                         ToastUtils.success(mContext, String.format("%s,请重新登录", result.msg));
-                        ModuleIm_Init.logout();
+//                        ModuleIm_Init.logout();
                         SPTools.saveString(MyApp.app, AppUtils.SP_KEY_LOGIN, "");
                         MyApp.app.setUserBean(null);
                         ActivityManagerTool.getInstance().finishApp();

@@ -1,98 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/transparent">
+    android:background="@drawable/bg_round_top_white"
+    android:orientation="vertical"
+    android:paddingBottom="15dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="1"
-        android:padding="10dp"
-        android:background="@drawable/bg_specfication_dialog">
+        android:orientation="vertical">
+
         <TextView
             android:id="@+id/specfication_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="20dp"
+            android:text="商品名称"
+            android:textSize="20sp" />
 
         <com.wuhenzhizao.sku.view.SkuSelectScrollView
             android:id="@+id/skuSelectScrollView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"
-            android:gravity="center_vertical">
+            android:paddingLeft="15dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="已选规格"
-                android:textSize="13sp"
                 android:layout_marginRight="10dp"
-                android:textColor="@color/grey"/>
+                android:text="已选规格"
+                android:textColor="@color/grey"
+                android:textSize="13sp" />
+
             <TextView
                 android:id="@+id/specfication_kucun"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="13sp"
-                android:textColor="@android:color/darker_gray"/>
+                android:textColor="@android:color/darker_gray"
+                android:textSize="13sp" />
         </LinearLayout>
+
         <TextView
             android:id="@+id/specfication_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="13sp"
-            android:textColor="@android:color/darker_gray"/>
-        <LinearLayout
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="13sp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:orientation="horizontal"
-            android:gravity="bottom"
-            android:padding="10dp"
-            android:layout_gravity="bottom">
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            >
+
             <TextView
+                android:id="@+id/total_tag_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="总计："
                 android:textSize="14sp"
-                android:text="总计 "/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="@color/red"
-                android:text="￥"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/specfication_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="20sp"
+                android:text="0213"
                 android:textColor="@color/red"
-                android:text="0"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/total_tag_tv"
+                app:layout_constraintLeft_toRightOf="@+id/total_tag_tv"
+                app:layout_constraintTop_toTopOf="@+id/total_tag_tv" />
+
+
             <com.juntai.shop.mall.view.CountView
                 android:id="@+id/specfication_countview"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </com.juntai.shop.mall.view.CountView>
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/total_tag_tv"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/total_tag_tv"></com.juntai.shop.mall.view.CountView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/close_dialog_tv"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            style="@style/bt_style"
+            android:text="确定"
+            ></TextView>
     </LinearLayout>
-    <ImageView
-        android:id="@+id/specfication_close"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center_horizontal"
-        android:src="@mipmap/ic_dialog_spec_close"/>
 </LinearLayout>

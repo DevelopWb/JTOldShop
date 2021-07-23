@@ -1,5 +1,6 @@
 package com.juntai.shop.mall.mine.ui;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.TextView;
@@ -72,6 +73,12 @@ public class MyOrderActivity extends BaseActivity implements ViewPager.OnPageCha
     @Override
     public void initData() {
 
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        needRefresh();
     }
 
     public void needRefresh(){

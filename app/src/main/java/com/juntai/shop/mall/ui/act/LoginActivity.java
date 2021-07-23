@@ -181,35 +181,43 @@ public class LoginActivity extends BaseActivity {
                     String loginStr = responseBody.string();
                     userBean = GsonTools.changeGsonToBean(loginStr, LoginBean.class);
                     if (userBean.success) {
-                        ToastUtils.success(mContext, "登录成功");
-                        Hawk.put(HawkProperty.USER_INFO,userBean.getReturnValue());
-                        SPTools.saveString(MyApp.app, AppUtils.SP_KEY_LOGIN, loginStr);
-                        MyApp.app.setUserBean(null);
-                        ModuleIm_Init.connectIM(MyApp.app.getUser().getReturnValue().getrOngYunToken());
-                        setResult(RESULT_OK);
-                        finish();
+                        switch (userBean.code) {
+                            case 200:
+                                ToastUtils.success(mContext, "登录成功");
+                                Hawk.put(HawkProperty.USER_INFO,userBean.getReturnValue());
+                                SPTools.saveString(MyApp.app, AppUtils.SP_KEY_LOGIN, loginStr);
+                                MyApp.app.setUserBean(null);
+                                ModuleIm_Init.connectIM(MyApp.app.getUser().getReturnValue().getrOngYunToken());
+                                setResult(RESULT_OK);
+                                finish();
+                                break;
+                            case 302:
+                                startActivityForResult(new Intent(mContext,PhoneBindActivity.class)
+                                                .putExtra("qqId",qqId)
+                                                .putExtra("qqName",qqName),
+                                        AppCode.BIND_PHONE);
+                                ToastUtils.toast(mContext, userBean.msg);
+                                break;
+                            case 301:
+                                startActivityForResult(new Intent(mContext,PhoneBindActivity.class)
+                                                .putExtra("weChatId",weChatId)
+                                                .putExtra("weChatName",weChatName),
+                                        AppCode.BIND_PHONE);
+                                ToastUtils.toast(mContext, userBean.msg);
+                                break;
+                            default:
+                                ToastUtils.error(mContext, userBean.msg);
+                                break;
+                        }
+                        logining = false;
+                        progressDialog.dismiss();
                         LogUtil.d("token=" + MyApp.app.getUserToken());
                         LogUtil.d("token=" + userBean.getReturnValue().getAccount());
-                    } else {
-                        if (userBean.code == 302){
-                            startActivityForResult(new Intent(mContext,PhoneBindActivity.class)
-                                    .putExtra("qqId",qqId)
-                                    .putExtra("qqName",qqName),
-                                    AppCode.BIND_PHONE);
-                        }else if (userBean.code == 301){
-                            startActivityForResult(new Intent(mContext,PhoneBindActivity.class)
-                                            .putExtra("weChatId",weChatId)
-                                            .putExtra("weChatName",weChatName),
-                                    AppCode.BIND_PHONE);
-                        }
-                        ToastUtils.toast(mContext, userBean.error);
                     }
-                    logining = false;
-                    progressDialog.dismiss();
+
                 }, throwable -> {
                     LogUtil.d(throwable.toString());
                     LogUtil.d("token=" + throwable.toString());
-                    ToastUtils.error(mContext, "登录失败");
                     logining = false;
                     progressDialog.dismiss();
                 });

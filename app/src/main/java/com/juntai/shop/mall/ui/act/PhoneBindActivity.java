@@ -90,7 +90,7 @@ public class PhoneBindActivity extends BaseActivity {
                         ToastUtils.success(mContext, "登录成功");
                         SPTools.saveString(MyApp.app, AppUtils.SP_KEY_LOGIN, loginStr);
                         MyApp.app.setUserBean(null);
-                        ModuleIm_Init.connectIM(MyApp.app.getUser().getReturnValue().getrOngYunToken());
+//                        ModuleIm_Init.connectIM(MyApp.app.getUser().getReturnValue().getrOngYunToken());
                         bind();
                         LogUtil.d("token=" + MyApp.app.getUserToken());
                         LogUtil.d("token=" + userBean.getReturnValue().getAccount());

@@ -31,7 +31,7 @@ public class ClusterClickAdapter extends BaseQuickAdapter<MyItem, BaseViewHolder
         helper.setBackgroundRes(R.id.dev_tag_tv, 0);
         helper.setTextColor(R.id.dev_tag_tv, ContextCompat.getColor(mContext, R.color.text_default_color));
         helper.getView(R.id.dev_tag_tv).setPadding(0, 0, 0, 0);
-        ImageLoadUtil.loadImageNoCrash(mContext.getApplicationContext(), currentStreamCamera.getEzOpen(), imageView);
+        ImageLoadUtil.loadImageNoCrash(mContext.getApplicationContext(), currentStreamCamera.getEzOpen(),R.drawable.nopicture, imageView);
         helper.setText(R.id.camera_name_tv, currentStreamCamera.getName())
                 .setText(R.id.camera_no_tv, "编号:" + currentStreamCamera.getNumber())
                 .setText(R.id.dev_tag_tv, currentStreamCamera.getAddress());

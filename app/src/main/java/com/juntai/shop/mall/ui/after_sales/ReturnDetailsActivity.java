@@ -120,7 +120,7 @@ public class ReturnDetailsActivity extends BaseActivity implements View.OnClickL
                         }
                         tvCount.setText(String.valueOf(count));
                         //
-                        ModuleIm_Init.setUser(new UserIM(valueBean.getShopAccount(),valueBean.getShopName() , StringTools.getImageForCrmInt(valueBean.getShopUserId())));
+//                        ModuleIm_Init.setUser(new UserIM(valueBean.getShopAccount(),valueBean.getShopName() , StringTools.getImageForCrmInt(valueBean.getShopUserId())));
                     }
                     @Override
                     public void onError(String msg) {
@@ -134,7 +134,7 @@ public class ReturnDetailsActivity extends BaseActivity implements View.OnClickL
         if (valueBean == null)return;
         switch (v.getId()){
             case R.id.return_details_im://im
-                ModuleIm_Init.chat(mContext,valueBean.getShopAccount(),valueBean.getShopName());
+//                ModuleIm_Init.chat(mContext,valueBean.getShopAccount(),valueBean.getShopName());
                 break;
             case R.id.return_details_call://电话
                 if (valueBean.getPhone() != null && !valueBean.getPhone().isEmpty()){

@@ -26,6 +26,7 @@ import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.OrderCommodityListBean;
 import com.juntai.shop.mall.bean.ReturnReasonBean;
+import com.juntai.shop.mall.mine.ui.MyOrderActivity;
 import com.juntai.shop.mall.ui.after_sales.adt.ReturnGoodsAdapter;
 import com.juntai.shop.mall.utils.imageselect.ImageSelect;
 import com.juntai.shop.mall.utils.imageselect.ImageSelectLoad;
@@ -53,20 +54,22 @@ public class GoodsReturnActivity extends BaseActivity implements View.OnClickLis
     ReturnGoodsAdapter goodsAdapter;
     //换货-1，退货-2，退款-3
     public static int type;
-    TextView textView,tvStatus;
+    TextView textView, tvStatus;
     //（1：未收到货）（2：已收到货）
-    int status,orderId;
+    int status, orderId;
     double price;
     GoodsStatusDialog statusDialog = new GoodsStatusDialog();
     AfterSalesDialog afterSalesDialog = new AfterSalesDialog();
     ImageSelectionView2 imageSelectionView;
     //货物状态，退款原因
-    LinearLayout layoutStatus,layoutReturn,layoutMoney;
+    LinearLayout layoutStatus, layoutReturn, layoutMoney;
     //原因，说明
-    TextView tvReasontv,tvReason,tvDirections,tvMoney;
+    TextView tvReasontv, tvReason, tvDirections, tvMoney;
     EditText editText;
     ReturnReasonBean.ReturnValueBean valueBean;
     List<Integer> listIds = new ArrayList<>();
+    private TextView mTotalPriceTv;//总金额
+
     @Override
     public int getLayoutView() {
         return R.layout.activity_goods_return;
@@ -74,14 +77,15 @@ public class GoodsReturnActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void initView() {
-        type = getIntent().getIntExtra("type",-1);
-        orderId = getIntent().getIntExtra("id",-1);
-        if (type == -1 || orderId == -1)return;
+        type = getIntent().getIntExtra("type", -1);
+        orderId = getIntent().getIntExtra("id", -1);
+        if (type == -1 || orderId == -1) return;
         progressDialog = new ProgressDialog(mContext);
         textView = findViewById(R.id.goods_return_shopname);
         editText = findViewById(R.id.goods_return_edittext);
         layoutStatus = findViewById(R.id.goods_return_status_layout);
         layoutReturn = findViewById(R.id.goods_return_return_layout);
+        mTotalPriceTv = findViewById(R.id.total_price_tv);
         layoutMoney = findViewById(R.id.goods_return_money_layout);
         tvReasontv = findViewById(R.id.goods_return_reason_tv);
         tvReason = findViewById(R.id.goods_return_reason);
@@ -90,7 +94,7 @@ public class GoodsReturnActivity extends BaseActivity implements View.OnClickLis
         textView.setText(getIntent().getStringExtra("name"));
         tvReason.setOnClickListener(this);
         findViewById(R.id.goods_return_submit).setOnClickListener(this);
-        switch (type){
+        switch (type) {
             case 1://换货
                 setTitleName("申请换货");
                 tvReasontv.setText("换货原因");
@@ -123,11 +127,12 @@ public class GoodsReturnActivity extends BaseActivity implements View.OnClickLis
                 .setImageChoose(new ImageSelect(this))
                 .setImageLoader(new ImageSelectLoad())
                 .setNumColumn(3)
-                .setImageAddResource(R.mipmap.empty_image)
+                .setCloseResource(R.mipmap.ic_report_close)
+                .setImageAddResource(R.mipmap.upload_pics_icon)
                 .setScaleType(ImageView.ScaleType.FIT_CENTER)
                 .init();
-        imageSelectionView.setBackgroundResource(R.color.content_layout);
-        statusDialog.setOnSelectListener((arg,str) -> {
+        imageSelectionView.setBackgroundResource(R.drawable.bg_round_white);
+        statusDialog.setOnSelectListener((arg, str) -> {
             status = arg;
             tvStatus.setText(str);
         });
@@ -138,14 +143,16 @@ public class GoodsReturnActivity extends BaseActivity implements View.OnClickLis
         //
 
         listIds.clear();
-        for (OrderCommodityListBean s: MyApp.app.goodsReturnBeans) {
+        for (OrderCommodityListBean s : MyApp.app.goodsReturnBeans) {
             listIds.add(s.getId());
             price += s.getPrice() * s.getCommodityNumber();
         }
-        tvMoney.setText(String.format("￥%s元",price));
+        tvMoney.setText(String.format("￥%s元", price));
+        mTotalPriceTv.setText(String.format("￥%s元", price));
     }
 
     RequestBody requestBody;
+
     public void setFormData() {
         requestBody = null;
         MultipartBody.Builder builder = new MultipartBody.Builder()
@@ -154,29 +161,29 @@ public class GoodsReturnActivity extends BaseActivity implements View.OnClickLis
                 .addFormDataPart("account", MyApp.app.getAccount())
                 .addFormDataPart("orderId", String.valueOf(orderId))//订单id
                 .addFormDataPart("causeId", String.valueOf(valueBean.getId()));//	原因id
-        if (!editText.getText().toString().isEmpty()){
+        if (!editText.getText().toString().isEmpty()) {
             builder.addFormDataPart("remark", editText.getText().toString());//	说明
         }
         //退款金额-状态都不传=换货
         //状态不传=退货
         //全传=退款
-        if (type != 1){//不是换货
-            builder.addFormDataPart("returnPrice",String.valueOf(price));
-            if (type == 3){
-                builder.addFormDataPart("cargoStatus",String.valueOf(status));
+        if (type != 1) {//不是换货
+            builder.addFormDataPart("returnPrice", String.valueOf(price));
+            if (type == 3) {
+                builder.addFormDataPart("cargoStatus", String.valueOf(status));
             }
         }
         for (int i = 0; i < imageSelectionView.getImagePaths().size(); i++) {
-            if (imageSelectionView.getImagePaths().get(i).getImagePath() == null){
-                if (i == 1){
+            if (imageSelectionView.getImagePaths().get(i).getImagePath() == null) {
+                if (i == 1) {
                     builder.addFormDataPart("photoOne", "photoOne",
                             RequestBody.create(MediaType.parse("file"),
                                     new File(imageSelectionView.getImagePaths().get(i).getImagePath())));
-                }else if (i == 2){
+                } else if (i == 2) {
                     builder.addFormDataPart("photoTwo", "photoTwo",
                             RequestBody.create(MediaType.parse("file"),
                                     new File(imageSelectionView.getImagePaths().get(i).getImagePath())));
-                }else if (i == 3){
+                } else if (i == 3) {
                     builder.addFormDataPart("photoThree", "photoThree",
                             RequestBody.create(MediaType.parse("file"),
                                     new File(imageSelectionView.getImagePaths().get(i).getImagePath())));
@@ -186,30 +193,31 @@ public class GoodsReturnActivity extends BaseActivity implements View.OnClickLis
 
         requestBody = builder.build();
     }
+
     @Override
     public void initData() {
 
     }
 
     boolean isSubmit = false;
-    private void submit(){
+
+    private void submit() {
         isSubmit = true;
         AppNetModule.createrRetrofit()
-                .returnGoods(AppHttpPath.RETURNSTATUS,listIds,requestBody)
+                .returnGoods(AppHttpPath.RETURNSTATUS, listIds, requestBody)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<BaseResult>() {
                     @Override
                     public void onSuccess(BaseResult result) {
-                        ToastUtils.success(mContext,result.msg);
+                        ToastUtils.success(mContext, result.msg);
                         //售后详情
-//                        startActivity(new Intent());
-                        finish();
+                        startActivity(new Intent(mContext, MyOrderActivity.class));
                     }
 
                     @Override
                     public void onError(String msg) {
-                        ToastUtils.toast(mContext,msg);
+                        ToastUtils.toast(mContext, msg);
                         isSubmit = false;
                     }
                 });
@@ -217,28 +225,31 @@ public class GoodsReturnActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.goods_return_status://获取状态
-                statusDialog.show(getSupportFragmentManager(),"statusDialog");
+                statusDialog.show(getSupportFragmentManager(), "statusDialog");
                 break;
             case R.id.goods_return_reason://获取原因
-                afterSalesDialog.show(getSupportFragmentManager(),"reasonDialog");
+                afterSalesDialog.show(getSupportFragmentManager(), "reasonDialog");
                 break;
             case R.id.goods_return_submit://提交
-                if (type == 3 && status == 0){//退款--货物状态
-                    ToastUtils.toast(mContext,"请选择货物状态");
-                }else if (valueBean == null){//
-                    ToastUtils.toast(mContext,"请选择原因");
-                }else {
+                if (type == 3 && status == 0) {//退款--货物状态
+                    ToastUtils.toast(mContext, "请选择货物状态");
+                } else if (valueBean == null) {//
+                    ToastUtils.toast(mContext, "请选择原因");
+                } else {
                     setFormData();
                     submit();
                 }
                 break;
         }
     }
+
     private ProgressDialog progressDialog;
+
     /**
      * 图片压缩
+     *
      * @param paths
      */
     public void imageCompress(List<String> paths) {
@@ -257,8 +268,8 @@ public class GoodsReturnActivity extends BaseActivity implements View.OnClickLis
                     @Override
                     public void onSuccess(File file) {
                         //  压缩成功后调用，返回压缩后的图片文件
-                        imageSelectionView.addImagePath(new Bean(file.getPath(),false));
-                        LogUtil.e("push-图片压缩"+file.getPath());
+                        imageSelectionView.addImagePath(new Bean(file.getPath(), false));
+                        LogUtil.e("push-图片压缩" + file.getPath());
                         progressDialog.dismiss();
                     }
 
@@ -270,11 +281,12 @@ public class GoodsReturnActivity extends BaseActivity implements View.OnClickLis
                     }
                 }).launch();
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ImageSelect.REQUEST_CODE_CHOOSE && resultCode == RESULT_OK) {
-            LogUtil.d("选择图片" +"  =  " + Matisse.obtainPathResult(data));
+            LogUtil.d("选择图片" + "  =  " + Matisse.obtainPathResult(data));
             imageCompress(Matisse.obtainPathResult(data));
         }
     }

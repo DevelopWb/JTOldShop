@@ -80,7 +80,9 @@
         <activity android:name=".mine.ui.MyCollectActivity" />
         <activity android:name=".mine.ui.MyAssessActivity" />
         <activity android:name=".ui.act.GuideActivity" />
-        <activity android:name=".mine.ui.MyOrderActivity" />
+        <activity android:name=".mine.ui.MyOrderActivity"
+
+            android:launchMode="singleTask"/>
         <activity android:name=".ui.order.OrderDeatilsActivity" />
         <activity android:name=".ui.order.OrderCommentActivicty" />
         <activity android:name=".ui.order.LogisticsActivity" />

@@ -63,6 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
+                android:visibility="gone"
                 android:lines="1"
                 android:hint="人均"
                 android:inputType="number"
@@ -123,13 +124,21 @@
             android:checked="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:button="@drawable/check_edit_comment_niming"
+            android:button="@drawable/bg_raidio_cart"
             android:text="  匿名评价"/>
-        <ImageView
+        <TextView
             android:id="@+id/comment_submit"
             android:layout_width="wrap_content"
+            android:textSize="16dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_centerVertical="true"
             android:layout_height="wrap_content"
+            style="@style/bt_style"
+            android:text="发表评论"
             android:layout_alignParentRight="true"
-            android:src="@drawable/pre_edit_comment_submit"/>
+            />
     </RelativeLayout>
 </RelativeLayout>

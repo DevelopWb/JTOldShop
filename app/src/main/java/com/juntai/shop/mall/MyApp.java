@@ -58,7 +58,7 @@ public class MyApp extends BaseApplication {
         SDKInitializer.setCoordType(CoordType.BD09LL);
         //
         MobSDK.init(this);
-        ModuleIm_Init.init(this);
+//        ModuleIm_Init.init(this);
     }
     public void setUserBean(LoginBean loginBean) {
         loginB = loginBean;

@@ -21,6 +21,7 @@ import com.juntai.shop.mall.R;
 import com.juntai.shop.mall.bean.CartItemLocB;
 import com.juntai.shop.mall.bean.GoodsB;
 import com.juntai.shop.mall.bean.IntBean;
+import com.juntai.shop.mall.bean.event.EventDetailsMessage;
 import com.juntai.shop.mall.ui.goods.SpecificationsDialog;
 import com.juntai.shop.mall.ui.goods.adt.AttributesAdapter;
 import com.juntai.shop.mall.utils.AppUtils;
@@ -77,8 +78,6 @@ public class GoodsDetailsFragment extends BaseFragment implements View.OnClickLi
         //
         recyclerView = getView(R.id.goods_deatils_attributes);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        //添加默认分割线
-        recyclerView.addItemDecoration(new DividerItemDecoration(mContext,DividerItemDecoration.VERTICAL));
         attributesAdapter = new AttributesAdapter(R.layout.item_attributes,new ArrayList());
         recyclerView.setAdapter(attributesAdapter);
         //
@@ -90,10 +89,10 @@ public class GoodsDetailsFragment extends BaseFragment implements View.OnClickLi
         countview = getView(R.id.details_countview);
         ivSpc = getView(R.id.goods_deatils_specification);
         ivSpc.setOnClickListener(this);
-
+        getView(R.id.title_goods_back).setOnClickListener(this);
         /*anner*/
         banner = getView(R.id.banner);
-        banner.isAutoPlay(false);
+        banner.isAutoPlay(true);
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
         banner.setImageLoader(new GlideImageLoader());
 
@@ -162,11 +161,16 @@ public class GoodsDetailsFragment extends BaseFragment implements View.OnClickLi
         }
     }
 
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.title_goods_check:
                 collect();
+                break;
+            case R.id.title_goods_back:
+                //商品详情返回
+                EventBus.getDefault().post(new EventDetailsMessage(-1));
                 break;
             case R.id.title_goods_more:
                 showPopMore();
@@ -202,9 +206,11 @@ public class GoodsDetailsFragment extends BaseFragment implements View.OnClickLi
                         if (goodsB.getIsType() == 0){
                             //默认单规格
                             countview.setVisibility(View.VISIBLE);
+                            ivSpc.setVisibility(View.GONE);
                             countview.setMaxNumber(goodsB.getSku().get(0).getInventoryNum());
                         }else {
                             ivSpc.setVisibility(View.VISIBLE);
+                            countview.setVisibility(View.GONE);
                         }
                         btnStatus();
                         List<String> images = new ArrayList<>();

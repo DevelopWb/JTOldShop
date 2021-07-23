@@ -77,11 +77,12 @@ public class ReportActivity extends BaseActivity implements View.OnClickListener
                 .setImageChoose(new ImageSelect(this))
                 .setImageLoader(new ImageSelectLoad())
                 .setNumColumn(4)
-                .setImageAddResource(R.mipmap.empty_image)
+                .setCloseResource(R.mipmap.ic_report_close)
+                .setImageAddResource(R.mipmap.upload_pics_icon)
                 .setVideoAddRous(R.mipmap.ic_report_video)
                 .setScaleType(ImageView.ScaleType.FIT_CENTER)
                 .init();
-        imageSelectionView.setBackgroundResource(R.color.content_layout);
+        imageSelectionView.setBackgroundResource(R.drawable.bg_round_white);
         imageSelectionView.addImagePath(new Bean(null,true));
         imageSelectionView.setRemoveListener(new RemoveListener() {
             @Override

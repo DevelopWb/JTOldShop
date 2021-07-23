@@ -61,7 +61,7 @@ public class AfterSalesActivity extends BaseActivity implements View.OnClickList
                 MyApp.app.activityTool.toReturnGoodsActivity(mContext,1,getIntent());
                 break;
             case R.id.after_sales_shang://商家
-                ModuleIm_Init.chat(mContext,shopAccount,name);
+//                ModuleIm_Init.chat(mContext,shopAccount,name);
                 break;
             case R.id.after_sales_kefu://客服
                 if (MyApp.app.customerServicePhone != null && !MyApp.app.customerServicePhone.isEmpty()){

@@ -12,8 +12,7 @@
             android:id="@+id/banner"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:elevation="10dp"
+            android:layout_height="200dp"
             app:indicator_drawable_selected="@mipmap/ic_banner_select"
             app:indicator_drawable_unselected="@mipmap/ic_banner_unselect"/>
     </androidx.constraintlayout.widget.ConstraintLayout>

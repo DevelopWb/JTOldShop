@@ -37,7 +37,7 @@ public class MapDateListDialog extends BottomDialogFragment {
             MyApp.app.activityTool.toShopActivity(getActivity(),adapter.getData().get(position).getId());
         });
         adapter.setOnItemChildClickListener((adapter1, view1, position) -> {
-            if (view1.getId() == R.id.item_dialog_map_dh){
+            if (view1.getId() == R.id.item_dialog_map_navigation_tv){
 //                navigationDialog.setData(adapter.getData().get(position).getLatitude(),
 //                        adapter.getData().get(position).getLongitude(),
 //                        adapter.getData().get(position).getAddress(),

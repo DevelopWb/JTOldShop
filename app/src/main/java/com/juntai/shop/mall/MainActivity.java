@@ -70,11 +70,6 @@ public class MainActivity extends BaseAppActivity implements ViewPager.OnPageCha
         mFragments.add(new MineFragment());
         //
         initTab();
-
-
-        //获取指定时间的时间戳，除以1000说明得到的是秒级别的时间戳（10位）
-        long time = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).parse("2019-12-19 16:00:00", new ParsePosition(0)).getTime() / 1000;
-        long time2 = System.currentTimeMillis() / 1000;
     }
 
     String[] permissions = new String[]{
@@ -87,7 +82,7 @@ public class MainActivity extends BaseAppActivity implements ViewPager.OnPageCha
     @Override
     public void initData() {
         if (MyApp.app.getUser() != null) {
-            ModuleIm_Init.connectIM(MyApp.app.getUser().getReturnValue().getrOngYunToken());
+//            ModuleIm_Init.connectIM(MyApp.app.getUser().getReturnValue().getrOngYunToken());
         }
 
         //权限
@@ -156,7 +151,7 @@ public class MainActivity extends BaseAppActivity implements ViewPager.OnPageCha
     public void onLoginOutEvent(IMLoginOutEvent login) {
         ToastUtils.toast(mContext, login.toast);
         //重新登录
-        ModuleIm_Init.logout();
+//        ModuleIm_Init.logout();
         //登录信息设置为空
         SPTools.saveString(MyApp.app, AppUtils.SP_KEY_LOGIN, "");
         MyApp.app.setUserBean(null);

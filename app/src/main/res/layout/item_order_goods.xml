@@ -33,17 +33,6 @@
         android:textSize="13sp"
         android:textColor="@color/gray"/>
     <TextView
-        android:id="@+id/item_order_pack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/item_order_goodsimage"
-        android:layout_below="@+id/item_order_specification"
-        android:layout_toLeftOf="@+id/item_order_goods_price"
-        android:ellipsize="end"
-        android:textSize="13sp"
-        android:text="包装费"
-        android:textColor="@color/gray"/>
-    <TextView
         android:id="@+id/item_order_goods_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

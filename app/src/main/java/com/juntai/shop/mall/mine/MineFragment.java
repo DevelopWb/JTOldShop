@@ -177,7 +177,7 @@ public class MineFragment extends BaseLazyFragment implements View.OnClickListen
                             tvWx.setText(result.getReturnValue().getWeChatName());
                             tvQQ.setText(result.getReturnValue().getQqName());
                             //
-                            ModuleIm_Init.setUser(new UserIM(String.valueOf(result.getReturnValue().getId()),result.getReturnValue().getNickName(), AppHttpPath.IMAGE + result.getReturnValue().getHeadUrl()));
+//                            ModuleIm_Init.setUser(new UserIM(String.valueOf(result.getReturnValue().getId()),result.getReturnValue().getNickName(), AppHttpPath.IMAGE + result.getReturnValue().getHeadUrl()));
                             ImageLoadUtil.loadCircularImage(
                                     mContext,
                                     AppHttpPath.IMAGE + result.getReturnValue().getHeadUrl(),
@@ -241,7 +241,7 @@ public class MineFragment extends BaseLazyFragment implements View.OnClickListen
                     @Override
                     public void onSuccess(BaseResult result) {
                         userB = null;
-                        ModuleIm_Init.logout();
+//                        ModuleIm_Init.logout();
                         tvNick.setText("未登录");
 
                         tvNick.setOnClickListener(toLoginListener);

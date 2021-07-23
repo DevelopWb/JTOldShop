@@ -38,8 +38,8 @@ public class MyOrderAdapter extends BaseQuickAdapter<OrderListBean.ReturnValueBe
                            R.id.item_myorder_cancle,
                            R.id.item_myorder_fukuan,
                            R.id.item_myorder_more};
-    //待发货
-    Integer[] ids1 = new Integer[]{R.id.item_myorder_wuliu};
+//    //待发货
+//    Integer[] ids1 = new Integer[]{R.id.item_myorder_wuliu};
     //待收货
     Integer[] ids2 = new Integer[]{R.id.item_myorder_wuliu, R.id.item_myorder_shouhuo};
     //待评价
@@ -56,7 +56,7 @@ public class MyOrderAdapter extends BaseQuickAdapter<OrderListBean.ReturnValueBe
     public MyOrderAdapter(int layoutResId, List data) {
         super(layoutResId, data);
         map.put(0, Arrays.asList(ids0));
-        map.put(1, Arrays.asList(ids1));
+//        map.put(1, Arrays.asList(ids1));
         map.put(2, Arrays.asList(ids2));
         map.put(3, Arrays.asList(ids3));
         map.put(4, Arrays.asList(ids4_7));

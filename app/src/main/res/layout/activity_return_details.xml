@@ -135,8 +135,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
+                    android:drawableLeft="@mipmap/shop_icon"
                     android:maxLines="1"
-                    android:textSize="18sp"
+                    android:drawablePadding="5dp"
+                    android:textSize="16dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"/>
                 <androidx.recyclerview.widget.RecyclerView
@@ -157,18 +159,26 @@
                 android:padding="10dp"
                 android:elevation="5dp"
                 android:background="@drawable/bg_round_white">
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:text="订单信息"/>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@color/gray"/>
+                    android:padding="10dp"
+                    android:layout_height="wrap_content">
+
+                    <View
+                        android:layout_width="2dp"
+                        android:background="@color/red"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:layout_height="match_parent"></View>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:textSize="16dp"
+                        android:text="订单信息" />
+
+                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -179,6 +189,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textSize="14dp"
                         android:text="退款原因"/>
                     <EditText
                         android:id="@+id/return_details_case"
@@ -198,6 +209,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textSize="14dp"
+
                         android:text="退款金额"/>
                     <TextView
                         android:id="@+id/return_details_price2"
@@ -215,6 +228,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textSize="14dp"
+
                         android:text="商品数量"/>
                     <TextView
                         android:id="@+id/return_details_count"
@@ -232,6 +247,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textSize="14dp"
+
                         android:text="申请时间"/>
                     <TextView
                         android:id="@+id/return_details_time"
@@ -249,6 +266,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textSize="14dp"
+
                         android:text="退款编号"/>
                     <TextView
                         android:id="@+id/return_details_number"
@@ -260,7 +279,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingLeft="10dp">
+                    android:padding="15dp"
+                    >
                     <TextView
                         android:id="@+id/return_details_im"
                         android:layout_width="wrap_content"

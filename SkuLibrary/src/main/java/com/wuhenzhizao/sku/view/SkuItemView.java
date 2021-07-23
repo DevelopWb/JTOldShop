@@ -36,12 +36,12 @@ public class SkuItemView extends TextView {
     private void init(Context context) {
         setBackgroundResource(R.drawable.sku_item_selector);
         setTextColor(getResources().getColorStateList(R.color.sku_item_text_selector));
-        setTextSize(TypedValue.COMPLEX_UNIT_DIP, 11);
+        setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12);
         setSingleLine();
         setGravity(Gravity.CENTER);
         setPadding(ScreenUtils.dp2PxInt(context, 10), 0, ScreenUtils.dp2PxInt(context, 10), 0);
 
-        setMinWidth(ScreenUtils.dp2PxInt(context, 45));
+        setMinWidth(ScreenUtils.dp2PxInt(context, 30));
         setMaxWidth(ScreenUtils.dp2PxInt(context, 200));
     }
 

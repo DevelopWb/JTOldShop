@@ -64,7 +64,7 @@ public class SectionClassftAdapter extends BaseSectionQuickAdapter<MySection, Ba
                     item.t.getPrice(),item.t.getAttrId(),"");
             EventBus.getDefault().post(cartItemLocB);
         });
-        ImageLoadUtil.loadImage(mContext, AppHttpPath.IMAGE + item.t.getCommodityImg(),R.mipmap.empty_image,helper.getView(R.id.item_shop_goodsimage));
+        ImageLoadUtil.loadImage(mContext, AppHttpPath.IMAGE + item.t.getCommodityImg(),R.drawable.nopicture,helper.getView(R.id.item_shop_goodsimage));
         //没有多规格，显示添加购物车。多规格显示选规格
         if (item.t.getIsType() == 0){
             if (item.t.getInventoryNum() < item.t.getCommodityNum()){

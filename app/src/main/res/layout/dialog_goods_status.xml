@@ -1,76 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/address_select_layout"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/bg_round_top_white"
     android:gravity="center_horizontal"
-    android:padding="10dp"
-    android:background="@drawable/bg_round_top_white">
+    android:orientation="vertical"
+    android:padding="10dp">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textSize="20sp"
-            android:text="货物状态"/>
+            android:text="货物状态"
+            android:textSize="20sp" />
+
         <ImageView
             android:id="@+id/dialog_goods_status_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:padding="5dp"
-            android:layout_alignParentRight="true"
-            android:src="@mipmap/ic_dialog_close"/>
+            android:src="@mipmap/ic_dialog_close" />
     </RelativeLayout>
+
 
     <LinearLayout
         android:id="@+id/dialog_goods_status_layout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="10dp"
-        android:gravity="center_vertical">
+        android:padding="10dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:text="未收到货"/>
+            android:text="未收到货" />
+
         <RadioButton
             android:id="@+id/dialog_goods_status_radio1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
-            android:button="@drawable/radiobutton"/>
+            android:clickable="false"
+            android:focusable="false"
+            android:button="@drawable/radiobutton_return"
+            android:checked="true" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/dialog_goods_status_layout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="10dp"
-        android:gravity="center_vertical">
+        android:padding="10dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:text="已收到货"/>
+            android:text="已收到货" />
+
         <RadioButton
             android:id="@+id/dialog_goods_status_radio2"
             android:layout_width="wrap_content"
+            android:clickable="false"
+            android:focusable="false"
             android:layout_height="wrap_content"
-            android:button="@drawable/radiobutton"/>
+            android:button="@drawable/radiobutton_return" />
     </LinearLayout>
 
-    <ImageView
+    <TextView
         android:id="@+id/dialog_goods_status_qd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/pre_dialog_qd"
-        android:layout_margin="15dp"/>
+        style="@style/bt_style"
+        android:layout_margin="15dp"
+        android:text="确定" />
 </LinearLayout>

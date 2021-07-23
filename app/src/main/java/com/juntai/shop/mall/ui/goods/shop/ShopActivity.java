@@ -135,9 +135,6 @@ public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPa
         }else {
             getSupportFragmentManager().beginTransaction().hide(detailsFragment).commit();
         }
-
-        //ShopCartFragment shopCartFragment = new ShopCartFragment();
-        //getSupportFragmentManager().beginTransaction().add(R.id.shop_shopcart_goodsdetails,shopCartFragment,"cart").show(shopCartFragment).commit();
     }
 
     /**
@@ -225,7 +222,7 @@ public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPa
                             mAppBarLayout.setVisibility(View.GONE);
                         }
                         //
-                        ModuleIm_Init.setUser(new UserIM(shopInfoBean.getShopAccount(),shopName,StringTools.getImageForCrmInt(shopInfoBean.getShopUserId())));
+//                        ModuleIm_Init.setUser(new UserIM(shopInfoBean.getShopAccount(),shopName,StringTools.getImageForCrmInt(shopInfoBean.getShopUserId())));
                     }
                     @Override
                     public void onError(String msg) {
@@ -384,10 +381,6 @@ public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPa
                             StringTools.getImageForCrmInt(shopInfoBean.getLogoId()));
                 }
                 break;
-            case R.id.title_goods_back:
-                //商品详情返回
-                onMessageEvent(new EventDetailsMessage(-1));
-                break;
             case R.id.title_shop_back:
                 finish();
                 break;
@@ -478,11 +471,15 @@ public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPa
             //隐藏fragment
 //            titlelayout.setVisibility(View.VISIBLE);
             mAppBarLayout.setVisibility(View.VISIBLE);
+            //状态栏字体颜色变成白色
+            mImmersionBar.statusBarDarkFont(false).init();
             getSupportFragmentManager().beginTransaction().hide(detailsFragment).commit();
         }else {
 //            titlelayout.setVisibility(View.GONE);
             mAppBarLayout.setVisibility(View.GONE);
             detailsFragment.setGoodsId(detailsMessage.goodsId);
+            //状态栏字体颜色变成黑色
+            mImmersionBar.statusBarDarkFont(true).init();
             getSupportFragmentManager().beginTransaction().show(detailsFragment).commit();
         }
         glideImageLoader.pause();
@@ -517,6 +514,7 @@ public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPa
         if (detailsFragment.isVisible()){
             getSupportFragmentManager().beginTransaction().hide(detailsFragment).commit();
 //            titlelayout.setVisibility(View.VISIBLE);
+            mImmersionBar.statusBarDarkFont(false).init();
             mAppBarLayout.setVisibility(View.VISIBLE);
         }else {
             super.onBackPressed();

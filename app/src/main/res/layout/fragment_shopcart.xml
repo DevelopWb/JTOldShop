@@ -29,42 +29,22 @@
         <LinearLayout
             android:id="@+id/dialog_shopcart_Layout"
             android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone"
             android:layout_weight="1">
-            <LinearLayout
-                android:id="@+id/dialog_shopcart_list_top"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/dialog_shopcart_clear"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:text="包装费"/>
-                <TextView
-                    android:id="@+id/shop_cart_packprice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:textColor="@color/orange"
-                    android:layout_marginLeft="10dp"
-                    android:text="￥0"/>
-
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="1dp"
-                    android:layout_weight="1"/>
-                <TextView
-                    android:id="@+id/dialog_shopcart_clear"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:textColor="@color/gray"
-                    android:text="清空购物车"/>
-            </LinearLayout>
+                android:textSize="12sp"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingRight="20dp"
+                android:layout_gravity="right"
+                android:textColor="@color/red"
+                android:text="清空购物车"/>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/dialog_shopcart_recyclerView"
                 android:layout_width="match_parent"

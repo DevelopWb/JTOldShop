@@ -57,14 +57,14 @@ public class SkuItemLayout extends LinearLayout {
 
         attributeValueLayout = new FlowLayout(context);
         attributeValueLayout.setId(ViewUtils.generateViewId());
-        attributeValueLayout.setMinimumHeight(ScreenUtils.dp2PxInt(context, 25));
+        attributeValueLayout.setMinimumHeight(ScreenUtils.dp2PxInt(context, 20));
         attributeValueLayout.setChildSpacing(ScreenUtils.dp2PxInt(context, 5));
         attributeValueLayout.setRowSpacing(ScreenUtils.dp2PxInt(context, 10));
         LayoutParams attributeValueParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         attributeValueParams.leftMargin = ScreenUtils.dp2PxInt(context, 15);
         attributeValueParams.rightMargin = ScreenUtils.dp2PxInt(context, 15);
         attributeValueParams.topMargin = ScreenUtils.dp2PxInt(context, 5);
-        attributeValueParams.bottomMargin = ScreenUtils.dp2PxInt(context, 5);
+        attributeValueParams.bottomMargin = ScreenUtils.dp2PxInt(context, 0);
         attributeValueLayout.setLayoutParams(attributeValueParams);
         addView(attributeValueLayout);
 

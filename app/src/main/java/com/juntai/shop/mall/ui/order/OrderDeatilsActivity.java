@@ -60,7 +60,7 @@ public class OrderDeatilsActivity extends BaseActivity implements View.OnClickLi
         tvStatus = findViewById(R.id.order_details_status);
         tvName = findViewById(R.id.order_details_name);
         tvPrice = findViewById(R.id.order_details_price);
-        tvPrice1 = findViewById(R.id.order_details_price1);
+//        tvPrice1 = findViewById(R.id.order_details_price1);
         tvPrice2 = findViewById(R.id.order_details_price2);
         editNum = findViewById(R.id.order_details_num);
         tvTimeCreate = findViewById(R.id.order_details_time_create);
@@ -115,7 +115,7 @@ public class OrderDeatilsActivity extends BaseActivity implements View.OnClickLi
 
                         tvStatus.setText(mapStr.get(orderInfoBean.getStatus()));
                         tvName.setText(orderInfoBean.getShopName());
-                        tvPrice1.setText("￥" + orderInfoBean.getSumPackingCharges()+"元");
+//                        tvPrice1.setText("￥" + orderInfoBean.getSumPackingCharges()+"元");
                         tvPrice2.setText("￥" + orderInfoBean.getTransportCharges()+"元");
                         tvPrice.setText("￥" + orderInfoBean.getFooting()+"元");
                         editNum.setText(orderInfoBean.getOrderFormNumber());
@@ -133,7 +133,7 @@ public class OrderDeatilsActivity extends BaseActivity implements View.OnClickLi
                         tvCount.setText(String.valueOf(count));
                         
                         //
-                        ModuleIm_Init.setUser(new UserIM(orderInfoBean.getShopAccount(),orderInfoBean.getShopName() , StringTools.getImageForCrmInt(orderInfoBean.getShopUserId())));
+//                        ModuleIm_Init.setUser(new UserIM(orderInfoBean.getShopAccount(),orderInfoBean.getShopName() , StringTools.getImageForCrmInt(orderInfoBean.getShopUserId())));
                     }
                     @Override
                     public void onError(String msg) {
@@ -148,7 +148,7 @@ public class OrderDeatilsActivity extends BaseActivity implements View.OnClickLi
         switch (v.getId()){
             case R.id.order_details_im://im
 
-                ModuleIm_Init.chat(mContext,orderInfoBean.getShopAccount(),orderInfoBean.getShopName());
+//                ModuleIm_Init.chat(mContext,orderInfoBean.getShopAccount(),orderInfoBean.getShopName());
                 break;
             case R.id.order_details_call://电话
                 if (orderInfoBean.getContactsPhone() != null && !orderInfoBean.getContactsPhone().isEmpty()){

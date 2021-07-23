@@ -13,7 +13,7 @@
         android:layout_height="60dp"
         android:layout_marginLeft="10dp"
         android:contentDescription="@string/app_name"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         android:src="@drawable/nopicture"
         android:transitionName="transimage"
         app:layout_constraintBottom_toBottomOf="parent"

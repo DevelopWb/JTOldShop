@@ -152,27 +152,6 @@
                 android:layout_height="wrap_content"
                  />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="3dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="包装费"
-                    android:textSize="14dp" />
-
-                <TextView
-                    android:id="@+id/order_comfirm_bzf"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="￥0.0元"
-                    android:textColor="@color/red"
-                    android:textSize="14dp" />
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

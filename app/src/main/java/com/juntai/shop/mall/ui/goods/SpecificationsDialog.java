@@ -15,8 +15,11 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.juntai.mall.base.base.BaseObserver;
 import com.juntai.mall.base.utils.ToastUtils;
+import com.juntai.mall.base.widght.BottomDialogFragment;
 import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
@@ -41,53 +44,80 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * 商品规格选择
  */
-public class SpecificationsDialog extends DialogFragment {
+public class SpecificationsDialog extends BottomDialogFragment {
     CountView countview;
     TextView tvPrice,tvTitle,tvSpecfication,tvKc;
-    View view;
     int goodsId;
     SkuSelectScrollView selectScrollView;
     GoodsB.ReturnValueBean goodsB;
     boolean isSelectAll = false;
     GoodsB.ReturnValueBean.SkuBean nowSku;
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.dialog_specifications,container,false);
-        initView();
-        return view;
+
+
+    public void setCountData(Sku sku){
+        isSelectAll = true;
+        SS ss = (SS) sku;
+        nowSku = (GoodsB.ReturnValueBean.SkuBean) ss.bean;
+        tvKc.setText(String.format("(库存:%s)",sku.getStockQuantity()));
+        tvPrice.setText(String.valueOf(nowSku.getPrice()));
+        countview.setNumber(0);
+        countview.setNumEdit(true);
+        countview.setMaxNumber(nowSku.getInventoryNum());
+        for (CartItemLocB b: MyApp.app.getCartBeansForShop(ShopActivity.shopId)) {
+            if (Integer.parseInt(sku.getId()) == b.getSpcId()){
+                //购物车有
+                countview.setNumber(b.getNum());
+            }
+        }
+        stringBuffer = new StringBuffer();
+        for (SkuAttribute bean:sku.getAttributes()) {
+            stringBuffer.append(bean.getValue()+" ");
+        }
+        tvSpecfication.setText(stringBuffer.toString());
+        //设置该规格最大库存
+        if (countview != null){
+            countview.setMaxNumber(nowSku.getInventoryNum());
+        }
+        if (onXXListener != null){
+            onXXListener.selectedComplete(nowSku.getAttributeId());
+        }
+    }
+
+    //已选规格名称
+    StringBuffer stringBuffer;
+
+    public void setGoodsId(int goodsId) {
+        this.goodsId = goodsId;
+    }
+
+    /**
+     * 规格选择
+     */
+    OnXXListener onXXListener;
+    public void setOnXXListener(OnXXListener listener) {
+        this.onXXListener = listener;
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        // 设置宽度为屏宽、位置靠近屏幕底部
-        Window window = getDialog().getWindow();
-        //window.setWindowAnimations(R.style.dialogWindowAnim);
-        window.setBackgroundDrawableResource(com.juntai.mall.base.R.color.transparent);
-        WindowManager.LayoutParams wlp = window.getAttributes();
-        wlp.gravity = Gravity.CENTER;
-        wlp.width = MyApp.W - MyApp.W / 20;
-//        wlp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        wlp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        window.setAttributes(wlp);
-        getDialog().setOnDismissListener(dialog -> {
-            if (onXXListener != null){
-                onXXListener.onDismiss();
-            }
-        });
-        if (wlp.height > MyApp.H / 2){
-            wlp.height = MyApp.H / 2;
-        }
+    public int setView() {
+        return R.layout.dialog_specifications;
     }
-    public void initView(){
+
+    @Override
+    public void initView(View view) {
         selectScrollView = view.findViewById(R.id.skuSelectScrollView);
         tvPrice = view.findViewById(R.id.specfication_price);
         tvKc = view.findViewById(R.id.specfication_kucun);
+        setCancelable(false);
         tvTitle = view.findViewById(R.id.specfication_title);
+        view.findViewById(R.id.close_dialog_tv).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
         tvSpecfication = view.findViewById(R.id.specfication_text);
         countview = view.findViewById(R.id.specfication_countview);
-        view.findViewById(R.id.specfication_close).setOnClickListener(v -> dismiss());
         countview.setNumber(0);
         countview.setNumEdit(false);
 //        tvPrice.setText(String.valueOf(price));
@@ -134,48 +164,9 @@ public class SpecificationsDialog extends DialogFragment {
 
     }
 
-    public void setCountData(Sku sku){
-        isSelectAll = true;
-        SS ss = (SS) sku;
-        nowSku = (GoodsB.ReturnValueBean.SkuBean) ss.bean;
-        tvKc.setText(String.format("(库存:%s)",sku.getStockQuantity()));
-        tvPrice.setText(String.valueOf(nowSku.getPrice()));
-        countview.setNumber(0);
-        countview.setNumEdit(true);
-        countview.setMaxNumber(nowSku.getInventoryNum());
-        for (CartItemLocB b: MyApp.app.getCartBeansForShop(ShopActivity.shopId)) {
-            if (Integer.parseInt(sku.getId()) == b.getSpcId()){
-                //购物车有
-                countview.setNumber(b.getNum());
-            }
-        }
-        stringBuffer = new StringBuffer();
-        for (SkuAttribute bean:sku.getAttributes()) {
-            stringBuffer.append(bean.getValue()+" ");
-        }
-        tvSpecfication.setText(stringBuffer.toString());
-        //设置该规格最大库存
-        if (countview != null){
-            countview.setMaxNumber(nowSku.getInventoryNum());
-        }
-        if (onXXListener != null){
-            onXXListener.selectedComplete(nowSku.getAttributeId());
-        }
-    }
-
-    //已选规格名称
-    StringBuffer stringBuffer;
-
-    public void setGoodsId(int goodsId) {
-        this.goodsId = goodsId;
-    }
-
-    /**
-     * 规格选择
-     */
-    OnXXListener onXXListener;
-    public void setOnXXListener(OnXXListener listener) {
-        this.onXXListener = listener;
+    @Override
+    public int dialogHeight() {
+        return WindowManager.LayoutParams.WRAP_CONTENT;
     }
 
     /**

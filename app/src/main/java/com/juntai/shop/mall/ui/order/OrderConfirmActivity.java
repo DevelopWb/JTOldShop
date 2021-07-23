@@ -39,7 +39,7 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
     AddressSelectDialog selectDialog;
     RelativeLayout relativeLayoutAdd;
     RecyclerView recyclerView;
-    TextView tvShopName,tvPrice1,tvPrice2,tvRemark,tvName,tvPhone,tvAddress,tvY,tvB;
+    TextView tvShopName,tvPrice1,tvPrice2,tvRemark,tvName,tvPhone,tvAddress,tvY;
     int shopid,logoId;
     private MyOrderGoodsAdapter adapter;
     double price1,price2;
@@ -66,7 +66,6 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
         tvPrice1 = findViewById(R.id.order_comfirm_price1);
         tvPrice2 = findViewById(R.id.order_comfirm_price2);
         tvY = findViewById(R.id.order_comfirm_yf);
-        tvB = findViewById(R.id.order_comfirm_bzf);
         tvRemark = findViewById(R.id.order_comfirm_remarks);
 
         shopid = getIntent().getIntExtra("id",-1);
@@ -105,7 +104,6 @@ public class OrderConfirmActivity extends BaseActivity implements View.OnClickLi
                         price1 = o.getReturnValue().getSumPackingCharges();
                         price2 = o.getReturnValue().getFooting();
                         tvY.setText(String.format("￥%s",o.getReturnValue().getTransportCharges()));
-                        tvB.setText(String.format("￥%s",o.getReturnValue().getSumPackingCharges()));
                         tvPrice1.setText(String.format("￥%s",String.valueOf(o.getReturnValue().getFooting())));
                         tvPrice2.setText(String.format("￥%s",String.valueOf(o.getReturnValue().getFooting())));
                         adapter.getData().clear();

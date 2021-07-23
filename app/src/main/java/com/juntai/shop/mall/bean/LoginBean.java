@@ -77,59 +77,59 @@ public class LoginBean extends BaseResult {
         }
 
         public String getAccount() {
-            return account;
+            return account == null ? "" : account;
         }
 
         public void setAccount(String account) {
-            this.account = account;
+            this.account = account == null ? "" : account;
         }
 
         public String getPassword() {
-            return password;
+            return password == null ? "" : password;
         }
 
         public void setPassword(String password) {
-            this.password = password;
+            this.password = password == null ? "" : password;
         }
 
         public String getPhone() {
-            return phone;
+            return phone == null ? "" : phone;
         }
 
         public void setPhone(String phone) {
-            this.phone = phone;
+            this.phone = phone == null ? "" : phone;
         }
 
         public String getNickName() {
-            return nickName;
+            return nickName == null ? "" : nickName;
         }
 
         public void setNickName(String nickName) {
-            this.nickName = nickName;
+            this.nickName = nickName == null ? "" : nickName;
         }
 
         public String getHeadUrl() {
-            return headUrl;
+            return headUrl == null ? "" : headUrl;
         }
 
         public void setHeadUrl(String headUrl) {
-            this.headUrl = headUrl;
+            this.headUrl = headUrl == null ? "" : headUrl;
         }
 
         public String getBirthday() {
-            return birthday;
+            return birthday == null ? "" : birthday;
         }
 
         public void setBirthday(String birthday) {
-            this.birthday = birthday;
+            this.birthday = birthday == null ? "" : birthday;
         }
 
         public String getrOngYunToken() {
-            return rOngYunToken;
+            return rOngYunToken == null ? "" : rOngYunToken;
         }
 
         public void setrOngYunToken(String rOngYunToken) {
-            this.rOngYunToken = rOngYunToken;
+            this.rOngYunToken = rOngYunToken == null ? "" : rOngYunToken;
         }
 
         public int getSex() {
@@ -149,35 +149,35 @@ public class LoginBean extends BaseResult {
         }
 
         public String getWeChatId() {
-            return weChatId;
+            return weChatId == null ? "" : weChatId;
         }
 
         public void setWeChatId(String weChatId) {
-            this.weChatId = weChatId;
+            this.weChatId = weChatId == null ? "" : weChatId;
         }
 
         public String getWeChatName() {
-            return weChatName;
+            return weChatName == null ? "" : weChatName;
         }
 
         public void setWeChatName(String weChatName) {
-            this.weChatName = weChatName;
+            this.weChatName = weChatName == null ? "" : weChatName;
         }
 
         public String getQqId() {
-            return qqId;
+            return qqId == null ? "" : qqId;
         }
 
         public void setQqId(String qqId) {
-            this.qqId = qqId;
+            this.qqId = qqId == null ? "" : qqId;
         }
 
         public String getQqName() {
-            return qqName;
+            return qqName == null ? "" : qqName;
         }
 
         public void setQqName(String qqName) {
-            this.qqName = qqName;
+            this.qqName = qqName == null ? "" : qqName;
         }
 
         public int getStatus() {
@@ -197,27 +197,27 @@ public class LoginBean extends BaseResult {
         }
 
         public String getGmtCreate() {
-            return gmtCreate;
+            return gmtCreate == null ? "" : gmtCreate;
         }
 
         public void setGmtCreate(String gmtCreate) {
-            this.gmtCreate = gmtCreate;
+            this.gmtCreate = gmtCreate == null ? "" : gmtCreate;
         }
 
         public String getLastLoginTime() {
-            return lastLoginTime;
+            return lastLoginTime == null ? "" : lastLoginTime;
         }
 
         public void setLastLoginTime(String lastLoginTime) {
-            this.lastLoginTime = lastLoginTime;
+            this.lastLoginTime = lastLoginTime == null ? "" : lastLoginTime;
         }
 
         public String getToken() {
-            return token;
+            return token == null ? "" : token;
         }
 
         public void setToken(String token) {
-            this.token = token;
+            this.token = token == null ? "" : token;
         }
     }
 }

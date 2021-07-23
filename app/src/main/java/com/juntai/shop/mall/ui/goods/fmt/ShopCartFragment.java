@@ -33,7 +33,7 @@ public class ShopCartFragment extends BaseFragment implements View.OnClickListen
     LinearLayout linearLayout;
     ImageView cartImage;
     View view1,view2;
-    TextView tvCartNumber,tvCartpackprice,tvCartPrice;
+    TextView tvCartNumber,tvCartPrice;
     ArrayList<CartItemLocB> locBArrayList = new ArrayList<>();
     @Override
     protected int getLayoutRes() {
@@ -47,10 +47,10 @@ public class ShopCartFragment extends BaseFragment implements View.OnClickListen
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         cartImage = getView(R.id.shop_car_iv);
         tvCartNumber = getView( R.id.selected_goods_account_tv);
-        tvCartpackprice = getView( R.id.shop_cart_packprice);
         tvCartPrice = getView( R.id.goods_total_money_tv);
         linearLayout = getView(R.id.dialog_shopcart_Layout);
         cartImage.setOnClickListener(this);
+        getView(R.id.shopping_car_tv).setOnClickListener(this);
         view1 = getView(R.id.dialog_shopcart_nullview1);
         view2 = getView(R.id.dialog_shopcart_nullview2);
         view1.setOnClickListener(this);
@@ -99,7 +99,6 @@ public class ShopCartFragment extends BaseFragment implements View.OnClickListen
         }
         if (cartSize == 0){
             tvCartNumber.setVisibility(View.INVISIBLE);
-            tvCartpackprice.setText("￥0");
             tvCartPrice.setText("0");
             linearLayout.setVisibility(View.GONE);
             view1.setVisibility(View.GONE);
@@ -107,7 +106,6 @@ public class ShopCartFragment extends BaseFragment implements View.OnClickListen
         }else {
             tvCartNumber.setVisibility(View.VISIBLE);
             tvCartNumber.setText("X" + cartSize);
-            tvCartpackprice.setText("￥" + sumPack);
             tvCartPrice.setText("" + sumPrice);
         }
         cartItemAdapter.notifyDataSetChanged();
@@ -129,13 +127,16 @@ public class ShopCartFragment extends BaseFragment implements View.OnClickListen
                     }
                 }
                 break;
+            case R.id.shopping_car_tv:
+                cartImage.performClick();
+                break;
             case R.id.dialog_shopcart_nullview1://
                 linearLayout.setVisibility(View.GONE);
                 view1.setVisibility(View.GONE);
                 view2.setVisibility(View.GONE);
                 break;
             case R.id.shop_cs_iv://联系商家
-                ModuleIm_Init.chat(mContext,ShopActivity.shopRyid,ShopActivity.shopName);
+//                ModuleIm_Init.chat(mContext,ShopActivity.shopRyid,ShopActivity.shopName);
                 break;
             case R.id.shopcart_confirm://确定
                 EventBus.getDefault().post(new EventToSubmit());

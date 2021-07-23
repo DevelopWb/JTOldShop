@@ -135,7 +135,7 @@ public class MyOrderFragment extends BaseLazyFragment {
                 case R.id.item_myorder_maijia://联系卖家
                     //im
                     // TODO: 2021/7/15 联系卖家 跳转到聊天的界面
-                    ModuleIm_Init.chat(mContext,adapter.getData().get(position).getShopAccount(),adapter.getData().get(position).getShopName());
+//                    ModuleIm_Init.chat(mContext,adapter.getData().get(position).getShopAccount(),adapter.getData().get(position).getShopName());
                     break;
                 case R.id.item_myorder_cancle://取消订单
                     nowUrl = AppHttpPath.ORDER_MY_QX;

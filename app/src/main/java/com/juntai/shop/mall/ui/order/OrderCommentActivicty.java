@@ -25,6 +25,7 @@ import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppHttpPath;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
+import com.juntai.shop.mall.mine.ui.MyOrderActivity;
 import com.juntai.shop.mall.utils.imageselect.ImageSelect;
 import com.juntai.shop.mall.utils.imageselect.ImageSelectLoad;
 import com.zhihu.matisse.Matisse;
@@ -51,7 +52,6 @@ import top.zibin.luban.OnCompressListener;
  * on 2019/12/9
  */
 
-// TODO: 2021/7/15   发表订单评价  这个效果图还没有出 
 public class OrderCommentActivicty extends BaseActivity {
     RadioGroup radioGroup;//1-5
     RatingBar ratingBar;//1-5
@@ -102,11 +102,12 @@ public class OrderCommentActivicty extends BaseActivity {
                 .setImageChoose(new ImageSelect(this))
                 .setImageLoader(new ImageSelectLoad())
                 .setNumColumn(4)
-                .setImageAddResource(R.mipmap.empty_image)
+                .setCloseResource(R.mipmap.ic_report_close)
+                .setImageAddResource(R.mipmap.upload_pics_icon)
                 .setVideoAddRous(R.mipmap.ic_report_video)
                 .setScaleType(ImageView.ScaleType.FIT_CENTER)
                 .init();
-        imageSelectionView.setBackgroundResource(R.color.content_layout);
+        imageSelectionView.setBackgroundResource(R.drawable.bg_round_white);
         imageSelectionView.addImagePath(new Bean(null,true));
         imageSelectionView.setRemoveListener((bean, i) -> {
             if (i == 0 && bean.isVideo()){
@@ -191,7 +192,7 @@ public class OrderCommentActivicty extends BaseActivity {
                     @Override
                     public void onSuccess(BaseResult result) {
                         ToastUtils.success(mContext,result.msg);
-                        finish();
+                       startActivity(new Intent(mContext, MyOrderActivity.class));
                     }
 
                     @Override
