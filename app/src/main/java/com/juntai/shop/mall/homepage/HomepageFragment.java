@@ -257,12 +257,10 @@ public class HomepageFragment extends BaseAppFragment<HomepagePresent> implement
                 }
                 break;
             case R.id.map_menu_weather://天气
-                // TODO: 2021/7/17 暂时跳转到店铺详情
-                MyApp.app.activityTool.toShopActivity(mContext,14);
-//                checkBoxMap.setChecked(false);
-//                checkBoxVideo.setChecked(false);
-//                startActivity(new Intent(mContext, WeatherActivity.class));
-//                checkBoxWeather.setChecked(false);
+                checkBoxMap.setChecked(false);
+                checkBoxVideo.setChecked(false);
+                startActivity(new Intent(mContext, WeatherActivity.class));
+                checkBoxWeather.setChecked(false);
                 break;
             case R.id.map_menu_video://视频
                 checkBoxMap.setChecked(false);

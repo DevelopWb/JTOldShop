@@ -18,6 +18,8 @@ import java.util.List;
  * Created by Ma
  * on 2019/9/7
  */
+
+// TODO: 2021/7/23 订单地址选择  界面待优化
 public class AddressSelectDialog extends BottomDialogFragment {
     RecyclerView recyclerView;
     AddressSelectAdapter listAdapter;

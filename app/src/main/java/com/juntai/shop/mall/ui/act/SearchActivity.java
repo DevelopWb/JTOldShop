@@ -22,12 +22,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.gyf.barlibrary.ImmersionBar;
 import com.juntai.mall.base.base.BaseObserver;
+import com.juntai.mall.base.mvp.BasePresenter;
 import com.juntai.mall.base.utils.DialogUtil;
 import com.juntai.mall.base.utils.SPTools;
 import com.juntai.mall.base.utils.ToastUtils;
 import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
+import com.juntai.shop.mall.baseinfo.BaseAppActivity;
 import com.juntai.shop.mall.bean.SearchGoodsBean;
 import com.juntai.shop.mall.bean.SearchShopBean;
 import com.juntai.shop.mall.ui.adapter.SearchGoodsAdapter;
@@ -53,8 +55,8 @@ import io.reactivex.schedulers.Schedulers;
  * on 2019/11/23
  */
 
-// TODO: 2021/7/16 搜索界面需要优化
-public class SearchActivity extends AppCompatActivity implements View.OnClickListener{
+//  搜索界面需要优化
+public class SearchActivity extends BaseAppActivity implements View.OnClickListener{
     TagFlowLayout flowLayout;
     RelativeLayout relativeLayout;
     LinearLayout linearLayout;
@@ -82,17 +84,24 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     };
 
     @Override
+    protected BasePresenter createPresenter() {
+        return null;
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ImmersionBar.with(this).statusBarDarkFont(true).init();
-        setContentView(R.layout.activity_search);
-        findViewById(R.id.search_back).setOnClickListener(v -> finish());
-        findViewById(R.id.search_top_null_view).getLayoutParams().height = MyApp.statusBarH;
-        initView();
-        initData();
+    }
+
+    @Override
+    public int getLayoutView() {
+        return R.layout.activity_search;
     }
 
     public void initView() {
+        initToolbarAndStatusBar(false);
+        mImmersionBar.statusBarDarkFont(false).init();
+        findViewById(R.id.search_back).setOnClickListener(v -> finish());
         //
         linearLayout = findViewById(R.id.search_parent_layout);
         relativeLayout = findViewById(R.id.search_historry_layout);
@@ -289,54 +298,10 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ImmersionBar.with(this).destroy();
-    }
 
-    /**
-     * 点击空白隐藏键盘
-     * @param event
-     * @param view
-     * @param activity
-     */
-    public void hideKeyboard(MotionEvent event, View view,
-                                    Activity activity) {
-        try {
-            if (view != null && view instanceof EditText) {
-                int[] location = {0, 0};
-                view.getLocationInWindow(location);
-                int left = location[0], top = location[1], right = left
-                        + view.getWidth(), bootom = top + view.getHeight();
-                // 判断焦点位置坐标是否在空间内，如果位置在控件外，则隐藏键盘
-                if (event.getRawX() < left || event.getRawX() > right
-                        || event.getY() < top || event.getRawY() > bootom) {
-
-                    // 隐藏键盘
-                    IBinder token = view.getWindowToken();
-                    InputMethodManager inputMethodManager = (InputMethodManager) activity
-                            .getSystemService(Context.INPUT_METHOD_SERVICE);
-                    inputMethodManager.hideSoftInputFromWindow(token,
-                            InputMethodManager.HIDE_NOT_ALWAYS);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        switch (ev.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                View view = getCurrentFocus();
-                hideKeyboard(ev, view, SearchActivity.this);//调用方法判断是否需要隐藏键盘
-                break;
+    public void onSuccess(String tag, Object o) {
 
-            default:
-                break;
-        }
-        return super.dispatchTouchEvent(ev);
     }
 }

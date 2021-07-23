@@ -74,12 +74,11 @@
             android:numColumns="4">
         </com.dxngxhl.imageselection.t2.ImageSelectionView2>
 
-        <ImageView
+        <TextView
             android:id="@+id/report_submit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/pre_report"/>
+            style="@style/bt_style"
+            android:text="举报店铺"
+
+            />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

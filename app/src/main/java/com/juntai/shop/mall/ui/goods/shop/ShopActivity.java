@@ -56,8 +56,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.PlatformActionListener;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
@@ -378,16 +381,34 @@ public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPa
                             AppUtils.getAppName(),
                             shopInfoBean.getWebUrl(),
                             shopInfoBean.getShopName(),
-                            StringTools.getImageForCrmInt(shopInfoBean.getLogoId()));
+                            StringTools.getImageForCrmInt(shopInfoBean.getLogoId()), new PlatformActionListener() {
+                                @Override
+                                public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+
+                                }
+
+                                @Override
+                                public void onError(Platform platform, int i, Throwable throwable) {
+
+                                }
+
+                                @Override
+                                public void onCancel(Platform platform, int i) {
+
+                                }
+                            });
                 }
                 break;
             case R.id.title_shop_back:
                 finish();
                 break;
+            case R.id.shop_details_back:
+                finish();
+                break;
             case R.id.title_shop_check:
                 collect();
                 break;
-            case R.id.title_shop_more:
+            case R.id.shop_details_more_iv:
                 showPopMore();
                 break;
         }

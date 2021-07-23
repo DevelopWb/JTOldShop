@@ -10,18 +10,20 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.juntai.mall.base.base.BaseActivity;
+import com.juntai.mall.base.mvp.BasePresenter;
 import com.juntai.mall.base.utils.LogUtil;
 import com.juntai.mall.bdmap.utils.DateUtil;
 import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
+import com.juntai.shop.mall.baseinfo.BaseAppActivity;
 import com.juntai.shop.mall.bean.WeatherBean;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class WeatherActivity extends BaseActivity implements View.OnClickListener {
+public class WeatherActivity extends BaseAppActivity implements View.OnClickListener {
     private String province = "山东省";
     private String city = "临沂市", area = "河东区";
     private TextView address, date, time, realTimeTemp, dayTemp, skycon, aqi, windSpeed, windDir, hum;
@@ -29,11 +31,6 @@ public class WeatherActivity extends BaseActivity implements View.OnClickListene
     private RelativeLayout weatherBg;
     public static final int SELECT_LOCATION = 9887;
 
-    @Override
-    public void finish() {
-        super.finish();
-
-    }
 
     @Override
     public int getLayoutView() {
@@ -42,6 +39,7 @@ public class WeatherActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void initView() {
+        initToolbarAndStatusBar(false);
         back = findViewById(R.id.weather_back);
         back.setOnClickListener(v -> {
             this.finish();
@@ -225,7 +223,7 @@ public class WeatherActivity extends BaseActivity implements View.OnClickListene
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == SELECT_LOCATION && resultCode == RESULT_OK) {
             String selectedProvince = data.getStringExtra("province");
             String selectedCity = data.getStringExtra("city");
@@ -309,6 +307,11 @@ public class WeatherActivity extends BaseActivity implements View.OnClickListene
     }
 
     @Override
+    protected BasePresenter createPresenter() {
+        return null;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.in_from_bottom, R.anim.no_slide);
@@ -319,5 +322,10 @@ public class WeatherActivity extends BaseActivity implements View.OnClickListene
         if (v.getId() == R.id.weather_place) {
             startActivityForResult(new Intent(mContext, CitySelectActivity.class).putExtra("city", city), SELECT_LOCATION);
         }
+    }
+
+    @Override
+    public void onSuccess(String tag, Object o) {
+
     }
 }

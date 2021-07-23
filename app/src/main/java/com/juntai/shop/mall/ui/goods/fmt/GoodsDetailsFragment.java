@@ -35,8 +35,11 @@ import com.youth.banner.BannerConfig;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.PlatformActionListener;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -279,7 +282,22 @@ public class GoodsDetailsFragment extends BaseFragment implements View.OnClickLi
                     AppUtils.getAppName(),
                     goodsB.getWebUrl(),
                     goodsB.getCommodityName(),
-                    AppHttpPath.IMAGE + goodsB.getCommodityPicture().get(0).getImgUrl());
+                    AppHttpPath.IMAGE + goodsB.getCommodityPicture().get(0).getImgUrl(), new PlatformActionListener() {
+                        @Override
+                        public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+
+                        }
+
+                        @Override
+                        public void onError(Platform platform, int i, Throwable throwable) {
+
+                        }
+
+                        @Override
+                        public void onCancel(Platform platform, int i) {
+
+                        }
+                    });
         }
     }
 

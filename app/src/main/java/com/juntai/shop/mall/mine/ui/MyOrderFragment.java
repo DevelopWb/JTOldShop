@@ -80,6 +80,10 @@ public class MyOrderFragment extends BaseLazyFragment {
 
     public void setRefresh(boolean refresh) {
         isRefresh = refresh;
+        if (adapter != null && isRefresh){
+            page = 1;
+            getData();
+        }
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.juntai.shop.mall.utils;
 
 import android.content.Context;
 
+import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 
 /**
@@ -13,11 +14,12 @@ public class ShareUtils {
      * 第三方分享
      * @param context
      */
-    public static void shareForMob(Context context, String title, String url, String content, String imagepath){
+    public static void shareForMob(Context context, String title, String url, String content, String imagepath, PlatformActionListener callback){
 //        Log.e("ffff",title+" 1 " + url + " ");
         OnekeyShare oks = new OnekeyShare();
         //关闭sso授权
         oks.disableSSOWhenAuthorize();
+        oks.setCallback(callback);
         // title标题，微信、QQ和QQ空间等平台使用
         oks.setTitle(title);
         // titleUrl QQ和QQ空间跳转链接

@@ -86,7 +86,7 @@ public class MyInfoActivity extends BaseActivity implements View.OnClickListener
         //去掉表情
         editNick.setFilters(new InputFilter[]{new EmojiExcludeFilter()});
         //
-        mBaseRootCol.setOnClickListener(v -> {
+        findViewById(R.id.my_info_ll).setOnClickListener(v -> {
             //判断当前和网络是否一致。不一致提示更改昵称
             nickname = editNick.getText().toString();
             if (editNick.isEnabled() && (!nicknameNet.equals(nickname))){
