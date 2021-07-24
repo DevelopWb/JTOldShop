@@ -18,6 +18,7 @@ import com.juntai.mall.im.ModuleIm_Init;
 import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppNetModule;
 import com.juntai.shop.mall.R;
+import com.juntai.shop.mall.baseinfo.sendcode.SmsCheckCodeActivity;
 import com.juntai.shop.mall.bean.LoginBean;
 import com.juntai.shop.mall.utils.AppCode;
 import com.juntai.shop.mall.utils.AppUtils;
@@ -29,7 +30,9 @@ import io.reactivex.schedulers.Schedulers;
  * Created by Ma
  * on 2019/12/27
  */
-public class PhoneBindActivity extends BaseActivity {
+
+// TODO: 2021/7/24 这个界面和逻辑待优化
+public class PhoneBindActivity extends SmsCheckCodeActivity {
     TextInputEditText editPhone;
     boolean isSuccess = false;
     TextView tvSubmit;
@@ -42,8 +45,7 @@ public class PhoneBindActivity extends BaseActivity {
     @Override
     public void initView() {
         setTitleName("绑定手机号");
-        mBaseRootCol.setBackgroundResource(R.color.content_layout);
-        getToolbar().setVisibility(View.GONE);
+        initToolbarAndStatusBar(false);
         qqId = getIntent().getStringExtra("qqId");
         qqName = getIntent().getStringExtra("qqName");
         weChatId = getIntent().getStringExtra("weChatId");
@@ -79,7 +81,7 @@ public class PhoneBindActivity extends BaseActivity {
      */
     public void login(){
         AppNetModule.createrRetrofit()
-                .login(phone,null,null,null,null,null)
+                .login(phone,null,null,null,null,null,null)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(responseBody -> {
@@ -109,7 +111,8 @@ public class PhoneBindActivity extends BaseActivity {
      */
     public void bind(){
         AppNetModule.createrRetrofit()
-                .bind(MyApp.app.getAccount(), MyApp.app.getUserToken(),weChatId,weChatName,qqId,qqName)
+                // TODO: 2021/7/24 这个地方的验证码暂时穿null
+                .bind(MyApp.app.getAccount(), MyApp.app.getUserToken(),weChatId,weChatName,qqId,qqName,null)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<BaseResult>(null) {
@@ -128,7 +131,7 @@ public class PhoneBindActivity extends BaseActivity {
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == AppCode.SSM_CODE && resultCode == RESULT_OK) {
             isSuccess = true;
@@ -136,5 +139,10 @@ public class PhoneBindActivity extends BaseActivity {
         }else {
             tvSubmit.setBackgroundResource(R.drawable.bg_r_gray);
         }
+    }
+
+    @Override
+    protected TextView getSendCodeTv() {
+        return null;
     }
 }

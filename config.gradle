@@ -6,8 +6,8 @@ ext{
             compileSdkVersion : 28,
             minSdkVersion :19,
             targetSdkVersion :27,
-            versionCode :1,
-            versionName :"1.0",
+            versionCode :120,
+            versionName :"1.2.0",
     ]
     libsVersion=[
             // App dependencies version

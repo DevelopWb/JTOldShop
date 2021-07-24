@@ -41,7 +41,7 @@ import okhttp3.RequestBody;
  * @aouther Ma
  * @date 2019/3/9
  */
-public class AddressActivity  extends BaseActivity implements View.OnClickListener {
+public class EditAddressActivity extends BaseActivity implements View.OnClickListener {
     ImageView imageView;
     TextInputEditText editTextName,editTextPhone,editeTextPlace;
     TextView addressTv,tvTag;

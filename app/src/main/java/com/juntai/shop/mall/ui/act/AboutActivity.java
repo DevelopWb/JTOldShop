@@ -23,7 +23,6 @@ public class AboutActivity extends BaseActivity {
     public void initView() {
         setTitleName("关于我们");
         textView = findViewById(R.id.version_text);
-        tvPhone = findViewById(R.id.version_phone);
         textView.setText("当前版本：" + AppUtils.getVersionName(mContext));
 //        tvPhone.setText("联系我们：" + App.app.customerServicePhone);
     }

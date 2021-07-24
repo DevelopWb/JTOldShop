@@ -47,8 +47,9 @@ import io.reactivex.schedulers.Schedulers;
 public class MineFragment extends BaseLazyFragment implements View.OnClickListener {
     ImageView headImageView;
     TextView mCommitTv;
-    TextView tvNick,tvOrder,tvCom,tvColl,tvShare,tvWx,tvQQ;
+    TextView tvNick, tvOrder, tvCom, tvColl, tvShare, tvWx, tvQQ;
     UserB userB;
+
     @Override
     protected int getLayoutRes() {
         return R.layout.fragment_my;
@@ -64,17 +65,19 @@ public class MineFragment extends BaseLazyFragment implements View.OnClickListen
         tvShare = getView(R.id.my_share_num);
         tvWx = getView(R.id.my_wx);
         tvQQ = getView(R.id.my_qq);
+        tvWx.setOnClickListener(MineFragment.this);
+        tvQQ.setOnClickListener(MineFragment.this);
         headImageView.setOnClickListener(this);
         getView(R.id.my_order).setOnClickListener(this);
         getView(R.id.my_com).setOnClickListener(this);
         getView(R.id.my_coll).setOnClickListener(this);
         getView(R.id.my_share).setOnClickListener(this);
         getView(R.id.my_setting).setOnClickListener(this);
-        if (MyApp.app.getUser() == null){
+        if (MyApp.app.getUser() == null) {
             tvNick.setText("未登录");
             tvNick.setOnClickListener(toLoginListener);
             headImageView.setOnClickListener(toLoginListener);
-        }else {
+        } else {
             tvNick.setOnClickListener(toUserInfoListener);
             headImageView.setOnClickListener(toUserInfoListener);
             tvNick.setText(MyApp.app.getUser().getReturnValue().getNickName());
@@ -98,14 +101,14 @@ public class MineFragment extends BaseLazyFragment implements View.OnClickListen
     @Override
     public void onResume() {
         super.onResume();
-        if (headImageView != null){
+        if (headImageView != null) {
             getdata();
         }
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.my_order:
                 //订单
                 startActivity(new Intent(mContext, MyOrderActivity.class));
@@ -116,22 +119,36 @@ public class MineFragment extends BaseLazyFragment implements View.OnClickListen
                 break;
             case R.id.my_coll:
                 //收藏
-                startActivity(new Intent(mContext, MyCollectActivity.class).putExtra("function",1));
+                startActivity(new Intent(mContext, MyCollectActivity.class).putExtra("function", 1));
                 break;
             case R.id.my_share:
                 //分享
-                startActivity(new Intent(mContext, MyCollectActivity.class).putExtra("function",2));
+                startActivity(new Intent(mContext, MyCollectActivity.class).putExtra("function", 2));
                 break;
             case R.id.my_wx:
+                if (MyApp.app.getUser() == null) {
+                    //跳转到登录界面
+                    startActivity(new Intent(mContext, LoginActivity.class));
+                    return;
+                }
                 //绑定微信
-                if (userB.getReturnValue().getWeChatId() == null || userB.getReturnValue().getWeChatId().isEmpty()){
+                if (userB.getReturnValue().getWeChatId() == null || userB.getReturnValue().getWeChatId().isEmpty()) {
                     loginForQQWeChat(Wechat.NAME);
+                } else {
+                    ToastUtils.toast(mContext, "已绑定");
                 }
                 break;
             case R.id.my_qq:
+                if (MyApp.app.getUser() == null) {
+                    //跳转到登录界面
+                    startActivity(new Intent(mContext, LoginActivity.class));
+                    return;
+                }
                 //绑定qq
-                if (userB.getReturnValue().getQqId() == null || userB.getReturnValue().getQqId().isEmpty()){
+                if (userB.getReturnValue().getQqId() == null || userB.getReturnValue().getQqId().isEmpty()) {
                     loginForQQWeChat(QQ.NAME);
+                } else {
+                    ToastUtils.toast(mContext, "已绑定");
                 }
                 break;
             case R.id.my_setting:
@@ -151,13 +168,13 @@ public class MineFragment extends BaseLazyFragment implements View.OnClickListen
      * 用户信息
      */
     View.OnClickListener toUserInfoListener = v -> {
-        if (userB != null){
+        if (userB != null) {
             startActivityForResult(new Intent(mContext, MyInfoActivity.class), AppCode.REFRESH);
         }
     };
 
     @SuppressLint("CheckResult")
-    public void getdata(){
+    public void getdata() {
         AppNetModule.createrRetrofit()
                 .userInfo(MyApp.app.getAccount(), MyApp.app.getUserToken(), MyApp.app.getUid())
                 .subscribeOn(Schedulers.io())
@@ -165,7 +182,7 @@ public class MineFragment extends BaseLazyFragment implements View.OnClickListen
                 .subscribe(new Consumer<UserB>() {
                     @Override
                     public void accept(UserB result) throws Exception {
-                        if (result.success && result.getReturnValue() != null){
+                        if (result.success && result.getReturnValue() != null) {
                             mCommitTv.setVisibility(View.VISIBLE);
                             userB = result;
                             MyApp.app.customerServicePhone = userB.getReturnValue().getCustomerServicePhone();
@@ -185,26 +202,23 @@ public class MineFragment extends BaseLazyFragment implements View.OnClickListen
                                     R.mipmap.ic_launcher,
                                     headImageView);
                             //微信qq
-                            if (result.getReturnValue().getWeChatId() == null || result.getReturnValue().getWeChatId().equals("")){
+                            if (result.getReturnValue().getWeChatId() == null || result.getReturnValue().getWeChatId().equals("")) {
                                 tvWx.setText("未绑定");
-                                tvWx.setOnClickListener(MineFragment.this);
-                            }else {
+
+                            } else {
                                 tvWx.setText(result.getReturnValue().getWeChatName());
-                                tvWx.setOnClickListener(null);
                             }
-                            if (result.getReturnValue().getQqId() == null || result.getReturnValue().getQqId().equals("")){
+                            if (result.getReturnValue().getQqId() == null || result.getReturnValue().getQqId().equals("")) {
                                 tvQQ.setText("未绑定");
-                                tvQQ.setOnClickListener(MineFragment.this);
-                            }else {
+                            } else {
                                 tvQQ.setText(result.getReturnValue().getQqName());
-                                tvQQ.setOnClickListener(null);
                             }
                             //
-                            if (MyApp.app.getUser() == null){
+                            if (MyApp.app.getUser() == null) {
                                 tvNick.setText("未登录");
                                 tvNick.setOnClickListener(toLoginListener);
                                 headImageView.setOnClickListener(toLoginListener);
-                            }else {
+                            } else {
                                 tvNick.setOnClickListener(toUserInfoListener);
                                 headImageView.setOnClickListener(toUserInfoListener);
                                 tvNick.setText(userB.getReturnValue().getNickName());
@@ -213,26 +227,32 @@ public class MineFragment extends BaseLazyFragment implements View.OnClickListen
                     }
                 });
     }
+
     /**
      * 绑定
      */
-    private void bind(){
+    private void bind() {
         AppNetModule.createrRetrofit()
-                .bind(MyApp.app.getAccount(), MyApp.app.getUserToken(),weChatId,weChatName,qqId,qqName)
+                .bind(MyApp.app.getAccount(), MyApp.app.getUserToken(), weChatId, weChatName, qqId, qqName, null)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(result -> {
-                    getdata();
-                }, throwable -> {
-                    LogUtil.d(throwable.toString());
-                    LogUtil.d("token=" + throwable.toString());
-                    ToastUtils.error(mContext, "登录失败");
+                .subscribe(new BaseObserver<BaseResult>() {
+                    @Override
+                    public void onSuccess(BaseResult o) {
+                        getdata();
+                    }
+
+                    @Override
+                    public void onError(String msg) {
+                        ToastUtils.toast(mContext, msg);
+                    }
                 });
     }
+
     /**
      * 退出登录
      */
-    public void loginout(){
+    public void loginout() {
         AppNetModule.createrRetrofit()
                 .loginOut(MyApp.app.getAccount(), MyApp.app.getUserToken())
                 .subscribeOn(Schedulers.io())
@@ -259,18 +279,19 @@ public class MineFragment extends BaseLazyFragment implements View.OnClickListen
                         SPTools.saveString(MyApp.app, AppUtils.SP_KEY_LOGIN, "");
                         MyApp.app.setUserBean(null);
                         ToastUtils.success(mContext, result.msg);
-                        startActivityForResult(new Intent(mContext, LoginActivity.class),AppCode.LOGIN);
+                        startActivityForResult(new Intent(mContext, LoginActivity.class), AppCode.LOGIN);
                     }
 
                     @Override
                     public void onError(String msg) {
-                        ToastUtils.toast(mContext,msg);
+                        ToastUtils.toast(mContext, msg);
                     }
                 });
     }
 
-    String weChatId,weChatName,qqId,qqName;
+    String weChatId, weChatName, qqId, qqName;
     PlatformDb platDB;
+
     /**
      * 第三方数据
      *
@@ -337,12 +358,12 @@ public class MineFragment extends BaseLazyFragment implements View.OnClickListen
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == AppCode.LOGIN && resultCode == getActivity().RESULT_OK){
+        if (requestCode == AppCode.LOGIN && resultCode == getActivity().RESULT_OK) {
             tvNick.setOnClickListener(toUserInfoListener);
             headImageView.setOnClickListener(toUserInfoListener);
 //            getdata();
         }
-        if (requestCode == AppCode.REFRESH && resultCode == getActivity().RESULT_OK){
+        if (requestCode == AppCode.REFRESH && resultCode == getActivity().RESULT_OK) {
             getdata();
         }
     }

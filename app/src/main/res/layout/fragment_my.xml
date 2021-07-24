@@ -39,7 +39,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:drawableRight="@mipmap/ic_my_meiyong"
                         android:drawablePadding="10dp"
                         android:text="未登录"
                         android:textColor="@color/white"

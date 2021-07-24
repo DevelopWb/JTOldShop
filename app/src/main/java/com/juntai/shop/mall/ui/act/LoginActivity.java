@@ -2,10 +2,11 @@ package com.juntai.shop.mall.ui.act;
 
 import android.content.Intent;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,16 +14,16 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import com.google.android.material.textfield.TextInputEditText;
-import com.juntai.mall.base.base.BaseActivity;
 import com.juntai.mall.base.utils.GsonTools;
 import com.juntai.mall.base.utils.LogUtil;
 import com.juntai.mall.base.utils.SPTools;
 import com.juntai.mall.base.utils.ToastUtils;
 import com.juntai.mall.base.widght.ProgressDialog;
 import com.juntai.mall.im.ModuleIm_Init;
-import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.AppNetModule;
+import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.R;
+import com.juntai.shop.mall.baseinfo.sendcode.SmsCheckCodeActivity;
 import com.juntai.shop.mall.bean.LoginBean;
 import com.juntai.shop.mall.utils.AppCode;
 import com.juntai.shop.mall.utils.AppUtils;
@@ -43,17 +44,27 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * 登录
+ *
  * @aouther Ma
  * @date 2019/3/4
  */
-public class LoginActivity extends BaseActivity {
-    TextInputEditText editPhone,editPass;
+public class LoginActivity extends SmsCheckCodeActivity implements View.OnClickListener {
+    TextInputEditText mPhoneEt, editPass;
     boolean logining = false;
-    Button loginBtn;
     ProgressDialog progressDialog;
-    CheckBox checkBox,passV;//选中状态-密码登录
-    LinearLayout linearLayout;
-    TextView tvHint;
+    CheckBox mLoginStyleCb, passV;//选中状态-密码登录
+    LinearLayout mPwdLoginLl;
+    /**
+     * 输入验证码
+     */
+    private EditText mSmsCodeEt;
+    /**
+     * 获取验证码
+     */
+    private TextView mSendCheckCodeTv;
+    private LinearLayout mSmsCodeLl;
+    private TextView loginTv;
+
     @Override
     public int getLayoutView() {
         return R.layout.activity_login;
@@ -61,119 +72,64 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        mBaseRootCol.setBackgroundResource(R.color.content_layout);
-        getToolbar().setVisibility(View.GONE);
-        findViewById(R.id.login_code).setOnClickListener(v -> {
-//            sendCode(mContext);
-        });
-        editPhone = findViewById(R.id.login_phone);
+        initToolbarAndStatusBar(false);
+        mPhoneEt = findViewById(R.id.login_phone);
         editPass = findViewById(R.id.login_pass);
         passV = findViewById(R.id.login_pass_v);
-        loginBtn = findViewById(R.id.login_btn);
-        linearLayout = findViewById(R.id.pass_layout);
-        tvHint = findViewById(R.id.login_hint);
+        loginTv = findViewById(R.id.login_tv);
+        loginTv.setOnClickListener(this);
+        mPwdLoginLl = findViewById(R.id.pwd_login_ll);
         progressDialog = new ProgressDialog(mContext);
-        loginBtn.setOnClickListener(v -> {
-            qqId = null;
-            qqName = null;
-            weChatId = null;
-            weChatName = null;
-            phone = editPhone.getText().toString();
-            if (!phone.isEmpty() && phone.length() == 11){
-                if (checkBox.isChecked()){
-                    //密码登录
-                    pass = editPass.getText().toString();
-                    if (!pass.isEmpty()){
-                        try {
-                            //用公钥加密
-                            byte[] encrypt = RSAUtils.encryptByPublicKey(pass.getBytes());
-                            pass = Base64.encodeToString(encrypt,Base64.NO_WRAP);
-                            login();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+        mLoginStyleCb = findViewById(R.id.login_style_cb);
 
-                    }else {
-                        ToastUtils.toast(mContext,"密码不能为空");
-                    }
-                }else {
-                    pass = null;
-                    getCode(AppCode.SSM_CODE_LOGIN);
-                }
-            }else {
-                ToastUtils.toast(mContext,"请输入正确手机号");
-            }
-        });
-        checkBox = findViewById(R.id.login_code);
-        checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked){
-                loginBtn.setText("登陆");
-                checkBox.setText("短信验证码登录");
-                linearLayout.setVisibility(View.VISIBLE);
-                tvHint.setVisibility(View.GONE);
-            }else {
+        findViewById(R.id.login_forget).setOnClickListener(this);
+        findViewById(R.id.login_qq).setOnClickListener(this);
+        findViewById(R.id.login_wx).setOnClickListener(this);
+        findViewById(R.id.login_close).setOnClickListener(this);
+        findViewById(R.id.login_phone_clear).setOnClickListener(this);
+        mSmsCodeEt = (EditText) findViewById(R.id.sms_code_et);
+        mSendCheckCodeTv = (TextView) findViewById(R.id.send_check_code_tv);
+        mSmsCodeLl = (LinearLayout) findViewById(R.id.sms_code_ll);
+        mSendCheckCodeTv.setOnClickListener(this);
+        mLoginStyleCb.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                mLoginStyleCb.setText("密码登录");
+                mPwdLoginLl.setVisibility(View.GONE);
+                mSmsCodeLl.setVisibility(View.VISIBLE);
+            } else {
                 editPass.setText("");
                 pass = null;
-                loginBtn.setText("获取短信验证码");
-                checkBox.setText("密码登录");
-                linearLayout.setVisibility(View.GONE);
-                tvHint.setVisibility(View.VISIBLE);
+                mLoginStyleCb.setText("验证码登录");
+                mPwdLoginLl.setVisibility(View.VISIBLE);
+                mSmsCodeLl.setVisibility(View.GONE);
                 passV.setChecked(false);
             }
         });
         passV.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked){
-                editPass.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-            }else {
-                editPass.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            if (isChecked) {
+                editPass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            } else {
+                editPass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             }
-        });
-        findViewById(R.id.login_forget).setOnClickListener(v -> {
-            phone = editPhone.getText().toString();
-            if (!phone.isEmpty() && phone.length() == 11){
-                getCode(AppCode.SSM_CODE_FORGET);
-            }else {
-                ToastUtils.toast(mContext,"请输入正确手机号");
-            }
-        });
-        findViewById(R.id.login_qq).setOnClickListener(v -> {
-            loginForQQWeChat(QQ.NAME);
-        });
-        findViewById(R.id.login_wx).setOnClickListener(v -> {
-            loginForQQWeChat(Wechat.NAME);
-        });
-        findViewById(R.id.login_close).setOnClickListener(v -> finish());
-        findViewById(R.id.login_phone_clear).setOnClickListener(v -> {
-            editPhone.setText("");
         });
     }
 
-    public void getCode(int code){
-        //验证码登陆
-        int time = (int) ((System.currentTimeMillis() - MyApp.app.codeOverTime) / 1000);
-        if (60 - time > 0){
-            //验证码不可获取直接返回
-            ToastUtils.toast(mContext,String.format("请在%s秒后重新获取",(60 - time)));
-            return;
-        }
-        startActivityForResult(new Intent(mContext, CodeActivity.class)
-                .putExtra("phone",editPhone.getText().toString()), code);
-    }
+
     @Override
     public void initData() {
 
     }
 
-    String phone,pass,weChatId,weChatName,qqId,qqName;
+    String phone, pass, weChatId, weChatName, qqId, qqName;
 
     /**
-     * 登陆
+     * 登录
      */
-    public void login(){
+    public void login() {
         logining = true;
         progressDialog.show();
         AppNetModule.createrRetrofit()
-                .login(phone,pass,weChatId,weChatName,qqId,qqName)
+                .login(phone, pass, weChatId, weChatName, qqId, qqName,getTextViewValue(mSmsCodeEt))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(responseBody -> {
@@ -184,7 +140,7 @@ public class LoginActivity extends BaseActivity {
                         switch (userBean.code) {
                             case 200:
                                 ToastUtils.success(mContext, "登录成功");
-                                Hawk.put(HawkProperty.USER_INFO,userBean.getReturnValue());
+                                Hawk.put(HawkProperty.USER_INFO, userBean.getReturnValue());
                                 SPTools.saveString(MyApp.app, AppUtils.SP_KEY_LOGIN, loginStr);
                                 MyApp.app.setUserBean(null);
                                 ModuleIm_Init.connectIM(MyApp.app.getUser().getReturnValue().getrOngYunToken());
@@ -192,16 +148,16 @@ public class LoginActivity extends BaseActivity {
                                 finish();
                                 break;
                             case 302:
-                                startActivityForResult(new Intent(mContext,PhoneBindActivity.class)
-                                                .putExtra("qqId",qqId)
-                                                .putExtra("qqName",qqName),
+                                startActivityForResult(new Intent(mContext, PhoneBindActivity.class)
+                                                .putExtra("qqId", qqId)
+                                                .putExtra("qqName", qqName),
                                         AppCode.BIND_PHONE);
                                 ToastUtils.toast(mContext, userBean.msg);
                                 break;
                             case 301:
-                                startActivityForResult(new Intent(mContext,PhoneBindActivity.class)
-                                                .putExtra("weChatId",weChatId)
-                                                .putExtra("weChatName",weChatName),
+                                startActivityForResult(new Intent(mContext, PhoneBindActivity.class)
+                                                .putExtra("weChatId", weChatId)
+                                                .putExtra("weChatName", weChatName),
                                         AppCode.BIND_PHONE);
                                 ToastUtils.toast(mContext, userBean.msg);
                                 break;
@@ -222,6 +178,7 @@ public class LoginActivity extends BaseActivity {
                     progressDialog.dismiss();
                 });
     }
+
     PlatformDb platDB;
 
     /**
@@ -294,16 +251,89 @@ public class LoginActivity extends BaseActivity {
         ShareSDK.setActivity(this);//抖音登录适配安卓9.0
         plat.showUser(null);    //要数据不要功能，主要体现在不会重复出现授权界面
     }
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == AppCode.SSM_CODE_LOGIN && resultCode == RESULT_OK) {
-            login();
-        }else if (requestCode == AppCode.SSM_CODE_FORGET && resultCode == RESULT_OK) {
-            MyApp.app.activityTool.toPassChange(mContext,phone,1);
-        }else if (requestCode == AppCode.BIND_PHONE && resultCode == RESULT_OK) {
+         if (requestCode == AppCode.BIND_PHONE && resultCode == RESULT_OK) {
             setResult(RESULT_OK);
             finish();
+        }
+    }
+
+
+    @Override
+    protected TextView getSendCodeTv() {
+        return mSendCheckCodeTv;
+    }
+
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            default:
+                break;
+            case R.id.login_close:
+               finish();
+                break;
+            case R.id.login_forget:
+                phone = mPhoneEt.getText().toString();
+                if (!phone.isEmpty() && phone.length() == 11) {
+                    MyApp.app.activityTool.toPassChange(mContext, phone, 1);
+                } else {
+                    ToastUtils.toast(mContext, "请输入正确手机号");
+                }
+
+                break;
+            case R.id.login_phone_clear:
+                mPhoneEt.setText("");
+                break;
+            case R.id.login_wx:
+                loginForQQWeChat(Wechat.NAME);
+                break;
+            case R.id.login_qq:
+                loginForQQWeChat(QQ.NAME);
+                break;
+            case R.id.send_check_code_tv:
+                sendCheckCode(getTextViewValue(mPhoneEt));
+                break;
+            case R.id.login_tv:
+                qqId = null;
+                qqName = null;
+                weChatId = null;
+                weChatName = null;
+                phone = mPhoneEt.getText().toString();
+                if (!phone.isEmpty() && phone.length() == 11) {
+                    if (!mLoginStyleCb.isChecked()) {
+                        //密码登录
+                        pass = editPass.getText().toString();
+                        if (!pass.isEmpty()) {
+                            try {
+                                //用公钥加密
+                                byte[] encrypt = RSAUtils.encryptByPublicKey(pass.getBytes());
+                                pass = Base64.encodeToString(encrypt, Base64.NO_WRAP);
+                                login();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+                            ToastUtils.toast(mContext, "密码不能为空");
+                        }
+                    } else {
+                        pass = null;
+                        //验证码登录
+                        if (TextUtils.isEmpty(getTextViewValue(mSmsCodeEt))) {
+                            ToastUtils.toast(mContext, "请输入验证码");
+                            return;
+                        }
+                        login();
+                    }
+                } else {
+                    ToastUtils.toast(mContext, "请输入正确手机号");
+                }
+                break;
         }
     }
 }

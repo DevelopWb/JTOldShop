@@ -1,6 +1,7 @@
 package com.juntai.shop.mall.mine.set.address;
 
 import android.view.View;
+import android.view.WindowManager;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,7 +20,6 @@ import java.util.List;
  * on 2019/9/7
  */
 
-// TODO: 2021/7/23 订单地址选择  界面待优化
 public class AddressSelectDialog extends BottomDialogFragment {
     RecyclerView recyclerView;
     AddressSelectAdapter listAdapter;
@@ -55,7 +55,7 @@ public class AddressSelectDialog extends BottomDialogFragment {
     }
     @Override
     public int dialogHeight() {
-        return MyApp.H / 2;
+        return WindowManager.LayoutParams.WRAP_CONTENT;
     }
     public void updateList(List<AddressListBean.ReturnValueBean> list){
         beanList.clear();

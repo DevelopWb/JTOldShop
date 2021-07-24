@@ -17,6 +17,13 @@ public class AddressListAdapter extends BaseQuickAdapter<AddressListBean.ReturnV
 
     @Override
     protected void convert(BaseViewHolder helper, AddressListBean.ReturnValueBean item) {
+
+        if (0== helper.getAdapterPosition()) {
+            helper.setGone(R.id.default_addr_iv,true);
+        }else {
+            helper.setGone(R.id.default_addr_iv,false);
+        }
+
         helper.addOnClickListener(R.id.item_address_edit);
         helper.setText(R.id.item_address_name,item.getName());
         helper.setText(R.id.item_address_one,item.getName().substring(0,1));

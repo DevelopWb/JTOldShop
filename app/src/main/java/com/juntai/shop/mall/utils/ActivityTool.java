@@ -7,7 +7,7 @@ import android.content.Intent;
 import androidx.fragment.app.Fragment;
 
 import com.juntai.shop.mall.mine.set.ModifyPwd;
-import com.juntai.shop.mall.mine.set.address.AddressActivity;
+import com.juntai.shop.mall.mine.set.address.EditAddressActivity;
 import com.juntai.shop.mall.ui.after_sales.AfterSalesActivity;
 import com.juntai.shop.mall.ui.after_sales.GoodsReturnActivity;
 import com.juntai.shop.mall.ui.after_sales.GoodsSelectActivity;
@@ -89,7 +89,7 @@ public class ActivityTool {
      * @param addressId:-1 = 新增
      */
     public void toAddAddress(Activity context, int addressId){
-        context.startActivityForResult(new Intent(context, AddressActivity.class).putExtra("id",addressId),AppCode.ADDRESS);
+        context.startActivityForResult(new Intent(context, EditAddressActivity.class).putExtra("id",addressId),AppCode.ADDRESS);
     }
 
     /**

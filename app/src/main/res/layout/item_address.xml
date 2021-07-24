@@ -45,13 +45,23 @@
             android:id="@+id/item_address_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
             android:text="测试数据"
             android:textColor="@color/grey"
             android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="@+id/item_address_name"
             app:layout_constraintLeft_toRightOf="@+id/item_address_name"
             app:layout_constraintTop_toTopOf="@+id/item_address_name" />
+        <ImageView
+            android:id="@+id/default_addr_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/default_icon"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/item_address_phone"
+            app:layout_constraintLeft_toRightOf="@+id/item_address_phone"
+            app:layout_constraintTop_toTopOf="@+id/item_address_phone"></ImageView>
 
         <TextView
             android:id="@+id/item_address_adress"
