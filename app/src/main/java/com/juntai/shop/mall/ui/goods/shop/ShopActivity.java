@@ -45,7 +45,6 @@ import com.juntai.shop.mall.utils.DpTools;
 import com.juntai.shop.mall.utils.GlideImageLoader;
 import com.juntai.shop.mall.utils.ShareUtils;
 import com.juntai.shop.mall.utils.StringTools;
-import com.juntai.shop.mall.utils.listener.GoodsStatusChangeListener;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 
@@ -124,9 +123,6 @@ public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPa
         initTab();
         //
         showTitleRes(R.id.title_collect,R.id.title_more);
-//        goodsFragment.setGoodsStatusChangeListener(new GoodsStatusChangeListener(){
-//
-//        });
 
         detailsFragment = (GoodsDetailsFragment) getSupportFragmentManager().findFragmentById(R.id.shop_fragment_goodsdetails);
         shopCartFragment = (ShopCartFragment) getSupportFragmentManager().findFragmentById(R.id.shop_fragment_shopcart);
@@ -476,10 +472,10 @@ public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPa
      * @param locB
      */
     public void refrehsGoods(CartItemLocB locB){
-//        goodsFragment.refreshList(locB.getGoodsId(),locB.getNum());
-//        if (detailsFragment != null){
-//            detailsFragment.refreshNum(locB.getGoodsId(),locB.getNum());
-//        }
+        goodsFragment.refreshList(locB.getGoodsId(),locB.getNum());
+        if (detailsFragment != null){
+            detailsFragment.refreshNum(locB.getGoodsId(),locB.getNum());
+        }
     }
 
     /**
@@ -523,7 +519,6 @@ public class ShopActivity extends BaseAppActivity<ShopPresent> implements ViewPa
         }else {
             //上传购物车
             cartSys();
-//            goodsFragment.setGoodsStatusChangeListener(null);
             goodsFragment.setDateList(null);
             glideImageLoader.release();
             super.onDestroy();

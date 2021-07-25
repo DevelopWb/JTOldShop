@@ -20,7 +20,6 @@ import com.juntai.shop.mall.bean.event.EventDetailsMessage;
 import com.juntai.shop.mall.ui.adapter.ClassftTopAdapter;
 import com.juntai.shop.mall.ui.goods.adt.SectionClassftAdapter;
 import com.juntai.shop.mall.ui.goods.SpecificationsDialog;
-import com.juntai.shop.mall.utils.listener.GoodsStatusChangeListener;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -48,7 +47,6 @@ public class GoodsFragment extends BaseFragment {
     //右侧是否是自动滑动
     boolean isAuto = false;
     MySection nowMySection;
-    GoodsStatusChangeListener goodsStatusChangeListener;
     List<ShopBean.ReturnValueBean.ShopClassifyBean> dateList = new ArrayList<>();
     ArrayList<String> dateListLeft = new ArrayList<>();
     SpecificationsDialog specificationsDialog = new SpecificationsDialog();
@@ -178,13 +176,6 @@ public class GoodsFragment extends BaseFragment {
 
     public void initPop(){
 
-    }
-    /**
-     * 设置事件
-     * @param goodsStatusChangeListener
-     */
-    public void setGoodsStatusChangeListener(GoodsStatusChangeListener goodsStatusChangeListener) {
-        this.goodsStatusChangeListener = goodsStatusChangeListener;
     }
     /**
      * 设置数据
