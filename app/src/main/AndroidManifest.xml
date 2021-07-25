@@ -45,7 +45,7 @@
             android:theme="@android:style/Theme.Translucent" />
         <activity
             android:name=".ui.act.SplashActivity"
-            android:theme="@style/splashThemeImage">
+            android:theme="@style/AppTheme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

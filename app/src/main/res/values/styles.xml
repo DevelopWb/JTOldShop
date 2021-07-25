@@ -15,13 +15,12 @@
         <item name="contentInsetStart">0dp</item>
     </style>
     <style name="MyTheme" parent="AppTheme"/>
-    <!--使用图片的方案-->
-    <style name="splashThemeImage" parent="AppTheme">
+    <!--避免第一次进来白屏或黑屏-->
+    <style name="AppTheme.Splash">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
         <item name="android:windowBackground">@mipmap/splash_bg</item>
-        <!--沉浸-->
-        <item name="android:windowTranslucentStatus">true</item>
     </style>
     <style name="BaseDialog" parent="android:Theme.Light">
         <item name="android:windowFrame">@null</item>

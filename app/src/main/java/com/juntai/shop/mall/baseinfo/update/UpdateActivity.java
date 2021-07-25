@@ -22,6 +22,7 @@ import com.juntai.mall.bdmap.BaseRequestLocationActivity;
 import com.juntai.shop.mall.AppHttpPath;
 import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.R;
+import com.juntai.shop.mall.bean.UpgradeBean;
 import com.juntai.shop.mall.utils.AppUtils;
 
 /**
@@ -50,20 +51,20 @@ public abstract class UpdateActivity<P extends BasePresenter> extends BaseReques
                         //拿到服务器返回的数据，解析，拿到downloadUrl和一些其他的UI数据
                         LogUtil.d("更新" + result);
 
-                        UpdateBean upgradeBean = GsonTools.changeGsonToBean(result, UpdateBean.class);
-                        if (upgradeBean == null||upgradeBean.getData()==null) {
+                        UpgradeBean upgradeBean = GsonTools.changeGsonToBean(result, UpgradeBean.class);
+                        if (upgradeBean == null||upgradeBean.getReturnValue()==null) {
                             if (isWarn) {
                                 ToastUtils.toast(mContext, "已是最新版本");
                             }
                             return null;
                         }
-                        version = upgradeBean.getData().getVersionsName();
-                        isForceUpdate = upgradeBean.getData().isConstraintUpdate();
-                        if (AppUtils.getVersionCode(mContext) < upgradeBean.getData().getVersionsCode()) {
+                        version = upgradeBean.getReturnValue().getVersionsName();
+                        isForceUpdate = upgradeBean.getReturnValue().isConstraintUpdate();
+                        if (AppUtils.getVersionCode(mContext) < upgradeBean.getReturnValue().getVersionsCode()) {
                             return UIData.create()
-                                    .setTitle(upgradeBean.getData().getFileName())
-                                    .setContent(upgradeBean.getData().getUpdateContent())
-                                    .setDownloadUrl(AppHttpPath.BASE_IMAGE+upgradeBean.getData().getDownloadLink());
+                                    .setTitle(upgradeBean.getReturnValue().getFileName())
+                                    .setContent(upgradeBean.getReturnValue().getUpdateContent())
+                                    .setDownloadUrl(upgradeBean.getReturnValue().getDownloadLink());
                         } else {
                             if (isWarn) {
                                 ToastUtils.toast(mContext, "已是最新版本");

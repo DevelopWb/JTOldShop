@@ -29,7 +29,6 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start);
         new RxPermissions(this)
                 .request(permissions)
                 .delay(1, TimeUnit.SECONDS)
