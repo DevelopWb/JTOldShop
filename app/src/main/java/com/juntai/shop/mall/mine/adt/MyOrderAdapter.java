@@ -101,7 +101,7 @@ public class MyOrderAdapter extends BaseQuickAdapter<OrderListBean.ReturnValueBe
         }
         helper.setText(R.id.item_myorder_shopname,item.getShopName());
         helper.setText(R.id.item_myorder_right,mapStr.get(item.getStatus()));
-        ImageLoadUtil.loadCircularImage(mContext, StringTools.getImageForCrmInt(item.getLogoId() ),R.mipmap.ic_launcher,R.mipmap.ic_launcher,helper.getView(R.id.item_myorder_logo));
+        ImageLoadUtil.loadCircularImage(mContext, StringTools.getImageForCrmInt(item.getLogoId() ),R.drawable.nopicture,R.drawable.nopicture,helper.getView(R.id.item_myorder_logo));
         helper.setText(R.id.item_myorder_price_all,"共"+ item.getCommodityList().size() +"件商品   合计:");
        helper.setText(R.id.item_myorder_price_tv,"￥"+item.getFooting());
         //

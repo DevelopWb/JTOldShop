@@ -152,14 +152,12 @@ public class LoginActivity extends SmsCheckCodeActivity implements View.OnClickL
                                                 .putExtra("qqId", qqId)
                                                 .putExtra("qqName", qqName),
                                         AppCode.BIND_PHONE);
-                                ToastUtils.toast(mContext, userBean.msg);
                                 break;
                             case 301:
                                 startActivityForResult(new Intent(mContext, PhoneBindActivity.class)
                                                 .putExtra("weChatId", weChatId)
                                                 .putExtra("weChatName", weChatName),
                                         AppCode.BIND_PHONE);
-                                ToastUtils.toast(mContext, userBean.msg);
                                 break;
                             default:
                                 ToastUtils.error(mContext, userBean.msg);
@@ -213,11 +211,6 @@ public class LoginActivity extends SmsCheckCodeActivity implements View.OnClickL
                     platDB.getUserIcon();
                     platDB.getUserId();
                     platDB.getUserName();
-//                    Log.e("userinfo", "token=" + platDB.getToken());
-//                    Log.e("userinfo", "性别=" + platDB.getUserGender());
-//                    Log.e("userinfo", "image=" + platDB.getUserIcon());
-//                    Log.e("userinfo", "id=" + platDB.getUserId());
-//                    Log.e("userinfo", "name=" + platDB.getUserName());
 
                     if (platform.getName().equals(QQ.NAME)) {
                         qqId = platDB.getUserId();
@@ -257,7 +250,7 @@ public class LoginActivity extends SmsCheckCodeActivity implements View.OnClickL
         super.onActivityResult(requestCode, resultCode, data);
          if (requestCode == AppCode.BIND_PHONE && resultCode == RESULT_OK) {
             setResult(RESULT_OK);
-            finish();
+           login();
         }
     }
 

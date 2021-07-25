@@ -3,15 +3,15 @@ package com.juntai.shop.mall.mine.set;
 import android.content.Intent;
 import android.view.View;
 
-import com.juntai.mall.base.base.BaseActivity;
+import com.juntai.mall.base.mvp.BasePresenter;
 import com.juntai.mall.base.utils.ToastUtils;
 import com.juntai.mall.base.widght.MenuDialog;
 import com.juntai.shop.mall.MyApp;
 import com.juntai.shop.mall.R;
+import com.juntai.shop.mall.baseinfo.BaseAppActivity;
 import com.juntai.shop.mall.mine.set.address.AddressListActivity;
 import com.juntai.shop.mall.ui.act.AboutActivity;
 import com.juntai.shop.mall.utils.CleanDataUtils;
-import com.juntai.shop.mall.utils.UpdateUtils;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -20,7 +20,7 @@ import java.util.Objects;
  * @aouther Ma
  * @date 2019/3/6
  */
-public class SettingActivity extends BaseActivity implements View.OnClickListener {
+public class SettingActivity extends BaseAppActivity implements View.OnClickListener {
     MenuDialog menuDialog;
     String[] menu = new String[]{"确认要清除缓存吗？","确认","取消"};
     @Override
@@ -74,7 +74,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 menuDialog.showMenu(getSupportFragmentManager(), Arrays.asList(menu));
                 break;
             case R.id.setting_update://更新
-                new UpdateUtils().update(mContext,true);
+                update(true);
                 break;
             case R.id.setting_about://关于
                 startActivity(new Intent(mContext, AboutActivity.class));
@@ -83,8 +83,17 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     }
 
     @Override
+    protected BasePresenter createPresenter() {
+        return null;
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
     }
 
+    @Override
+    public void onSuccess(String tag, Object o) {
+
+    }
 }

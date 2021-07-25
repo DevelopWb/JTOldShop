@@ -13,14 +13,20 @@ android {
         applicationId "com.juntai.shop.mall"
         minSdkVersion configs.minSdkVersion
         targetSdkVersion configs.targetSdkVersion
-        versionCode 4
-        versionName '1.14'//正式版打包只保留1.01
+        versionCode configs.versionCode
+        versionName configs.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled true
 
         ndk {
             abiFilters "armeabi-v7a"//,"x86"//,"armeabi"////,"arm64-v8a","x86_64"
+        }
+        lintOptions {
+            checkReleaseBuilds false
+            // Or, if you prefer, you can continue to check for errors in release builds,
+            // but continue the build even when errors are found:
+            abortOnError false
         }
 
     }

@@ -70,8 +70,8 @@ public class ShopDesFragment extends BaseLazyFragment implements View.OnClickLis
                         phone = result.getReturnValue().getContactsPhone();
                         image1 = StringTools.getImageForCrmInt(result.getReturnValue().getBusinessImg());
                         image2 = StringTools.getImageForCrmInt(result.getReturnValue().getSanitationImg());
-                        ImageLoadUtil.loadImage(mContext, image1,R.mipmap.ic_launcher,iv1);
-                        ImageLoadUtil.loadImage(mContext, image2,R.mipmap.ic_launcher,iv2);
+                        ImageLoadUtil.loadImage(mContext, image1,R.drawable.nopicture,iv1);
+                        ImageLoadUtil.loadImage(mContext, image2,R.drawable.nopicture,iv2);
                     }
                     @Override
                     public void onError(String msg) {

@@ -19,7 +19,7 @@
     <style name="splashThemeImage" parent="AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:windowBackground">@drawable/bg_start</item>
+        <item name="android:windowBackground">@mipmap/splash_bg</item>
         <!--沉浸-->
         <item name="android:windowTranslucentStatus">true</item>
     </style>

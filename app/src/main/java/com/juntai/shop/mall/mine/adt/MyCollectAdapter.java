@@ -64,7 +64,7 @@ public class MyCollectAdapter extends BaseQuickAdapter<MyCollcetB.ReturnValueBea
             DecimalFormat format = new DecimalFormat("##0.0");
             helper.setText(R.id.item_collect_score,"(" + format.format(item.getDegreeOfSatisfaction()) + ")");
             helper.setText(R.id.item_collect_distance,format.format(item.getDistance()) + "km");
-            ImageLoadUtil.loadImageNoCrash(mContext, StringTools.getImageForCrmInt(item.getLogoId()),R.mipmap.ic_launcher,helper.getView(R.id.item_collect_image));
+            ImageLoadUtil.loadImageNoCrash(mContext, StringTools.getImageForCrmInt(item.getLogoId()),R.drawable.nopicture,helper.getView(R.id.item_collect_image));
         }else{
             //商品
             helper.setGone(R.id.item_collect_ratingBar,false);
@@ -75,7 +75,7 @@ public class MyCollectAdapter extends BaseQuickAdapter<MyCollcetB.ReturnValueBea
             helper.setText(R.id.item_collect_distance,"月销" + item.getMonthlySales());
             helper.setTextColor(R.id.item_collect_address, ContextCompat.getColor(mContext,R.color.red));
             helper.setText(R.id.item_collect_address,"￥"+String.valueOf(item.getPrice()));
-            ImageLoadUtil.loadImageNoCrash(mContext, AppHttpPath.IMAGE + item.getCommodityImg(),R.mipmap.ic_launcher,helper.getView(R.id.item_collect_image));
+            ImageLoadUtil.loadImageNoCrash(mContext, AppHttpPath.IMAGE + item.getCommodityImg(),R.drawable.nopicture,helper.getView(R.id.item_collect_image));
         }
     }
 

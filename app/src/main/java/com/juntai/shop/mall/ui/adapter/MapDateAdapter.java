@@ -32,7 +32,7 @@ public class MapDateAdapter extends BaseQuickAdapter<ShopLocationB.ReturnValueBe
         ratingBar.setRating(item.getDegreeOfSatisfaction());
         ImageLoadUtil.loadImageNoCrashRound(mContext,20,
                 StringTools.getImageForCrmInt(item.getLogoId()),
-                R.mipmap.ic_launcher,
+                R.drawable.nopicture,
                 helper.getView(R.id.item_dialog_map_image));
     }
 }

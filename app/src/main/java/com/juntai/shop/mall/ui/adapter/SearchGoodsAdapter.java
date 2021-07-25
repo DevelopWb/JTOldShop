@@ -34,6 +34,6 @@ public class SearchGoodsAdapter extends BaseQuickAdapter<SearchGoodsBean.ReturnV
         tvName.setMaxLines(2);
         helper.setText(R.id.item_collect_yuexiao,"月销" + item.getMonthlySales());
         helper.setText(R.id.item_collect_address,"￥"+String.valueOf(item.getPrice()));
-        ImageLoadUtil.loadImageNoCrash(mContext, AppHttpPath.IMAGE + item.getCommodityImg(),R.mipmap.ic_launcher,helper.getView(R.id.item_collect_image));
+        ImageLoadUtil.loadImageNoCrash(mContext, AppHttpPath.IMAGE + item.getCommodityImg(),R.drawable.nopicture,helper.getView(R.id.item_collect_image));
     }
 }

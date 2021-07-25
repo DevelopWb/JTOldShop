@@ -16,7 +16,6 @@ import com.juntai.mall.base.utils.NotificationTool;
 import com.juntai.mall.base.utils.SPTools;
 import com.juntai.mall.base.utils.ToastUtils;
 import com.juntai.mall.im.CustomMessage;
-import com.juntai.mall.im.ModuleIm_Init;
 import com.juntai.shop.mall.baseinfo.BaseAppActivity;
 import com.juntai.shop.mall.ui.act.LoginActivity;
 import com.juntai.shop.mall.ui.adapter.MainAdapter;
@@ -24,15 +23,12 @@ import com.juntai.shop.mall.homepage.HomepageFragment;
 import com.juntai.shop.mall.ui.fmt.PublishFragment;
 import com.juntai.shop.mall.mine.MineFragment;
 import com.juntai.shop.mall.utils.AppUtils;
-import com.juntai.shop.mall.utils.UpdateUtils;
 import com.juntai.shop.mall.view.CustomViewPager;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -97,7 +93,7 @@ public class MainActivity extends BaseAppActivity implements ViewPager.OnPageCha
                     }
                 }, throwable -> {
                 });
-        new UpdateUtils().update(mContext, false);
+        update( false);
     }
 
     public void initTab() {

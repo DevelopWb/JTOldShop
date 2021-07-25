@@ -303,6 +303,14 @@ public class MineFragment extends BaseLazyFragment implements View.OnClickListen
         weChatId = "";
         weChatName = "";
         Platform plat = ShareSDK.getPlatform(name);
+        if (!plat.isClientValid()) {
+            //判断是否存在授权凭条的客户端，true是有客户端，false是无
+            if (name.equals(QQ.NAME)) {
+                ToastUtils.warning(mContext, "未安装QQ");
+            } else {
+                ToastUtils.warning(mContext, "未安装微信");
+            }
+        }
         plat.removeAccount(true); //移除授权状态和本地缓存，下次授权会重新授权
         plat.SSOSetting(false); //SSO授权，传false默认是客户端授权，没有客户端授权或者不支持客户端授权会跳web授权
         plat.setPlatformActionListener(new PlatformActionListener() {
@@ -352,7 +360,7 @@ public class MineFragment extends BaseLazyFragment implements View.OnClickListen
             return;
         }
         ShareSDK.setActivity(getActivity());//抖音登录适配安卓9.0
-        plat.showUser(null);    //要数据不要功能，主要体现在不会重复出现授权界面
+        plat.showUser(MyApp.app.getAccount());    //要数据不要功能，主要体现在不会重复出现授权界面
     }
 
     @Override

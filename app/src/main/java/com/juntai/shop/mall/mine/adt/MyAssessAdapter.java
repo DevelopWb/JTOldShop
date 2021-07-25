@@ -35,7 +35,7 @@ public class MyAssessAdapter extends BaseQuickAdapter<MyCommentB.ReturnValueBean
         helper.addOnClickListener(R.id.item_myassess_shop_layout);
 
         ImageLoadUtil.loadCircularImage(mContext, AppHttpPath.IMAGE + item.getHeadUrl(),R.mipmap.ic_launcher,R.mipmap.ic_launcher,helper.getView(R.id.item_myassess_head));
-        ImageLoadUtil.loadImageNoCrash(mContext, StringTools.getImageForCrmInt(item.getLogoId()),R.mipmap.ic_launcher,helper.getView(R.id.item_myassess_shop_logo));
+        ImageLoadUtil.loadImageNoCrash(mContext, StringTools.getImageForCrmInt(item.getLogoId()),R.mipmap.shop_icon,helper.getView(R.id.item_myassess_shop_logo));
         helper.setText(R.id.item_myassess_time,item.getGmtCreate().substring(0,9));
         helper.setText(R.id.item_myassess_content,item.getEvaluate());
         helper.setText(R.id.item_myassess_shop_name,item.getShopName());

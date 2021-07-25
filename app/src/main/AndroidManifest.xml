@@ -44,7 +44,7 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent" />
         <activity
-            android:name=".ui.act.StartActivity"
+            android:name=".ui.act.SplashActivity"
             android:theme="@style/splashThemeImage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -70,7 +70,6 @@
         <activity android:name=".ui.order.OrderPayActivity" />
         <activity android:name=".ui.order.PayCompleteActivity" />
         <activity android:name=".ui.act.ReportActivity" />
-        <activity android:name=".ui.act.CodeActivity" />
         <activity
             android:name=".ui.act.LoginActivity"
             android:launchMode="singleTop" />

@@ -30,7 +30,7 @@ public class ShopCartItemAdapter extends BaseQuickAdapter<CartItemLocB, BaseView
     @Override
     protected void convert(BaseViewHolder helper, CartItemLocB item) {
         if (item.getNum() <= 0)return;
-        ImageLoadUtil.loadImage(mContext, AppHttpPath.IMAGE + item.getGoodImage(),R.mipmap.ic_launcher,helper.getView(R.id.item_shopcart_goodsimage));
+        ImageLoadUtil.loadImage(mContext, AppHttpPath.IMAGE + item.getGoodImage(),R.drawable.nopicture,helper.getView(R.id.item_shopcart_goodsimage));
         helper.setText(R.id.item_shopcart_goodsname,item.getGoodsName());
         helper.setText(R.id.item_shopcart_specification,item.getSpcName());
         helper.setText(R.id.item_shopcart_goods_price,"￥ " + item.getPrice());

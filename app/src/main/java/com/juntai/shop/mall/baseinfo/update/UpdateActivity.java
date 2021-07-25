@@ -41,7 +41,7 @@ public abstract class UpdateActivity<P extends BasePresenter> extends BaseReques
                 .getInstance()
                 .requestVersion()
                 .setRequestMethod(HttpRequestMethod.POST)
-                .setRequestUrl(AppHttpPath.APP_UPDATE)
+                .setRequestUrl(AppHttpPath.UPDATE_VERSION)
                 .setRequestParams(getHttpParams())
                 .request(new RequestVersionListener() {
                     @Nullable

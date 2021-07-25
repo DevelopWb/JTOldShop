@@ -41,6 +41,6 @@ public class SearchShopsAdapter extends BaseQuickAdapter<SearchShopBean.ReturnVa
         DecimalFormat format = new DecimalFormat("##0.0");
         helper.setText(R.id.item_collect_score,"(" + format.format(item.getDegreeOfSatisfaction()) + ")");
         helper.setText(R.id.item_collect_distance,format.format(item.getDistance()) + "km");
-        ImageLoadUtil.loadImageNoCrash(mContext, StringTools.getImageForCrmInt(item.getLogoId()),R.mipmap.ic_launcher,helper.getView(R.id.item_collect_image));
+        ImageLoadUtil.loadImageNoCrash(mContext, StringTools.getImageForCrmInt(item.getLogoId()),R.drawable.nopicture,helper.getView(R.id.item_collect_image));
     }
 }
