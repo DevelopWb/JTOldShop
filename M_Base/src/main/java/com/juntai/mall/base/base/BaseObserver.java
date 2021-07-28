@@ -63,7 +63,7 @@ public abstract class BaseObserver<T> extends DisposableObserver<T> {
             BaseResult model = (BaseResult) bean;
             if (model instanceof OpenLiveBean || model instanceof SearchResultBean || model instanceof CareChildListNewestBean || model instanceof CareChildOldBean) {
                 model.success = true;
-//                model.status = 200;
+                model.code = 200;
             }
             if (model.success) {
                 if (200==model.code) {

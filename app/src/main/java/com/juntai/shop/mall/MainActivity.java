@@ -68,12 +68,6 @@ public class MainActivity extends BaseAppActivity implements ViewPager.OnPageCha
         initTab();
     }
 
-    String[] permissions = new String[]{
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.RECORD_AUDIO,
-            Manifest.permission.CAMERA,
-            Manifest.permission.ACCESS_FINE_LOCATION};
 
     @Override
     public void initData() {
@@ -81,18 +75,6 @@ public class MainActivity extends BaseAppActivity implements ViewPager.OnPageCha
 //            ModuleIm_Init.connectIM(MyApp.app.getUser().getReturnValue().getrOngYunToken());
         }
 
-        //权限
-        new RxPermissions(this)
-                .request(permissions)
-                .delay(1, TimeUnit.SECONDS)
-                .subscribe(aBoolean -> {
-                    if (aBoolean) {
-                        //所有权限通过
-                    } else {
-                        //有一个权限没通过
-                    }
-                }, throwable -> {
-                });
         update( false);
     }
 
