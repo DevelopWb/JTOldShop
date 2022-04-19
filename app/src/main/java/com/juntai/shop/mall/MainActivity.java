@@ -1,8 +1,12 @@
 package com.juntai.shop.mall;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -41,7 +45,7 @@ public class MainActivity extends BaseAppActivity implements ViewPager.OnPageCha
     private int[] tabDrawables = new int[]{R.drawable.pre_main_home, R.drawable.pre_main_post, R.drawable.pre_main_my};
     List<Fragment> mFragments = new ArrayList<>();
     private HomepageFragment homepageFragment;
-
+    private long mExitTime = 0;//声明一个long类型变量：用于存放上一点击“返回键”的时刻
     //[]{new HomeFragment(), nearServiceFragment,new GoodsFragment(), new ShopCartFragment(), new MyFragment()};
     @Override
     public int getLayoutView() {
@@ -195,4 +199,17 @@ public class MainActivity extends BaseAppActivity implements ViewPager.OnPageCha
     }
 
 
+    @Override
+    public void onBackPressed() {
+
+        //与上次点击返回键时刻作差
+        if ((System.currentTimeMillis() - mExitTime) > 2000) {
+            //大于2000ms则认为是误操作，使用Toast进行提示
+            Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            //并记录下本次点击“返回键”的时刻，以便下次进行判断
+            mExitTime = System.currentTimeMillis();
+        } else {
+            super.onBackPressed();
+        }
+    }
 }
